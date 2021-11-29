@@ -15,12 +15,6 @@ final class House{
 
     }
 }
-class ground_floor {
-
-}
-class upper_floor{
-
-}
 
 class syntax{
     public static void line_break(){
@@ -51,4 +45,6 @@ public class Main {
 
 
     }
+
 }
+
