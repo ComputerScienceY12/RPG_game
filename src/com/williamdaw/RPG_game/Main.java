@@ -1,6 +1,7 @@
 package com.williamdaw.RPG_game;
 
-import java.util.*;
+import javax.print.attribute.standard.Media;
+import java.util.Scanner;
 
 //interface rooms {
 //    public void library
@@ -10,54 +11,42 @@ import java.util.*;
 
 ///
 
-class ground_floor {
+class murder_sequance {
+
+    String song = "song.mp3";
+    Media track = new Media(song);
+    MediaPlayer mediaPlayer = new MediaPlayer(track);
+    mediaPlayer.play();
 
 }
 class upper_floor{
 
 }
 
-class syntax{
-    public static void line_break(){
-        System.out.println("---------------------------------------------------------------");
-    }
-    public static void error_message(){
-        System.out.println("critical error");
-    }
-}
-class porch{
-    public static void beginning() {
-        System.out.println("There is a murder in the house, on the loose its your job to find him");
-        System.out.println("In you ruck");
-    }
-    class study {
-
-
-    }
-    class item{
-        public static String pickup_location = "";
-    }
-
-
-}
 public class Main {
+    public static String murder_room;
     String[][] inventory = new String[5][2];
     public static String[] user_name = new String[2];
     public static void main(String[] args) throws Exception {
         String[] bedrooms = {"Guest", "Master", "Child"};
         String[] other_rooms = {"Porch", "Living Room", "Kitchen", "Boot Room"};
         String[] bathrooms = {"Downstairs Bathroom", "Upstairs Bathroom"};
+        String[] murder_location_choice = new String[3];
 
 
 //        Map<String, Integer> test_map = new HashMap<String, Integer>() { { "Here", 1 }, { } };
 //        test_map["here"] == 1
-
+        murder_location_choice[0] = bathrooms[(int) (Math.random() * (2) - 0)];
+        murder_location_choice[1] = other_rooms[(int) (Math.random() * (4) - 0)];
+        murder_location_choice[2] = bathrooms[(int) (Math.random() * (3) - 0)];
+        murder_room = murder_location_choice[(int) (Math.random() * (2) - 0)];
+        System.out.println(murder_room);
         House house = new House();
         for (String bedroom : bedrooms) house.add_room(new bedroom(bedroom, 1));
         for (String room : other_rooms) house.add_room(new room(room, 0));
         house.add_room(new room[] { new Bathroom(null, 0), new Bathroom(house.get_room("Master Bedroom"), 1) });
         house.add_room(new room[] { new Hallway(0), new Hallway(1) });
-
+        System.out.println("enter username:");
         Scanner input = new Scanner(System.in);
         user_name = (input.nextLine()).split(" ");
 
