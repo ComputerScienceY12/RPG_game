@@ -49,5 +49,6 @@ public class Main {
         Scanner input = new Scanner(System.in);
         user_name = (input.nextLine()).split(" ");
 
+
     }
 }
