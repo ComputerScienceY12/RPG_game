@@ -1,13 +1,13 @@
 package com.williamdaw.RPG_game;
 
-public class room {
+public class Room {
     String name;
     int floor;
-    public room() {
+    public Room() {
 
     }
 
-    public room(String room_name, int floor) {
+    public Room(String room_name, int floor) {
         this.name = room_name;
         this.floor = floor;
     }

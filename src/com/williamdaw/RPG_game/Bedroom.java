@@ -2,8 +2,8 @@ package com.williamdaw.RPG_game;
 
 import java.util.Objects;
 
-public class bedroom extends room {
-    public bedroom(String type, int floor) {
+public class Bedroom extends Room {
+    public Bedroom(String type, int floor) {
         super(type + " Bedroom", floor);
         if (Objects.equals(type, "Master")){
             master();

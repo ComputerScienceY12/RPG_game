@@ -11,15 +11,12 @@ import java.util.Scanner;
 
 ///
 
-class murder_sequance {
+class murder_sequance<MediaPlayer> {
 
-    String song = "song.mp3";
-    Media track = new Media(song);
-    MediaPlayer mediaPlayer = new MediaPlayer(track);
-    mediaPlayer.play();
-
-}
-class upper_floor{
+//    String song = "song.mp3";
+//    Media track = new Media(song);
+//    MediaPlayer mediaPlayer = new MediaPlayer(track);
+//    mediaPlayer.play();
 
 }
 
@@ -36,16 +33,16 @@ public class Main {
 
 //        Map<String, Integer> test_map = new HashMap<String, Integer>() { { "Here", 1 }, { } };
 //        test_map["here"] == 1
-        murder_location_choice[0] = bathrooms[(int) (Math.random() * (2) - 0)];
-        murder_location_choice[1] = other_rooms[(int) (Math.random() * (4) - 0)];
-        murder_location_choice[2] = bathrooms[(int) (Math.random() * (3) - 0)];
-        murder_room = murder_location_choice[(int) (Math.random() * (2) - 0)];
+        murder_location_choice[0] = bathrooms[(int) (Math.random() * (2) - 1)];
+        murder_location_choice[1] = other_rooms[(int) (Math.random() * (4) - 1)];
+        murder_location_choice[2] = bathrooms[(int) (Math.random() * (3) - 1)];
+        murder_room = murder_location_choice[(int) (Math.random() * (2) - 1)];
         System.out.println(murder_room);
         House house = new House();
-        for (String bedroom : bedrooms) house.add_room(new bedroom(bedroom, 1));
-        for (String room : other_rooms) house.add_room(new room(room, 0));
-        house.add_room(new room[] { new Bathroom(null, 0), new Bathroom(house.get_room("Master Bedroom"), 1) });
-        house.add_room(new room[] { new Hallway(0), new Hallway(1) });
+        for (String bedroom : bedrooms) house.add_room(new Bedroom(bedroom, 1));
+        for (String room : other_rooms) house.add_room(new Room(room, 0));
+        house.add_room(new Room[] { new Bathroom(null, 0), new Bathroom(House.get_room("Master Bedroom"), 1) });
+        house.add_room(new Room[] { new Hallway(0), new Hallway(1) });
         System.out.println("enter username:");
         Scanner input = new Scanner(System.in);
         user_name = (input.nextLine()).split(" ");
