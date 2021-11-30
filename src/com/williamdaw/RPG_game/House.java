@@ -9,7 +9,7 @@ public class House {
     private MurderLocation murder_location;
     private ArrayList<Room> rooms = new ArrayList<Room>();
 
-    public House() {
+    public void set_murder_location() {
         this.murder_location = new MurderLocation(this);
     }
 
@@ -28,6 +28,9 @@ public class House {
     public Room get_room(String room_name) throws Exception {
         for (com.williamdaw.RPG_game.Room room : this.rooms) if (Objects.equals(room.get_name(), room_name)) return room;
         throw new Exception("Room not found");
+    }
+    public ArrayList<Room> get_rooms() {
+        return this.rooms;
     }
 }
 
