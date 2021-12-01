@@ -1,6 +1,5 @@
 package com.williamdaw.RPG_game;
 
-import javax.print.attribute.standard.Media;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -29,11 +28,11 @@ public class Main {
         );
         Map<String, PotentialMurderLocation[]> other_rooms = Map.of(
                 "Porch", new PotentialMurderLocation[]{ new PotentialMurderLocation( "on deck Chair") },
-                "Living Room", new PotentialMurderLocation[]{ new PotentialMurderLocation("") },
-                "Kitchen", new PotentialMurderLocation[]{ new PotentialMurderLocation( "") }
+                "Living Room", new PotentialMurderLocation[]{ new PotentialMurderLocation("on sofa") },
+                "Kitchen", new PotentialMurderLocation[]{ new PotentialMurderLocation( "in the sink") }
         );
         Map<String, PotentialMurderLocation[]> bathrooms = Map.of(
-                "Downstairs Bathroom", new PotentialMurderLocation[]{ new PotentialMurderLocation( "") },
+                "Downstairs Bathroom", new PotentialMurderLocation[]{ new PotentialMurderLocation( "in the bath") },
                 "Upstairs Bathroom", new PotentialMurderLocation[]{ new PotentialMurderLocation ( "" )}
         );
 
@@ -48,7 +47,7 @@ public class Main {
         System.out.println("enter username:");
         Scanner input = new Scanner(System.in);
         user_name = (input.nextLine()).split(" ");
-
+        House x = house;
         house.set_murder_location();
         MurderLocation murder_location = house.get_murder_location();
 
