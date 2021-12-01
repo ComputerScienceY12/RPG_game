@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class House {
-    private MurderLocation murder_location;
+    private MurderLocation murder_location = null;
     private ArrayList<Room> rooms = new ArrayList<Room>();
 
     public void set_murder_location() {
@@ -31,6 +31,10 @@ public class House {
     }
     public ArrayList<Room> get_rooms() {
         return this.rooms;
+    }
+    public MurderLocation get_murder_location() throws Exception {
+        if (this.murder_location == null) throw new Exception("Murder location has not been set.");
+        return this.murder_location;
     }
 }
 
