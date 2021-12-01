@@ -3,11 +3,10 @@ package com.williamdaw.RPG_game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
-import java.util.Random;
 
 public class House {
     private MurderLocation murder_location = null;
-    private ArrayList<Room> rooms = new ArrayList<Room>();
+    private final ArrayList<Room> rooms = new ArrayList<Room>();
 
     public void set_murder_location() {
         this.murder_location = new MurderLocation(this);

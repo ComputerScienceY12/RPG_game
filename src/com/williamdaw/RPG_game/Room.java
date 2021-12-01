@@ -11,11 +11,13 @@ public class Room {
 
     }
 
-    public Room(String room_name, int floor, PotentialMurderLocation[] potential_murder_locations) {
+    public Room(String room_name, int floor) {
         this.name = room_name;
         this.floor = floor;
         this.potential_murder_locations.addAll(Arrays.asList(potential_murder_locations));
     }
+
+
     public String get_name() {
         return this.name;
     }
