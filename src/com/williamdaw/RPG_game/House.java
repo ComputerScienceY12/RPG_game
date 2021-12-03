@@ -10,7 +10,7 @@ public class House {
     private ArrayList<Room> rooms = new ArrayList<Room>();
 
     public void set_murder_location() {
-        this.murder_location = new MurderLocation(this);
+        this.murder_location = new MurderLocation(house,floor);
     }
 
     public void add_room(Room room) {

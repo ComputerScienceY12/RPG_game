@@ -8,6 +8,9 @@ public class Room {
     int floor;
     ArrayList<PotentialMurderLocation> potential_murder_locations = new ArrayList<PotentialMurderLocation>();
     public Room(String s, int floor) {
+        System.out.println(s);
+        System.out.println(floor);
+
 
     }
 
