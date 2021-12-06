@@ -7,7 +7,10 @@ public class Room {
     String name;
     int floor;
     ArrayList<PotentialMurderLocation> potential_murder_locations = new ArrayList<PotentialMurderLocation>();
-    public Room() {
+    public Room(String s, int floor) {
+        System.out.println(s);
+        System.out.println(floor);
+
 
     }
 
