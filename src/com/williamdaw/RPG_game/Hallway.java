@@ -6,7 +6,7 @@ import java.util.Collections;
 public class Hallway extends Room {
     ArrayList<Room> adjacent_rooms = new ArrayList<Room>();
     public Hallway(int floor) {
-        super("Floor " + floor + " Hallway", floor);
+        super("Floor " + floor + " Hallway", floor, other_rooms.get(room));
     }
     public void add_adjacent_room(ArrayList<Room> rooms) {
         this.adjacent_rooms.addAll(rooms);

@@ -8,7 +8,7 @@ public class MurderLocation extends Room {
     PotentialMurderLocation sub_location;
 
     public MurderLocation(House house,int floor) {
-        super("Floor" + house, floor);
+        super("Floor" + house, floor, other_rooms.get(room));
         ArrayList<Room> rooms = house.get_rooms();
         this.value = rooms.get(new Random().nextInt(rooms.size()));
 

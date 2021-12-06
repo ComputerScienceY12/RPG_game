@@ -50,14 +50,15 @@ public class Main {
 //        Map<String, Integer> test_map = new HashMap<String, Integer>() { { "Here", 1 }, { } };
 //        test_map["here"] == 1
         House house = new House();
-        for (String bedroom : bedrooms.keySet()) house.add_room(new Bedroom(bedroom, 1));
-        for (String room : other_rooms.keySet()) house.add_room(new Room(room, 0));
-        house.add_room(new Room[] { new Bathroom(null, 0), new Bathroom(house.get_room("Master Bedroom"), 1) });
+        for (String bedroom : bedrooms.keySet()) house.add_room(new Bedroom(bedroom, 1, bedrooms.get(bedroom)));
+        for (String room : other_rooms.keySet()) house.add_room(new Room(room, 0, other_rooms.get(room)));
+        house.add_room(new Room[] { new Bathroom(null, 0, bathrooms.get("Downstairs Bathroom")), new Bathroom(house.get_room("Master Bedroom"), 1, bathrooms.get("Upstairs Bathroom")) });
         house.add_room(new Room[] { new Hallway(0), new Hallway(1) });
+
         System.out.println("enter username:");
         Scanner input = new Scanner(System.in);
-        user_name = (input.nextLine()).split(" ");
-        House x = house;
+        user_name = input.nextLine().split(" ");
+
         house.set_murder_location();
         MurderLocation murder_location = house.get_murder_location();
 
