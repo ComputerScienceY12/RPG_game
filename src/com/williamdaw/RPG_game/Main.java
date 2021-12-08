@@ -1,6 +1,5 @@
 package com.williamdaw.RPG_game;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -63,31 +62,31 @@ public class Main {
 
 
 
-        Map<String, Item[]> bedrooms = Map.of(
-                "Guest", new PotentialMurderLocation[]{ new PotentialMurderLocation("on bed") },
-                "Master", new PotentialMurderLocation[]{ new PotentialMurderLocation("in wardrobe") },
-                "Child", new PotentialMurderLocation[]{ new PotentialMurderLocation("on floor") }
+        Map<String, Item[]> other_rooms_items = Map.of(
+                "Porch", new Item[]{ new Item("on bed") },
+                "Living Room", new Item[]{ new Item("in wardrobe") },
+                "Kitchen", new Item[]{ new Item("on floor") }
         );
-        Map<String, Item[]> bedrooms = Map.of(
-                "Guest", new PotentialMurderLocation[]{ new PotentialMurderLocation("on bed") },
-                "Master", new PotentialMurderLocation[]{ new PotentialMurderLocation("in wardrobe") },
-                "Child", new PotentialMurderLocation[]{ new PotentialMurderLocation("on floor") }
+        Map<String, Item[]> bedrooms_items = Map.of(
+                "Guest", new Item[]{ new Item("on bed") },
+                "Master", new Item[]{ new Item("key"),new Item("flashlight") },
+                "Child", new Item[]{ new Item("toy") }
         );
-        Map<String, Item[]> bedrooms = Map.of(
-                "Guest", new PotentialMurderLocation[]{ new PotentialMurderLocation("on bed") },
-                "Master", new PotentialMurderLocation[]{ new PotentialMurderLocation("in wardrobe") },
-                "Child", new PotentialMurderLocation[]{ new PotentialMurderLocation("on floor") }
+        Map<String, Item[]> bathrooms_items = Map.of(
+                "Downstairs Bathroom", new Item[]{ new Item("hairdrier") },
+                "Upstairs", new Item[]{ new Item("in wardrobe") }
+//                "Child", new Item[]{ new Item("on floor") }
         );
-        Map<String, Item[]> bedrooms = Map.of(
-                "Guest", new PotentialMurderLocation[]{ new PotentialMurderLocation("on bed") },
-                "Master", new PotentialMurderLocation[]{ new PotentialMurderLocation("in wardrobe") },
-                "Child", new PotentialMurderLocation[]{ new PotentialMurderLocation("on floor") }
-        );
-        Map<String, Item[]> bedrooms = Map.of(
-                "Guest", new Item[]{ new PotentialMurderLocation("on bed") },
-                "Master", new PotentialMurderLocation[]{ new PotentialMurderLocation("in wardrobe") },
-                "Child", new PotentialMurderLocation[]{ new PotentialMurderLocation("on floor") }
-        );
+//        Map<String, Item[]> bedrooms = Map.of(
+//                "Guest", new Item[]{ new Item("on bed") },
+//                "Master", new Item[]{ new Item("in wardrobe") },
+//                "Child",new Item[]{ new Item("on floor") }
+//        );
+//        Map<String, Item[]> bedrooms = Map.of(
+//                "Guest", new Item[]{ new PotentialMurderLocation("on bed") },
+//                "Master", new Item[]{ new Item("in wardrobe") },
+//                "Child", new Item[]{ new Item("on floor") }
+//        );
 
 
 
