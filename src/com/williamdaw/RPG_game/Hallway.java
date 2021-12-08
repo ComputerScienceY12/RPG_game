@@ -5,8 +5,8 @@ import java.util.Collections;
 
 public class Hallway extends Room {
     ArrayList<Room> adjacent_rooms = new ArrayList<Room>();
-    public Hallway(int floor) {
-        super("Floor " + floor + " Hallway", floor, other_rooms.get(room));
+    public Hallway(int floor, PotentialMurderLocation[] potential_murder_locations) {
+        super("Floor " + floor + " Hallway", floor, potential_murder_locations);
     }
     public void add_adjacent_room(ArrayList<Room> rooms) {
         this.adjacent_rooms.addAll(rooms);

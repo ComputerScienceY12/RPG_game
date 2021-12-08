@@ -8,6 +8,10 @@ public class Room {
     int floor;
     ArrayList<PotentialMurderLocation> potential_murder_locations = new ArrayList<PotentialMurderLocation>();
 
+    public Room(String room_name) {
+        this.name = room_name;
+    }
+
     public Room(String room_name, int floor, PotentialMurderLocation[] potential_murder_locations) {
         this.name = room_name;
         this.floor = floor;
