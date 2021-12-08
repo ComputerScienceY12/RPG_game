@@ -1,7 +1,6 @@
 package com.williamdaw.RPG_game;
 
 import java.util.Map;
-import java.util.Scanner;
 
 //interface rooms {
 //    public void library
@@ -12,24 +11,13 @@ import java.util.Scanner;
 public class Main {
 
     public static String murder_room;
-    String[][] inventory = new String[5][2];
-    public static String[] user_name = new String[2];
+
+
     public static void main(String[] args) throws Exception {
-//        String[] bedrooms = {"Guest", "Master", "Child"};
-//        String[] other_rooms = {"Porch", "Living Room", "Kitchen", "Boot Room"};
-//        String[] bathrooms = {"Downstairs Bathroom", "Upstairs Bathroom"};
+
         String[] people = new String[]{"Daniel","Martin","will","Mrs Fowler","Cam"};
 
-//        Map<String, Weapons[]> weapons = Map.of(
-//                "All", new Weapons[]{ new Weapons("Knife") },
-//                "All", new Weapons[]{ new Weapons("Bat") },
-//                "All", new Weapons[]{ new Weapons("Scissors")},
-//                "All", new Weapons[]{ new Weapons("Rope")},
-//                "Bathroom", new Weapons[]{ new Weapons("Drowing")},
-//                "Bathroom", new Weapons[]{ new Weapons("Toast Bath")},
-//                "All", new Weapons[]{ new Weapons("5.56 cadet training rife")}
 
-//        );
         Map<String, PotentialMurderLocation[]> bedrooms = Map.of(
                 "Guest", new PotentialMurderLocation[]{ new PotentialMurderLocation("on bed") },
                 "Master", new PotentialMurderLocation[]{ new PotentialMurderLocation("in wardrobe") },
@@ -54,9 +42,6 @@ public class Main {
         house.add_room(new Room[] { new Bathroom(null, 0, bathrooms.get("Downstairs Bathroom")), new Bathroom(house.get_room("Master Bedroom"), 1, bathrooms.get("Upstairs Bathroom")) });
         house.add_room(new Room[] { new Hallway(0, new PotentialMurderLocation[] {}), new Hallway(1, new PotentialMurderLocation[] {}) });
 
-        System.out.println("enter username:");
-        Scanner input = new Scanner(System.in);
-        user_name = input.nextLine().split(" ");
 
         house.set_murder_location();
 
@@ -74,7 +59,7 @@ public class Main {
         );
         Map<String, Item[]> bathrooms_items = Map.of(
                 "Downstairs Bathroom", new Item[]{ new Item("hairdrier") },
-                "Upstairs", new Item[]{ new Item("in wardrobe") }
+                "Upstairs", new Item[]{ new Item("toaster") }
 //                "Child", new Item[]{ new Item("on floor") }
         );
 //        Map<String, Item[]> bedrooms = Map.of(
@@ -88,6 +73,7 @@ public class Main {
 //                "Child", new Item[]{ new Item("on floor") }
 //        );
 
+        Player.getUser_name();
 
 
     }

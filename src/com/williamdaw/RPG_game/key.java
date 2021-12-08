@@ -7,8 +7,6 @@ public class key extends Item{
     public key(String value) {
         super(value);
     }
-    public void setRoom_attribute{
 
-}
 }
 
