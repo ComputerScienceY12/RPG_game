@@ -22,23 +22,23 @@ public class Main {
 //        String[] bathrooms = {"Downstairs Bathroom", "Upstairs Bathroom"};
         String[] people = new String[]{"Daniel","Martin","will","Mrs Fowler","Cam"};
 
-        Map<String, Weapons[]> weapons = Map.of(
-                "All", new Weapons[]{ new Weapons("Knife") },
-                "All", new Weapons[]{ new Weapons("Bat") },
-                "All", new Weapons[]{ new Weapons("Scissors")},
-                "All", new Weapons[]{ new Weapons("Rope")},
-                "Bathroom", new Weapons[]{ new Weapons("Drowing")},
-                "Bathroom", new Weapons[]{ new Weapons("Toast Bath")},
-                "All", new Weapons[]{ new Weapons("5.56 cadet training rife")}
+//        Map<String, Weapons[]> weapons = Map.of(
+//                "All", new Weapons[]{ new Weapons("Knife") },
+//                "All", new Weapons[]{ new Weapons("Bat") },
+//                "All", new Weapons[]{ new Weapons("Scissors")},
+//                "All", new Weapons[]{ new Weapons("Rope")},
+//                "Bathroom", new Weapons[]{ new Weapons("Drowing")},
+//                "Bathroom", new Weapons[]{ new Weapons("Toast Bath")},
+//                "All", new Weapons[]{ new Weapons("5.56 cadet training rife")}
 
-        );
+//        );
         Map<String, PotentialMurderLocation[]> bedrooms = Map.of(
                 "Guest", new PotentialMurderLocation[]{ new PotentialMurderLocation("on bed") },
                 "Master", new PotentialMurderLocation[]{ new PotentialMurderLocation("in wardrobe") },
                 "Child", new PotentialMurderLocation[]{ new PotentialMurderLocation("on floor") }
         );
         Map<String, PotentialMurderLocation[]> other_rooms = Map.of(
-                "Porch", new PotentialMurderLocation[]{ new PotentialMurderLocation( "on deck Chair") },
+                "Porch", new PotentialMurderLocation[]{ new PotentialMurderLocation( "on deck Chair")},
                 "Living Room", new PotentialMurderLocation[]{ new PotentialMurderLocation("on sofa") },
                 "Kitchen", new PotentialMurderLocation[]{ new PotentialMurderLocation( "in the sink") }
         );
@@ -62,10 +62,7 @@ public class Main {
         house.set_murder_location();
         MurderLocation murder_location = house.get_murder_location();
 
-        System.out.println(murder_location);
-
 
 
     }
 }
-

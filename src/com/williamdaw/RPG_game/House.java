@@ -8,6 +8,7 @@ public class House {
     private MurderLocation murder_location = null;
     private final ArrayList<Room> rooms = new ArrayList<Room>();
 
+
     public void set_murder_location() {
         this.murder_location = new MurderLocation(this);
     }
