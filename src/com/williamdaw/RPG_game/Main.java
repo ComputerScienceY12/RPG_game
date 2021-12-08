@@ -74,6 +74,11 @@ public class Main {
 //        );
 
         Player.getUser_name();
+        DansCode.main();
+
+
+    }
+    public static void story_printer(){
 
 
     }
