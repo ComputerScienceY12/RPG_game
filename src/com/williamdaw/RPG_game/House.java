@@ -9,8 +9,9 @@ public class House {
     private final ArrayList<Room> rooms = new ArrayList<Room>();
 
 
-    public void set_murder_location() {
+    public String set_murder_location() {
         this.murder_location = new MurderLocation(this);
+        return null;
     }
 
     public void add_room(Room room) {
