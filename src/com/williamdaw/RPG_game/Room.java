@@ -5,11 +5,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Room {
+public class Room extends House{
     String name;
     int floor;
     ArrayList<Object> items = new ArrayList<>();
     ArrayList<PotentialMurderLocation> potential_murder_locations = new ArrayList<PotentialMurderLocation>();
+
 
 
     public Room(String room_name) {
@@ -47,6 +48,7 @@ public class Room {
         Object[][] Kitchen = {{"Hallway0",0},{"Downstairs Bathroom",0},{"Back Garden",0}};
         Object[][] Downstairs_Bathroom = {{"Hallway0",0}};
         Object[][] Back_Garden = {{"Hallway0",0}};
+
 
 
     }

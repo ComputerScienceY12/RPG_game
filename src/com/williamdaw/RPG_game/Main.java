@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Main {
 // update ui
+
     public static String murder_room;
 
 
@@ -52,6 +53,7 @@ public class Main {
 
         house.set_murder_location();
         String murder_location = house.set_murder_location();
+        System.out.println(murder_location);
 
 
 
@@ -70,19 +72,12 @@ public class Main {
                 "Upstairs", new Item[]{ new Item("toaster") }
 //                "Child", new Item[]{ new Item("on floor") }
         );
-//        Map<String, Item[]> bedrooms = Map.of(
-//                "Guest", new Item[]{ new Item("on bed") },
-//                "Master", new Item[]{ new Item("in wardrobe") },
-//                "Child",new Item[]{ new Item("on floor") }
-//        );
-//        Map<String, Item[]> bedrooms = Map.of(
-//                "Guest", new Item[]{ new PotentialMurderLocation("on bed") },
-//                "Master", new Item[]{ new Item("in wardrobe") },
-//                "Child", new Item[]{ new Item("on floor") }
-//        );
+
 
         Player.getUser_name();
         DansCode.main();
+
+
 
 
     }
