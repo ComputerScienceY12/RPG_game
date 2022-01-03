@@ -1,10 +1,20 @@
 package com.williamdaw.RPG_game;
 
 import java.util.Map;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        Random rand = new Random();
+
         String[] characters = new String[]{"Daniel","Martin","will","Mrs Fowler","Cam"};
+        String Murder = characters[rand.nextInt(characters.length)];rand.nextInt(characters.length);
+
+        System.out.println(Murder);
+
+
+
+
 
         Map<String, PotentialMurderLocation[]> bedrooms = Map.of(
                 "Guest", new PotentialMurderLocation[]{ new PotentialMurderLocation("on bed") },
@@ -37,8 +47,8 @@ public class Main {
 
 
         house.set_murder_location();
-        String murder_location = house.set_murder_location();
-        System.out.println(murder_location);
+
+
 
 //        Map<String, Item[]> murder_weapons = Map.of(
 //                "Knife", new Item[]{ new Item("stabbed") },
@@ -68,7 +78,7 @@ public class Main {
 //        DansCode.main();
 /*
 * TODO:
-* WHO KILLED?
+* WHO KILLED? RANDom generator start of main class
 * WHERE PLAYER STARTS
 * WHO PLAYER IS
 * START INVESTIGATION
