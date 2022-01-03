@@ -1,25 +1,10 @@
 package com.williamdaw.RPG_game;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.Map;
 
-//interface rooms {
-//    public void library
-//    // stairs
-//    // roof top
-// font 13
-
 public class Main {
-// update ui
-
-    public static String murder_room;
-
-
     public static void main(String[] args) throws Exception {
-
-        String[] people = new String[]{"Daniel","Martin","will","Mrs Fowler","Cam"};
-
+        String[] characters = new String[]{"Daniel","Martin","will","Mrs Fowler","Cam"};
 
         Map<String, PotentialMurderLocation[]> bedrooms = Map.of(
                 "Guest", new PotentialMurderLocation[]{ new PotentialMurderLocation("on bed") },
@@ -55,28 +40,60 @@ public class Main {
         String murder_location = house.set_murder_location();
         System.out.println(murder_location);
 
+//        Map<String, Item[]> murder_weapons = Map.of(
+//                "Knife", new Item[]{ new Item("stabbed") },
+//                "bat", new Item[]{ new Item("beaten") },
+//                "Poison", new Item[]{ new Item("poisoned") },
+//                "Handgun", new Item[]{ new Item("shot") }
+//        );
 
+//        Map<String, Item[]> other_rooms_items = Map.of(
+//                "Porch", new Item[]{ new Item("on bed") },
+//                "Living Room", new Item[]{ new Item("in wardrobe") },
+//                "Kitchen", new Item[]{ new Item("on floor") }
+//        );
+//        Map<String, Item[]> bedrooms_items = Map.of(
+//                "Guest", new Item[]{ new Item("on bed") },
+//                "Master", new Item[]{ new Item("key"),new Item("flashlight") },
+//                "Child", new Item[]{ new Item("toy") }
+//        );
+//        Map<String, Item[]> bathrooms_items = Map.of(
+//                "Downstairs Bathroom", new Item[]{ new Item("hairdrier") },
+//                "Upstairs", new Item[]{ new Item("toaster") }
+////                "Child", new Item[]{ new Item("on floor") }
+//        );
+//
 
-        Map<String, Item[]> other_rooms_items = Map.of(
-                "Porch", new Item[]{ new Item("on bed") },
-                "Living Room", new Item[]{ new Item("in wardrobe") },
-                "Kitchen", new Item[]{ new Item("on floor") }
-        );
-        Map<String, Item[]> bedrooms_items = Map.of(
-                "Guest", new Item[]{ new Item("on bed") },
-                "Master", new Item[]{ new Item("key"),new Item("flashlight") },
-                "Child", new Item[]{ new Item("toy") }
-        );
-        Map<String, Item[]> bathrooms_items = Map.of(
-                "Downstairs Bathroom", new Item[]{ new Item("hairdrier") },
-                "Upstairs", new Item[]{ new Item("toaster") }
-//                "Child", new Item[]{ new Item("on floor") }
-        );
+//        Player.getUser_name();
+//        DansCode.main();
+/*
+* TODO:
+* WHO KILLED?
+* WHERE PLAYER STARTS
+* WHO PLAYER IS
+* START INVESTIGATION
+* ENSURE ALL OPTIONS WORK
+* MAKE A WAY TO WIN
+* TEST EVERYTHING
+* TEST RANDOMNESS
+* TEST EVERYTHING
+* TEST ROBUSTNESS
+* CHECK AGAINST REQUIREMENTS
+*
+* NEW BRANCH GITHUB
+*
+* ADD HOME SCREEN
+* ENSURE ALL WORKS
+* ADD GAME INTERFACE
+* ENSURE ALL WORKS
+* CHECK AGAINST REQUIREMENTS
+* MAKE FINAL CHANGES
+* TEST EVERYTHING
+*
+*
+*
 
-
-        Player.getUser_name();
-        DansCode.main();
-
+* */
 
 
 
@@ -86,3 +103,4 @@ public class Main {
 
     }
 }
+
