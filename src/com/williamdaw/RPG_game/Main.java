@@ -49,10 +49,13 @@ public class Main {
         house.get_murder_location();
         String location = "Front Garden";
 
-        public static Object room_setter();
-            house.get_room(location);
-            location.replace(" ","-");
-            Room.
+
+
+
+       public static void room_setter1(){
+
+        }
+
                     /// find a way to call the function addjastent rooms in room
         // then the plan is to use one function to set everything then the other to print it and its in a perminant loop until the game is completed
 

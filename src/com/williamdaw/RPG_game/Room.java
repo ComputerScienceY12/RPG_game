@@ -35,7 +35,7 @@ public class Room extends House{
         return this.name;
     }
 
-    public String[] adjasent_rooms (String room_name) throws Exception{
+    public String[] adjasent_rooms (String rooms) throws Exception{
         Map<String, String[]> adjastent_room = Map.of(
 
         "Master",new String[]{"Hallway1"},
@@ -49,7 +49,7 @@ public class Room extends House{
         "Kitchen",new String[]{"Hallway0","Downstairs Bathroom","Back Garden"},
         "Back Garden",new String[]{"Hallway0"}
         );
-        return adjastent_room.get(room_name);
+        return adjastent_room.get(rooms);
 
 
     }
