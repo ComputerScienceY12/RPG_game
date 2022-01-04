@@ -35,20 +35,21 @@ public class Room extends House{
         return this.name;
     }
 
-    public void adjasent_rooms () {
-        Object[][] Guest = {{"Hallway1",1}};
-        Object[][] Master = {{"Hallway1",1},{"Upstairs Bathroom ",1}};
-        Object[][] child = {{"Hallway1",1}};
-        Object[][] Upstairs_Bathroom = {{"Hallway1",1}};
-        Object[][] Hallway1 = {{"Hallway0",0},{"Child",1},{"Master",1},{"Guest",1}};
-        Object[][] Hallway0 = {{"Hallway",1},{"Kitchen",0},{"Porch",0},{"Living_Room",0}};
-        Object[][] Porch = {{"Hallway0",0},{"Front_Garden",0}};
-        Object[][] Front_Garden = {{"Porch",0}};
-        Object[][] Living_Room = {{"Hallway0",0}};
-        Object[][] Kitchen = {{"Hallway0",0},{"Downstairs Bathroom",0},{"Back Garden",0}};
-        Object[][] Downstairs_Bathroom = {{"Hallway0",0}};
-        Object[][] Back_Garden = {{"Hallway0",0}};
+    public String[] adjasent_rooms (String room_name) throws Exception{
+        Map<String, String[]> adjastent_room = Map.of(
 
+        "Master",new String[]{"Hallway1"},
+        "Guest",new String[]{"Hallway1","Upstairs Bathroom"},
+        "Child",new String[]{"Hallway1"},
+        "Upstairs Bathroom",new String[]{"Hallway1"},
+        "Hallway1",new String[]{"Hallway0","Child","Master","Guest"},
+        "Porch",new String[]{"Hallway0","Front Garden"},
+        "Front Garden",new String[]{"Porch"},
+        "Living Room",new String[]{"Hallway0"},
+        "Kitchen",new String[]{"Hallway0","Downstairs Bathroom","Back Garden"},
+        "Back Garden",new String[]{"Hallway0"}
+        );
+        return adjastent_room.get(room_name);
 
 
     }

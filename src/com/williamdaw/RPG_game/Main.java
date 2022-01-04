@@ -8,9 +8,8 @@ public class Main {
         Random rand = new Random();
 
         String[] characters = new String[]{"Daniel","Martin","will","Mrs Fowler","Cam"};
-        String Murder = characters[rand.nextInt(characters.length)];rand.nextInt(characters.length);
-
-        System.out.println(Murder);
+        String killer = characters[rand.nextInt(characters.length)];rand.nextInt(characters.length);
+        System.out.println(killer);
 
 
 
@@ -40,13 +39,24 @@ public class Main {
 //        test_map["here"] == 1
         House house = new House();
         for (String bedroom : bedrooms.keySet()) house.add_room(new Bedroom(bedroom, 1, bedrooms.get(bedroom)));
-        for (String gardens : outside.keySet()) house.add_room(new Room(gardens, 1, outside.get(gardens)));
+        for (String gardens : outside.keySet()) house.add_room(new Room(gardens, 0, outside.get(gardens)));
         for (String room : other_rooms.keySet()) house.add_room(new Room(room, 0, other_rooms.get(room)));
         house.add_room(new Room[] { new Bathroom(null, 0, bathrooms.get("Downstairs Bathroom")), new Bathroom(house.get_room("Master Bedroom"), 1, bathrooms.get("Upstairs Bathroom")) });
         house.add_room(new Room[] { new Hallway(0, new PotentialMurderLocation[] {}), new Hallway(1, new PotentialMurderLocation[] {}) });
 
 
         house.set_murder_location();
+        house.get_murder_location();
+        String location = "Front Garden";
+
+        public static Object room_setter();
+            house.get_room(location);
+            location.replace(" ","-");
+            Room.
+                    /// find a way to call the function addjastent rooms in room
+        // then the plan is to use one function to set everything then the other to print it and its in a perminant loop until the game is completed
+
+
 
 
 
