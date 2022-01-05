@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) throws Exception {
         Random rand = new Random();
@@ -38,6 +37,7 @@ public class Main {
 
 //        Map<String, Integer> test_map = new HashMap<String, Integer>() { { "Here", 1 }, { } };
 //        test_map["here"] == 1
+
         House house = new House();
         for (String bedroom : bedrooms.keySet()) house.add_room(new Bedroom(bedroom, 1, bedrooms.get(bedroom)));
         for (String gardens : outside.keySet()) house.add_room(new Room(gardens, 0, outside.get(gardens)));
@@ -46,8 +46,22 @@ public class Main {
         house.add_room(new Room[]{new Hallway(0, new PotentialMurderLocation[]{}), new Hallway(1, new PotentialMurderLocation[]{})});
 
 
+
         house.set_murder_location();
-        house.get_murder_location();
+        MurderLocation murder_location = house.get_murder_location();
+        House house1;
+        String room_murder_subsection = "";
+        if( outside.containsKey(house.get_murder_location()) == true) {
+            room_murder_subsection = "outside";
+        }
+        if( bedrooms.containsKey(house.get_murder_location()) == true) {
+            room_murder_subsection = "bedrooms";
+        }
+        if( other_rooms.containsKey(house.get_murder_location()) == true) {
+            room_murder_subsection = "other_rooms";
+        }
+//        DansCode.main();
+        System.out.println(room_murder_subsection + house.get_murder_location());
         String location = "Front Garden";
         String[] rooms_adjacent;
         System.out.println("you murderer option are");
@@ -60,23 +74,43 @@ public class Main {
         boolean win = false;
         System.out.println(" ");
         Player.getUser_name();
+        // ask martin how to return the murder location
         while (win == false) {
 
             rooms_adjacent = Room.adjacent_room_finder(location);
-            if (Objects.equals(location, "Hallway0")) location = "Downstairs Hallway";// makes the 0 and 1 dissaplear
-            if (Objects.equals(location, "Hallway1")) location = "Upstairs Hallway";// makes the 0 and 1 dissaplear
+            System.out.println(location);
+            if (Objects.equals(location, "Hallway0")) location = "Downstairs Hallway ";// makes the 0 and 1 dissaplear
+            if (Objects.equals(location, "Hallway1")) location = "Upstairs Hallway ";// makes the 0 and 1 dissaplear
             System.out.println("You are in " + location + "where would you like to go");
-            for (int i = 0; i < rooms_adjacent.length; i++) System.out.println(rooms_adjacent[i]);
+
+            for (String s : rooms_adjacent)
+                if (Objects.equals(s, "Hallway0")) {
+                    s = "Downstairs Hallway ";// makes the 0 and 1 dissaplear
+                    System.out.println(s);
+                }
+                else if (Objects.equals(s, "Hallway1")) {
+                    s = "Upstairs Hallway ";// makes the 0 and 1 dissaplear
+                    System.out.println(s);
+                }
+                else{
+                    System.out.println(s);
+                }
+
             String User_choice = sc.nextLine();
+                if (Objects.equals(User_choice, "guess"))
+                    System.out.println("Please enter the location followed by the murder");
+                    String guess = sc.nextLine();
+                    if (guess.contains(killer) && guess.contains()) break;
+//                String User_choice_c = User_choice.substring(0, 1).toUpperCase() + User_choice.substring(1);
             for (String x : rooms_adjacent) {
                 if (Objects.equals(x, User_choice)) {
                     found = true;
                     location = User_choice;
                     break;
+                    }
                 }
-
             }
-
+        System.out.println("you win");
 
             /// find a way to call the function addjastent rooms in room
             // then the plan is to use one function to set everything then the other to print it and its in a perminant loop until the game is completed
@@ -140,5 +174,5 @@ public class Main {
 
         }
     }
-}
+
 

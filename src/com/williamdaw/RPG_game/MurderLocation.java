@@ -13,5 +13,6 @@ public class MurderLocation extends Room {
         this.value = rooms.get(new Random().nextInt(rooms.size()));
         this.floor = this.value.floor;
 
+
     }
 }
