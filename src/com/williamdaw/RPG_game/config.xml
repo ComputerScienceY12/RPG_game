@@ -12,7 +12,7 @@
         <object_prefix object="bed" prefix=" on the " />
         <object_prefix object="window" prefix=" next to the " />
         <object_prefix object="wardrobe" prefix=" in the " />
-        <object_prefix object="Tv" prefix=" next to the " />
+        <object_prefix object="TV" prefix=" next to the " />
         <object_prefix object="sofa" prefix=" on the " />
         <object_prefix object="sink" prefix=" in the " />
         <object_prefix object="cupboard" prefix=" on the " />
