@@ -49,7 +49,7 @@ public class Main {
 
         house.set_murder_location();
         MurderLocation murder_location = house.get_murder_location();
-        House house1;
+        MurderLocation murder_location1 = murder_location;
         String room_murder_subsection = "";
         if( outside.containsKey(house.get_murder_location()) == true) {
             room_murder_subsection = "outside";
@@ -100,7 +100,7 @@ public class Main {
                 if (Objects.equals(User_choice, "guess"))
                     System.out.println("Please enter the location followed by the murder");
                     String guess = sc.nextLine();
-                    if (guess.contains(killer) && guess.contains()) break;
+//                    if (guess.contains(killer) && guess.contains()) break;
 //                String User_choice_c = User_choice.substring(0, 1).toUpperCase() + User_choice.substring(1);
             for (String x : rooms_adjacent) {
                 if (Objects.equals(x, User_choice)) {
