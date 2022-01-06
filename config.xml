@@ -63,7 +63,6 @@
             <item name="sofa" murder_location="1"/>
             <item name="TV" murder_location="1" />
             <adjacent_room name="Downstairs Hallway" />
-
         </room>
         <room type="other_rooms" name="Front garden">
             <item name="flower" murder_location="1"/>
