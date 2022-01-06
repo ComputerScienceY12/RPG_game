@@ -17,6 +17,11 @@ public class Room extends House{
         this.name = room_name;
     }
 
+    public Room(String room_name, int floor) {
+        this.name = room_name;
+        this.floor = floor;
+    }
+
     public Room(String room_name, int floor, PotentialMurderLocation[] potential_murder_locations) {
         this.name = room_name;
         this.floor = floor;
@@ -35,7 +40,7 @@ public class Room extends House{
         return this.name;
     }
 
-    public static String[] adjacent_room_finder(String value) throws Exception{
+    public static String[] adjacent_room_finder(String value) throws Exception {
         Map<String, String[]> adjacent_room = new HashMap<>(Map.of(
 
                 "Master", new String[]{"Hallway1"},

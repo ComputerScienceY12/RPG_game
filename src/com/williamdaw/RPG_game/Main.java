@@ -16,9 +16,9 @@ public class Main {
 
 
         Map<String, PotentialMurderLocation[]> bedrooms = Map.of(
-                "Guest", new PotentialMurderLocation[]{new PotentialMurderLocation("on bed"),new PotentialMurderLocation("Next to the window")},
-                "Master", new PotentialMurderLocation[]{new PotentialMurderLocation("in wardrobe"),new PotentialMurderLocation("Behind the door")},
-                "Child", new PotentialMurderLocation[]{new PotentialMurderLocation("on floor"),new PotentialMurderLocation("Bed")}
+                "Guest", new PotentialMurderLocation[]{new PotentialMurderLocation("Bed"),new PotentialMurderLocation("Next to the window")},
+                "Master", new PotentialMurderLocation[]{new PotentialMurderLocation("Wardrobe"),new PotentialMurderLocation("Door")},
+                "Child", new PotentialMurderLocation[]{new PotentialMurderLocation("Floor"),new PotentialMurderLocation("Bed")}
         );
         Map<String, PotentialMurderLocation[]> other_rooms = Map.of(
                 "Porch", new PotentialMurderLocation[]{new PotentialMurderLocation("on deck Chair"),new PotentialMurderLocation("on the steps")},
@@ -32,7 +32,7 @@ public class Main {
 
         Map<String, PotentialMurderLocation[]> outside = Map.of(
                 "Front Garden", new PotentialMurderLocation[]{new PotentialMurderLocation("in the flowerbed"),new PotentialMurderLocation("on the concrete")},
-                "Back Garden", new PotentialMurderLocation[]{new PotentialMurderLocation("on the trampolene"),new PotentialMurderLocation("up against the fence")}
+                "Back Garden", new PotentialMurderLocation[]{new PotentialMurderLocation("on the trampoline"),new PotentialMurderLocation("up against the fence")}
         );
 
 //        Map<String, Integer> test_map = new HashMap<String, Integer>() { { "Here", 1 }, { } };
@@ -43,26 +43,25 @@ public class Main {
         for (String gardens : outside.keySet()) house.add_room(new Room(gardens, 0, outside.get(gardens)));
         for (String room : other_rooms.keySet()) house.add_room(new Room(room, 0, other_rooms.get(room)));
         house.add_room(new Room[]{new Bathroom(null, 0, bathrooms.get("Downstairs Bathroom")), new Bathroom(house.get_room("Master Bedroom"), 1, bathrooms.get("Upstairs Bathroom"))});
-        house.add_room(new Room[]{new Hallway(0, new PotentialMurderLocation[]{}), new Hallway(1, new PotentialMurderLocation[]{})});
+        house.add_room(new Room[]{new Hallway(0), new Hallway(1)});
 
 
 
         house.set_murder_location();
         MurderLocation murder_location = house.get_murder_location();
-        MurderLocation murder_location1 = murder_location;
         String room_murder_subsection = "";
-        if( outside.containsKey(house.get_murder_location()) == true) {
+        if (outside.containsKey(murder_location.name)) {
             room_murder_subsection = "outside";
         }
-        if( bedrooms.containsKey(house.get_murder_location()) == true) {
+        if(bedrooms.containsKey(murder_location.name)) {
             room_murder_subsection = "bedrooms";
         }
-        if( other_rooms.containsKey(house.get_murder_location()) == true) {
+        if(other_rooms.containsKey(murder_location.name)) {
             room_murder_subsection = "other_rooms";
         }
 //        DansCode.main();
         System.out.println(room_murder_subsection + house.get_murder_location());
-        String location = "Front Garden";
+        Room location = house.get_room("Front garden");
         String[] rooms_adjacent;
         System.out.println("you murderer option are");
         for (String character : characters) {
@@ -75,13 +74,11 @@ public class Main {
         System.out.println(" ");
         Player.getUser_name();
         // ask martin how to return the murder location
-        while (win == false) {
+        while (!(win)) {
 
             rooms_adjacent = Room.adjacent_room_finder(location);
             System.out.println(location);
-            if (Objects.equals(location, "Hallway0")) location = "Downstairs Hallway ";// makes the 0 and 1 dissaplear
-            if (Objects.equals(location, "Hallway1")) location = "Upstairs Hallway ";// makes the 0 and 1 dissaplear
-            System.out.println("You are in " + location + "where would you like to go");
+            System.out.println("You are in " + location + ", where would you like to go");
 
             for (String s : rooms_adjacent)
                 if (Objects.equals(s, "Hallway0")) {
@@ -96,24 +93,24 @@ public class Main {
                     System.out.println(s);
                 }
 
-            String User_choice = sc.nextLine();
-                if (Objects.equals(User_choice, "guess"))
+            String user_choice = sc.nextLine();
+                if (Objects.equals(user_choice, murder_location.name))
                     System.out.println("Please enter the location followed by the murder");
                     String guess = sc.nextLine();
 //                    if (guess.contains(killer) && guess.contains()) break;
 //                String User_choice_c = User_choice.substring(0, 1).toUpperCase() + User_choice.substring(1);
             for (String x : rooms_adjacent) {
-                if (Objects.equals(x, User_choice)) {
+                if (Objects.equals(x, user_choice)) {
                     found = true;
-                    location = User_choice;
+                    location = user_choice;
                     break;
                     }
                 }
             }
         System.out.println("you win");
 
-            /// find a way to call the function addjastent rooms in room
-            // then the plan is to use one function to set everything then the other to print it and its in a perminant loop until the game is completed
+            /// find a way to call the function adjacent rooms in room
+            // then the plan is to use one function to set everything then the other to print it and its in a permanent loop until the game is completed
 
 
 //        Map<String, Item[]> murder_weapons = Map.of(

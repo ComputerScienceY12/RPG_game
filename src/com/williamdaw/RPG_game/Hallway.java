@@ -2,9 +2,19 @@ package com.williamdaw.RPG_game;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 public class Hallway extends Room {
     ArrayList<Room> adjacent_rooms_hallway = new ArrayList<Room>();
+    public Hallway(int floor) {
+        String prefix = "";
+        if (floor == 0) {
+            prefix = "Upstairs ";
+        }else if (floor == 1) {
+            prefix = "Downstairs ";
+        }
+        super(prefix + "Hallway", floor);
+    }
     public Hallway(int floor, PotentialMurderLocation[] potential_murder_locations) {
         super("Floor " + floor + " Hallway", floor, potential_murder_locations);
     }
