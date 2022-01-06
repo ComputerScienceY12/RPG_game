@@ -11,10 +11,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 public class Main {
+
     public Object[] load_config() {
         return new Object[]{};
     }
     public static void main(String[] args) throws Exception {
+        SimpleAudioPlayer.main();
+
         Random rand = new Random();
 
         File inputFile = new File("config.xml");
