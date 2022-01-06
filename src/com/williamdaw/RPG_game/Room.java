@@ -5,13 +5,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Room extends House{
+public class Room {
     String name;
     int floor;
     ArrayList<Object> items = new ArrayList<>();
-    ArrayList<PotentialMurderLocation> potential_murder_locations = new ArrayList<PotentialMurderLocation>();
-
-
+    ArrayList<PotentialMurderLocation> potential_murder_locations = new ArrayList<>();
 
     public Room(String room_name) {
         this.name = room_name;
@@ -40,7 +38,7 @@ public class Room extends House{
         return this.name;
     }
 
-    public static String[] adjacent_room_finder(String value) throws Exception {
+    public String[] get_adjacent_rooms() {
         Map<String, String[]> adjacent_room = new HashMap<>(Map.of(
 
                 "Master", new String[]{"Hallway1"},

@@ -1,42 +1,94 @@
 package com.williamdaw.RPG_game;
 
-import javax.xml.stream.Location;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
+
+import java.io.File;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
+
 public class Main {
     public static void main(String[] args) throws Exception {
         Random rand = new Random();
 
-        String[] characters = new String[]{"Daniel", "Martin", "will", "Mrs Fowler", "Cam"};
+        File inputFile = new File("config.xml");
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(inputFile);
+        doc.getDocumentElement().normalize();
+        System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+        NodeList nList = doc.getElementsByTagName("student");
+        System.out.println("----------------------------");
+
+        for (int temp = 0; temp < nList.getLength(); temp++) {
+            Node nNode = nList.item(temp);
+            System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+                System.out.println("Student roll no : "
+                        + eElement.getAttribute("rollno"));
+                System.out.println("First Name : "
+                        + eElement
+                        .getElementsByTagName("firstname")
+                        .item(0)
+                        .getTextContent());
+                System.out.println("Last Name : "
+                        + eElement
+                        .getElementsByTagName("lastname")
+                        .item(0)
+                        .getTextContent());
+                System.out.println("Nick Name : "
+                        + eElement
+                        .getElementsByTagName("nickname")
+                        .item(0)
+                        .getTextContent());
+                System.out.println("Marks : "
+                        + eElement
+                        .getElementsByTagName("marks")
+                        .item(0)
+                        .getTextContent());
+            }
+        }
+
+        String[] characters = new String[] {
+                "Daniel",
+                "Martin",
+                "Will",
+                "Mrs Fowler",
+                "Cam",
+                "Mitch"
+        };
         String killer = characters[rand.nextInt(characters.length)];
-        rand.nextInt(characters.length);
-        System.out.println(killer);
 
+        System.out.println(killer); // TODO: REMOVE ME
 
-        Map<String, PotentialMurderLocation[]> bedrooms = Map.of(
-                "Guest", new PotentialMurderLocation[]{new PotentialMurderLocation("Bed"),new PotentialMurderLocation("Next to the window")},
-                "Master", new PotentialMurderLocation[]{new PotentialMurderLocation("Wardrobe"),new PotentialMurderLocation("Door")},
-                "Child", new PotentialMurderLocation[]{new PotentialMurderLocation("Floor"),new PotentialMurderLocation("Bed")}
+        // Create a map of all the rooms and items.
+        Map<String, Item[]> bedrooms = Map.of(
+                "Guest", new Item[]{new Item("Bed"), new Item("Next to the window")},
+                "Master", new Item[]{new Item("Wardrobe"), new Item("Door")},
+                "Child", new Item[]{new Item("Floor"), new Item("Bed")}
         );
-        Map<String, PotentialMurderLocation[]> other_rooms = Map.of(
-                "Porch", new PotentialMurderLocation[]{new PotentialMurderLocation("on deck Chair"),new PotentialMurderLocation("on the steps")},
-                "Living Room", new PotentialMurderLocation[]{new PotentialMurderLocation("on sofa"),new PotentialMurderLocation("against the tv")},
-                "Kitchen", new PotentialMurderLocation[]{new PotentialMurderLocation("in the sink"),new PotentialMurderLocation("in the cupboards")}
+        Map<String, Item[]> other_rooms = Map.of(
+                "Porch", new Item[]{new Item("on deck Chair"), new Item("on the steps")},
+                "Living Room", new Item[]{new Item("on sofa"), new Item("against the tv")},
+                "Kitchen", new Item[]{new Item("in the sink"), new Item("in the cupboards")}
         );
-        Map<String, PotentialMurderLocation[]> bathrooms = Map.of(
-                "Downstairs Bathroom", new PotentialMurderLocation[]{new PotentialMurderLocation("in the bath"),new PotentialMurderLocation("on the sink")},
-                "Upstairs Bathroom", new PotentialMurderLocation[]{new PotentialMurderLocation("in the shower"),new PotentialMurderLocation("next to the door")}
-        );
-
-        Map<String, PotentialMurderLocation[]> outside = Map.of(
-                "Front Garden", new PotentialMurderLocation[]{new PotentialMurderLocation("in the flowerbed"),new PotentialMurderLocation("on the concrete")},
-                "Back Garden", new PotentialMurderLocation[]{new PotentialMurderLocation("on the trampoline"),new PotentialMurderLocation("up against the fence")}
+        Map<String, Item[]> bathrooms = Map.of(
+                "Downstairs Bathroom", new Item[]{new Item("in the bath"), new Item("on the sink")},
+                "Upstairs Bathroom", new Item[]{new Item("in the shower"), new Item("next to the door")}
         );
 
-//        Map<String, Integer> test_map = new HashMap<String, Integer>() { { "Here", 1 }, { } };
-//        test_map["here"] == 1
+        Map<String, Item[]> outside = Map.of(
+                "Front Garden", new Item[]{new Item("in the flowerbed"), new Item("on the concrete")},
+                "Back Garden", new Item[]{new Item("on the trampoline"), new Item("up against the fence")}
+        );
 
         House house = new House();
         for (String bedroom : bedrooms.keySet()) house.add_room(new Bedroom(bedroom, 1, bedrooms.get(bedroom)));
@@ -61,7 +113,7 @@ public class Main {
         }
 //        DansCode.main();
         System.out.println(room_murder_subsection + house.get_murder_location());
-        Room location = house.get_room("Front garden");
+        Room current_room = house.get_room("Front garden");
         String[] rooms_adjacent;
         System.out.println("you murderer option are");
         for (String character : characters) {
@@ -76,38 +128,23 @@ public class Main {
         // ask martin how to return the murder location
         while (!(win)) {
 
-            rooms_adjacent = Room.adjacent_room_finder(location);
-            System.out.println(location);
-            System.out.println("You are in " + location + ", where would you like to go");
+            rooms_adjacent = current_room.get_adjacent_rooms();
+            System.out.println(current_room);
+            System.out.println("You are in " + current_room + ", where would you like to go");
 
-            for (String s : rooms_adjacent)
-                if (Objects.equals(s, "Hallway0")) {
-                    s = "Downstairs Hallway ";// makes the 0 and 1 dissaplear
-                    System.out.println(s);
-                }
-                else if (Objects.equals(s, "Hallway1")) {
-                    s = "Upstairs Hallway ";// makes the 0 and 1 dissaplear
-                    System.out.println(s);
-                }
-                else{
-                    System.out.println(s);
-                }
+            for (String s : rooms_adjacent) System.out.println(s);
 
             String user_choice = sc.nextLine();
-                if (Objects.equals(user_choice, murder_location.name))
-                    System.out.println("Please enter the location followed by the murder");
-                    String guess = sc.nextLine();
-//                    if (guess.contains(killer) && guess.contains()) break;
-//                String User_choice_c = User_choice.substring(0, 1).toUpperCase() + User_choice.substring(1);
-            for (String x : rooms_adjacent) {
-                if (Objects.equals(x, user_choice)) {
-                    found = true;
-                    location = user_choice;
-                    break;
-                    }
-                }
-            }
-        System.out.println("you win");
+            if (Objects.equals(user_choice, murder_location.name))
+                System.out.println("Please enter the location followed by the murder");
+
+//            String guess = sc.nextLine();
+//            if (guess.contains(killer) && guess.contains()) break;
+//            String User_choice_c = User_choice.substring(0, 1).toUpperCase() + User_choice.substring(1);
+
+            if (house.has_room(user_choice)) current_room = house.get_room(user_choice);
+
+            System.out.println("you win");
 
             /// find a way to call the function adjacent rooms in room
             // then the plan is to use one function to set everything then the other to print it and its in a permanent loop until the game is completed
@@ -168,8 +205,8 @@ public class Main {
 
              * */
 
-
         }
     }
+}
 
 

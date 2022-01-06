@@ -1,0 +1,33 @@
+<?xml version = "1.0"?>
+<class>
+    <characters>
+        <character name="Will" />
+        <character name="Mrs Fowler" />
+        <character name="Martin" />
+        <character name="Mitch" />
+        <character name="Cam" />
+        <character name="Dan" />
+    </characters>
+    <object_prefixes>
+        <object_prefix object="bed" prefix=" on the " />
+        <object_prefix object="window" prefix=" next to the " />
+        <object_prefix object="wardrobe" prefix=" in the " />
+        <object_prefix object="bed" prefix=" on the " />
+        <object_prefix object="bed" prefix=" on the " />
+        <object_prefix object="bed" prefix=" on the " />
+    </object_prefixes>
+    <rooms>
+        <room type="bedroom" name="Guest">
+            <item name="bed" murder_location="1" />
+            <item name="window" murder_location="1" />
+        </room>
+        <room type="bedroom" name="Master">
+            <item name="wardrobe" murder_location="1" />
+            <item name="door" murder_location="1" prefix=" behind the door " />
+        </room>
+        <room type="bedroom" name="Child">
+            <item name="floor" murder_location="1" prefix=" in the " />
+            <item name="bed" murder_location="1" prefix=" on the " />
+        </room>
+    </rooms>
+</class>
