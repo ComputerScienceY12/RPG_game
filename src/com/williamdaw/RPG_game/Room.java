@@ -10,6 +10,7 @@ public class Room {
     int floor;
     ArrayList<Object> items = new ArrayList<>();
     ArrayList<PotentialMurderLocation> potential_murder_locations = new ArrayList<>();
+    ArrayList<Room> adjacent_rooms = new ArrayList<>();
 
     public Room(String room_name) {
         this.name = room_name;
@@ -38,7 +39,7 @@ public class Room {
         return this.name;
     }
 
-    public String[] get_adjacent_rooms() {
-        return this.adjacent_rooms;
+    public Room[] get_adjacent_rooms() {
+        return (Room[]) this.adjacent_rooms.toArray();
     }
 }

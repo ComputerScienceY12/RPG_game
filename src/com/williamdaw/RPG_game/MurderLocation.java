@@ -12,7 +12,5 @@ public class MurderLocation extends Room {
         ArrayList<Room> rooms = house.get_rooms();
         this.value = rooms.get(new Random().nextInt(rooms.size()));
         this.floor = this.value.floor;
-
-
     }
 }

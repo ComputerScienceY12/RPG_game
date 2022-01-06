@@ -1,9 +1,6 @@
 package com.williamdaw.RPG_game;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import java.io.File;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,50 +22,69 @@ public class Main {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(inputFile);
         doc.getDocumentElement().normalize();
-        System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-        NodeList nList = doc.getElementsByTagName("student");
-        System.out.println("----------------------------");
 
-        for (int temp = 0; temp < nList.getLength(); temp++) {
-            Node nNode = nList.item(temp);
-            System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
-            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) nNode;
-                System.out.println("Student roll no : "
-                        + eElement.getAttribute("rollno"));
-                System.out.println("First Name : "
-                        + eElement
-                        .getElementsByTagName("firstname")
-                        .item(0)
-                        .getTextContent());
-                System.out.println("Last Name : "
-                        + eElement
-                        .getElementsByTagName("lastname")
-                        .item(0)
-                        .getTextContent());
-                System.out.println("Nick Name : "
-                        + eElement
-                        .getElementsByTagName("nickname")
-                        .item(0)
-                        .getTextContent());
-                System.out.println("Marks : "
-                        + eElement
-                        .getElementsByTagName("marks")
-                        .item(0)
-                        .getTextContent());
-            }
+        // parse characters
+        ArrayList<String> character_names = new ArrayList<>();
+        Element characters_node = (Element) doc.getElementsByTagName("characters").item(0);
+        NodeList character_node_list = characters_node.getElementsByTagName("character");
+        for (int i = 0; i < character_node_list.getLength(); i++) {
+            Node character_node = character_node_list.item(i);
+            character_names.add(((Element) character_node).getAttribute("name"));
         }
 
-        String[] characters = new String[] {
-                "Daniel",
-                "Martin",
-                "Will",
-                "Mrs Fowler",
-                "Cam",
-                "Mitch"
-        };
-        String killer = characters[rand.nextInt(characters.length)];
+        // parse prefixes
+        Map<String, String> item_prefixes = new HashMap<>();
+        Element object_prefixes_node = (Element) doc.getElementsByTagName("object_prefixes").item(0);
+        NodeList object_prefix_node_list = object_prefixes_node.getElementsByTagName("object_prefix");
+        for (int i = 0; i < object_prefix_node_list.getLength(); i++) {
+            Element object_prefix_node = (Element) object_prefix_node_list.item(i);
+            item_prefixes.put(object_prefix_node.getAttribute("object"), object_prefix_node.getAttribute("prefix"));
+        }
+
+        // parse rooms & adjacent rooms
+        Element characters_node = (Element) doc.getElementsByTagName("characters").item(0);
+        NodeList character_node_list = characters_node.getElementsByTagName("character");
+        for (int i = 0; i < character_node_list.getLength(); i++) {
+            Node character_node = character_node_list.item(i);
+            character_names.add(((Element) character_node).getAttribute("name"));
+        }
+
+
+
+
+
+
+
+
+
+
+//            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+//                Element eElement = (Element) nNode;
+//                System.out.println("Student roll no : "
+//                        + eElement.getAttribute("rollno"));
+//                System.out.println("First Name : "
+//                        + eElement
+//                        .getElementsByTagName("firstname")
+//                        .item(0)
+//                        .getTextContent());
+//                System.out.println("Last Name : "
+//                        + eElement
+//                        .getElementsByTagName("lastname")
+//                        .item(0)
+//                        .getTextContent());
+//                System.out.println("Nick Name : "
+//                        + eElement
+//                        .getElementsByTagName("nickname")
+//                        .item(0)
+//                        .getTextContent());
+//                System.out.println("Marks : "
+//                        + eElement
+//                        .getElementsByTagName("marks")
+//                        .item(0)
+//                        .getTextContent());
+//            }
+
+        String killer = character_names.get(rand.nextInt(character_names.size()));
 
         System.out.println(killer); // TODO: REMOVE ME
 
@@ -94,10 +110,10 @@ public class Main {
         );
 
         House house = new House();
-        for (String bedroom : bedrooms.keySet()) house.add_room(new Bedroom(bedroom, 1, bedrooms.get(bedroom)));
-        for (String gardens : outside.keySet()) house.add_room(new Room(gardens, 0, outside.get(gardens)));
-        for (String room : other_rooms.keySet()) house.add_room(new Room(room, 0, other_rooms.get(room)));
-        house.add_room(new Room[]{new Bathroom(null, 0, bathrooms.get("Downstairs Bathroom")), new Bathroom(house.get_room("Master Bedroom"), 1, bathrooms.get("Upstairs Bathroom"))});
+//        for (String bedroom : bedrooms.keySet()) house.add_room(new Bedroom(bedroom, 1, bedrooms.get(bedroom)));
+//        for (String gardens : outside.keySet()) house.add_room(new Room(gardens, 0, outside.get(gardens)));
+//        for (String room : other_rooms.keySet()) house.add_room(new Room(room, 0, other_rooms.get(room)));
+//        house.add_room(new Room[]{new Bathroom(null, 0, bathrooms.get("Downstairs Bathroom")), new Bathroom(house.get_room("Master Bedroom"), 1, bathrooms.get("Upstairs Bathroom"))});
         house.add_room(new Room[]{new Hallway(0), new Hallway(1)});
 
 
@@ -117,9 +133,9 @@ public class Main {
 //        DansCode.main();
         System.out.println(room_murder_subsection + house.get_murder_location());
         Room current_room = house.get_room("Front garden");
-        String[] rooms_adjacent;
+
         System.out.println("you murderer option are");
-        for (String character : characters) {
+        for (String character : character_names) {
             System.out.print(character + " ,");
         }
         Scanner sc = new Scanner(System.in);
@@ -131,11 +147,11 @@ public class Main {
         // ask martin how to return the murder location
         while (!(win)) {
 
-            rooms_adjacent = current_room.get_adjacent_rooms();
+            Room[] adjacent_rooms = current_room.get_adjacent_rooms();
             System.out.println(current_room);
             System.out.println("You are in " + current_room + ", where would you like to go");
 
-            for (String s : rooms_adjacent) System.out.println(s);
+            for (Room s : adjacent_rooms) System.out.println(s.name);
 
             String user_choice = sc.nextLine();
             if (Objects.equals(user_choice, murder_location.name))
