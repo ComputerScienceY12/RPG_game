@@ -12,9 +12,18 @@
         <object_prefix object="bed" prefix=" on the " />
         <object_prefix object="window" prefix=" next to the " />
         <object_prefix object="wardrobe" prefix=" in the " />
-        <object_prefix object="bed" prefix=" on the " />
-        <object_prefix object="bed" prefix=" on the " />
-        <object_prefix object="bed" prefix=" on the " />
+        <object_prefix object="Tv" prefix=" next to the " />
+        <object_prefix object="sofa" prefix=" on the " />
+        <object_prefix object="sink" prefix=" in the " />
+        <object_prefix object="cupboard" prefix=" on the " />
+        <object_prefix object="steps" prefix=" on the " />
+        <object_prefix object="deckchair" prefix=" on the " />
+        <object_prefix object="shower" prefix=" in the " />
+        <object_prefix object="bath" prefix=" in the " />
+        <object_prefix object="flower" prefix=" in the " />
+        <object_prefix object="concrete" prefix=" on the " />
+        <object_prefix object="fence" prefix=" against the fence " />
+        <object_prefix object="trampoline" prefix=" on the " />
     </object_prefixes>
     <rooms>
         <room type="bedroom" name="Guest">
@@ -23,11 +32,39 @@
         </room>
         <room type="bedroom" name="Master">
             <item name="wardrobe" murder_location="1" />
-            <item name="door" murder_location="1" prefix=" behind the door " />
+            <item name="door" murder_location="1" />
         </room>
         <room type="bedroom" name="Child">
-            <item name="floor" murder_location="1" prefix=" in the " />
-            <item name="bed" murder_location="1" prefix=" on the " />
+            <item name="floor" murder_location="1" />
+            <item name="bed" murder_location="1"  />
+        </room>
+        <room type="other_rooms" name="Kitchen">
+        <item name="sink" murder_location="1"  />
+        <item name="cupboard" murder_location="1"  />
+        </room>
+        <room type="other_rooms" name="Porch">
+            <item name="steps" murder_location="1" />
+            <item name="deckchair" murder_location="1"  />
+        </room>
+        <room type="other_rooms" name="Living room">
+            <item name="sofa" murder_location="1"/>
+            <item name="TV" murder_location="1"  />
+        </room>
+        <room type="bathrooms" name="Downstairs bathroom">
+            <item name="bath" murder_location="1"/>
+            <item name="sink" murder_location="1"  />
+        </room>
+        <room type="bathrooms" name="Upstairs bathroom">
+            <item name="shower" murder_location="1"/>
+            <item name="door" murder_location="1"  />
+        </room>
+        <room type="garden" name="front garden">
+            <item name="flower" murder_location="1"/>
+            <item name="concrete" murder_location="1"  />
+        </room>
+        <room type="garden" name="front garden">
+            <item name="fence" murder_location="1"/>
+            <item name="trampoline" murder_location="1"  />
         </room>
     </rooms>
 </class>
