@@ -39,24 +39,6 @@ public class Room {
     }
 
     public String[] get_adjacent_rooms() {
-        Map<String, String[]> adjacent_room = new HashMap<>(Map.of(
-
-                "Master", new String[]{"Hallway1"},
-                "Guest", new String[]{"Hallway1", "Upstairs Bathroom"},
-                "Child", new String[]{"Hallway1"},
-                "Upstairs Bathroom", new String[]{"Master"},
-                "Hallway1", new String[]{"Hallway0", "Child", "Master", "Guest"},
-                "Porch", new String[]{"Hallway0", "Front Garden"},
-                "Front Garden", new String[]{"Porch"},
-                "Living Room", new String[]{"Hallway0"},
-                "Kitchen", new String[]{"Hallway0", "Downstairs Bathroom", "Back Garden"},
-                "Back Garden", new String[]{"Hallway0"}
-
-
-        ));
-        adjacent_room.put("Hallway0", new String[]{"Porch", "Kitchen", "Living Room", "Hallway1"});
-        return adjacent_room.get(value);
-
-
+        return this.adjacent_rooms;
     }
 }

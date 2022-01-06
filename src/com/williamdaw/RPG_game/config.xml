@@ -36,35 +36,35 @@
         </room>
         <room type="bedroom" name="Child">
             <item name="floor" murder_location="1" />
-            <item name="bed" murder_location="1"  />
+            <item name="bed" murder_location="1" />
         </room>
-        <room type="other_rooms" name="Kitchen">
-        <item name="sink" murder_location="1"  />
-        <item name="cupboard" murder_location="1"  />
+        <room type="bathroom" name="Downstairs bathroom">
+            <item name="bath" murder_location="1"/>
+            <item name="sink" murder_location="1" />
+        </room>
+        <room type="bathroom" name="Upstairs bathroom">
+            <item name="shower" murder_location="1"/>
+            <item name="door" murder_location="1" />
         </room>
         <room type="other_rooms" name="Porch">
             <item name="steps" murder_location="1" />
-            <item name="deckchair" murder_location="1"  />
+            <item name="deckchair" murder_location="1" />
         </room>
         <room type="other_rooms" name="Living room">
             <item name="sofa" murder_location="1"/>
-            <item name="TV" murder_location="1"  />
+            <item name="TV" murder_location="1" />
         </room>
-        <room type="bathrooms" name="Downstairs bathroom">
-            <item name="bath" murder_location="1"/>
-            <item name="sink" murder_location="1"  />
-        </room>
-        <room type="bathrooms" name="Upstairs bathroom">
-            <item name="shower" murder_location="1"/>
-            <item name="door" murder_location="1"  />
-        </room>
-        <room type="garden" name="front garden">
+        <room type="other_rooms" name="Front garden">
             <item name="flower" murder_location="1"/>
-            <item name="concrete" murder_location="1"  />
+            <item name="concrete" murder_location="1" />
         </room>
-        <room type="garden" name="front garden">
+        <room type="other_rooms" name="Back garden">
             <item name="fence" murder_location="1"/>
-            <item name="trampoline" murder_location="1"  />
+            <item name="trampoline" murder_location="1" />
+        </room>
+        <room type="other_rooms" name="Kitchen" >
+            <item name="sink" murder_location="1" />
+            <item name="cupboard" murder_location="1" />
         </room>
     </rooms>
 </class>
