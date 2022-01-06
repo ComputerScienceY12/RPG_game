@@ -75,10 +75,12 @@
             <item name="trampoline" murder_location="1" />
             <adjacent_room name="Downstairs Hallway" />
         </room>
-        <room type="other_rooms" name="Back garden">
-            <item name="fence" murder_location="1"/>
-            <item name="trampoline" murder_location="1" />
+        <room type="other_rooms" name="Kitchen">
+            <item name="sink" murder_location="1"/>
+            <item name="cupboard" murder_location="1" />
             <adjacent_room name="Downstairs Hallway" />
+            <adjacent_room name="Downstairs Bathroom" />
+            <adjacent_room name="Back garden" />
         </room>
         <room type="other_rooms" name="Upstairs Hallway">
             <adjacent_room name="Downstairs Hallway" />
@@ -91,16 +93,6 @@
             <adjacent_room name="Porch Bathroom" />
             <adjacent_room name="Living room" />
             <adjacent_room name="Kitchen" />
-            "Master", new String[]{"Hallway1"},
-            "Guest", new String[]{"Hallway1", "Upstairs Bathroom"},
-            "Child", new String[]{"Hallway1"},
-            "Upstairs Bathroom", new String[]{"Master"},
-            "Hallway1", new String[]{"Hallway0", "Child", "Master", "Guest"},
-            "Porch", new String[]{"Hallway0", "Front Garden"},
-            "Front Garden", new String[]{"Porch"},
-            "Living Room", new String[]{"Hallway0"},
-            "Back Garden", new String[]{"Hallway0"}
-            hallway
         </room>
     </rooms>
 </class>

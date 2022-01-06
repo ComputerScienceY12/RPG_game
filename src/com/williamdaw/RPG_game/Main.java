@@ -25,28 +25,22 @@ public class Main {
 
         // parse characters
         ArrayList<String> character_names = new ArrayList<>();
-        Element characters_node = (Element) doc.getElementsByTagName("characters").item(0);
-        NodeList character_node_list = characters_node.getElementsByTagName("character");
-        for (int i = 0; i < character_node_list.getLength(); i++) {
-            Node character_node = character_node_list.item(i);
-            character_names.add(((Element) character_node).getAttribute("name"));
-        }
+        NodeList character_node_list = ((Element) doc.getElementsByTagName("characters").item(0)).getElementsByTagName("character");
+        for (int i = 0; i < character_node_list.getLength(); i++) character_names.add(((Element) character_node_list.item(i)).getAttribute("name"));
 
         // parse prefixes
         Map<String, String> item_prefixes = new HashMap<>();
-        Element object_prefixes_node = (Element) doc.getElementsByTagName("object_prefixes").item(0);
-        NodeList object_prefix_node_list = object_prefixes_node.getElementsByTagName("object_prefix");
+        NodeList object_prefix_node_list = ((Element) doc.getElementsByTagName("object_prefixes").item(0)).getElementsByTagName("object_prefix");
         for (int i = 0; i < object_prefix_node_list.getLength(); i++) {
             Element object_prefix_node = (Element) object_prefix_node_list.item(i);
             item_prefixes.put(object_prefix_node.getAttribute("object"), object_prefix_node.getAttribute("prefix"));
         }
 
         // parse rooms & adjacent rooms
-        Element characters_node = (Element) doc.getElementsByTagName("characters").item(0);
-        NodeList character_node_list = characters_node.getElementsByTagName("character");
-        for (int i = 0; i < character_node_list.getLength(); i++) {
-            Node character_node = character_node_list.item(i);
-            character_names.add(((Element) character_node).getAttribute("name"));
+        NodeList room_node_list = ((Element) doc.getElementsByTagName("rooms").item(0)).getElementsByTagName("room");
+        for (int i = 0; i < room_node_list.getLength(); i++) {
+            Node room_node = room_node_list.item(i);
+            character_names.add(((Element) room_node).getAttribute("name"));
         }
 
 
@@ -84,7 +78,7 @@ public class Main {
 //                        .getTextContent());
 //            }
 
-        String killer = character_names.get(rand.nextInt(character_names.size()));
+        String killer = character_names.get(rand.nextInt(character_names.size())); // TODO: CANNOT KILL HERE
 
         System.out.println(killer); // TODO: REMOVE ME
 
