@@ -19,8 +19,8 @@ public class Main {
         Random rand = new Random();
 
         House house = new House();
-        Player player = new Player(scanner, house);
-        SimpleAudioPlayer.main(0);
+        Player player = new Player(scanner);
+//        SimpleAudioPlayer.main(0);
 
         File inputFile = new File("config.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -93,15 +93,16 @@ public class Main {
         // parse settings
         NodeList house_settings_node_list = ((Element) doc.getElementsByTagName("house_settings").item(0)).getElementsByTagName("house_setting");
         for (int i = 0; i < house_settings_node_list.getLength(); i++) {
-            Element room_element = (Element) room_node_list.item(i);
+            Element room_element = (Element) house_settings_node_list.item(i);
             String setting_name = room_element.getAttribute("name");
             String setting_value = room_element.getAttribute("value");
             if (Objects.equals(setting_name, "start_location")) house.start_location = house.get_room(setting_value);
         }
 
+        player.move_player(house.start_location);
+
         // choose a killer
         String killer = character_names.get(rand.nextInt(character_names.size()));
-        System.out.println(killer); // TODO: REMOVE ME
 
         // pick a murder location
         house.set_murder_location();
