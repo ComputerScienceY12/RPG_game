@@ -135,7 +135,7 @@ public class Main {
 
             String user_choice = scanner.nextLine();
 //            if (Objects.equals(user_choice, murder_location.name)) System.out.println("Please enter the location followed by the murder");
-            if (player.get_current_room().name == house.get_murder_location().name) System.out.println("right room");
+            if (Objects.equals(player.get_current_room().name, house.get_murder_location().name)) System.out.println("right room");
             if (house.has_room(user_choice)) player.move_player(house.get_room(user_choice));
             else if (murder_location_names.contains(user_choice)){
                 System.out.println("You are checking if they were murdered in " + player.get_current_room().name);
@@ -174,7 +174,6 @@ public class Main {
              * CHECK AGAINST REQUIREMENTS
              * MAKE FINAL CHANGES
              * TEST EVERYTHING
-
              */
         }
         System.out.println("With many thanks to:");
