@@ -18,15 +18,9 @@ public class House {
     public void add_room(Room[] rooms) {
         Collections.addAll(this.rooms, rooms);
     }
-
     public boolean has_room(String room_name) {
         for (com.williamdaw.RPG_game.Room room : this.rooms) if (Objects.equals(room.get_name(), room_name)) return true;
         return false;
-    }
-    public boolean is_sub_murder_location(String sub_location_name){
-        for (com.williamdaw.RPG_game.PotentialMurderLocation potentialMurderLocation : this.murder_location.get_potential_murder_locations()) if (Objects.equals(potentialMurderLocation, sub_location_name)) return true;
-        return false;
-
     }
     public Room get_room(String room_name) throws Exception {
         for (com.williamdaw.RPG_game.Room room : this.rooms) if (Objects.equals(room.get_name(), room_name)) return room;

@@ -124,23 +124,17 @@ public class Main {
             if (house.has_room(user_choice)) current_room = house.get_room(user_choice);
             else if (current_room_potential_murder_locations_names.contains(user_choice)){
                 System.out.println("You are checking if they were murdered here");
-                if (!(house.is_sub_murder_location(user_choice))) System.out.println("This isn't the murder location");
-                else {
+                if (murder_location.check_sub_location(user_choice)) {
                     System.out.println("this is the murder location");
-                    System.out.println("You have 3 guesses. You must guess the murder out of " + potential_murderers_string);
+                    System.out.println("You have 3 guesses. You must guess the murderer out of " + potential_murderers_string);
                     for (int i = 0; i < 6; i++){
                         String murder_choice = scanner.nextLine();
-                        if (murder_choice == killer){
-                            System.out.println("You won it was " + killer +" in the" + current_room + item_prefixes.get(user_choice) + user_choice);
+                        if (Objects.equals(murder_choice, killer)){
+                            System.out.println("You won, " + killer + " murdered in the" + current_room + item_prefixes.get(user_choice) + user_choice);
                             break;
                         }
-
-
-
-
                     }
-
-                }
+                }else System.out.println("This isn't the murder location");
             }
 
 //            String guess = sc.nextLine();
