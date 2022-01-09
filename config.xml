@@ -20,10 +20,12 @@
         <object_prefix object="deckchair" prefix=" on the " />
         <object_prefix object="shower" prefix=" in the " />
         <object_prefix object="bath" prefix=" in the " />
-        <object_prefix object="flower" prefix=" in the " />
+        <object_prefix object="flowers" prefix=" in the " />
         <object_prefix object="concrete" prefix=" on the " />
         <object_prefix object="fence" prefix=" against the fence " />
         <object_prefix object="trampoline" prefix=" on the " />
+        <object_prefix object="floor" prefix=" on the " />
+        <object_prefix object="door" prefix=" behind the " />
     </object_prefixes>
     <rooms>
         <room type="bedroom" name="Guest" floor="1">
