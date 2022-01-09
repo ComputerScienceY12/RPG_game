@@ -10,7 +10,6 @@ import java.io.File;
 import java.util.*;
 
 public class Main {
-
     public Object[] load_config() {
         return new Object[]{};
     }
@@ -146,7 +145,7 @@ public class Main {
                         String murder_choice = scanner.nextLine();
                         if (Objects.equals(murder_choice, killer)) {
                             System.out.println("You won, " + killer + " murdered in the " + player.get_current_room() + item_prefixes.get(user_choice) + user_choice);
-                            break;
+                            playing = false;
                         }
                     }
                 }else System.out.println("This isn't the murder location");
