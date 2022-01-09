@@ -148,7 +148,7 @@ public class Main {
             /*
              * TODO:
              * NEW BRANCH GITHUB
-             *
+             * make interface
              * ADD HOME SCREEN
              * ENSURE ALL WORKS
              * ADD GAME INTERFACE
