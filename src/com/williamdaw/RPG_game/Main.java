@@ -91,7 +91,7 @@ public class Main {
         }
 
         // parse settings
-        NodeList house_settings_node_list = ((Element) doc.getElementsByTagName("house_settings").item(0)).getElementsByTagName("house_setting");
+        NodeList house_settings_node_list = ((Element) doc.getElementsByTagName("game_settings").item(0)).getElementsByTagName("setting");
         for (int i = 0; i < house_settings_node_list.getLength(); i++) {
             Element room_element = (Element) house_settings_node_list.item(i);
             String setting_name = room_element.getAttribute("name");
@@ -147,8 +147,6 @@ public class Main {
 
             /*
              * TODO:
-             * NEW BRANCH GITHUB
-             *
              * ADD HOME SCREEN
              * ENSURE ALL WORKS
              * ADD GAME INTERFACE
