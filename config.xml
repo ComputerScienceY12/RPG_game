@@ -49,13 +49,13 @@
         <room type="bathroom" name="Upstairs bathroom" floor="1">
             <item name="shower" murder_location="1"/>
             <item name="door" murder_location="1" />
-            <adjacent_room name="Master" />
+            <adjacent_room name="Master bedroom" />
         </room>
         <room type="hallway" name="Upstairs hallway" floor="1">
             <adjacent_room name="Downstairs hallway" />
-            <adjacent_room name="Master" />
-            <adjacent_room name="Guest" />
-            <adjacent_room name="Child" />
+            <adjacent_room name="Master bedroom" />
+            <adjacent_room name="Guest bedroom" />
+            <adjacent_room name="Child bedroom" />
         </room>
         <room type="hallway" name="Downstairs hallway" floor="0" >
             <adjacent_room name="Upstairs hallway" />
