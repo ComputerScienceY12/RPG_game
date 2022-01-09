@@ -101,7 +101,6 @@ public class Main {
 
         // choose a killer
         String killer = character_names.get(rand.nextInt(character_names.size()));
-        System.out.println(killer); // TODO: REMOVE ME
 
         // pick a murder location
         house.set_murder_location();
