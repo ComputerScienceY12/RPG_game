@@ -7,7 +7,10 @@ import java.awt.event.ActionListener;
 
 public class DansCode {
 
-        public static String[][] Colour = {{"#007FAD", "#009DD6", "#FFFFFF", "#C0C0C0"}, {"#2A5BBC", "#3D71D6", "#3B3B3B", "#545454"}, {"#FFF500", "#FFF500", "#000000", "#BDBDBD"}};//Light, Dark, High Contrast //TitleTextColour, MainTextColour, BG Colour, Button BG Colour
+        public static String[][] Colour = {
+                {"#2A5BBC", "#3D71D6", "#3B3B3B", "#545454"}, // Dark
+                {"#FFF500", "#FFF500", "#000000", "#BDBDBD"} // High Contrast
+        }; // TitleTextColour, MainTextColour, BG Colour, Button BG Colour
 
         public static int roomIndex, areaIndex, index = 0;
 
