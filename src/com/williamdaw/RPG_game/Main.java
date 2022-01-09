@@ -91,26 +91,24 @@ public class Main {
             }
         }
 
-        String killer = character_names.get(rand.nextInt(character_names.size())); // TODO: CANNOT KILL HERE
+        String killer = character_names.get(rand.nextInt(character_names.size()));
         System.out.println(killer); // TODO: REMOVE ME
 
         house.set_murder_location();
         MurderLocation murder_location = house.get_murder_location();
 
-//        DansCode.main();
         Room current_room = house.get_room("Front garden");
 
         System.out.println("Potential murderers: ");
-        System.out.print(String.join(", ", character_names));
-        boolean found = false;
+        System.out.println(String.join(", ", character_names));
 
         boolean playing = true;
         while (playing) {
             System.out.println("You are in " + current_room + ", where would you like to go?");
 
-            StringBuilder x = new StringBuilder();
-            for (Room s : current_room.get_adjacent_rooms()) x.append(s.name);
-            System.out.println(x);
+            StringBuilder adjacent_rooms_output = new StringBuilder();
+            for (Room s : current_room.get_adjacent_rooms()) adjacent_rooms_output.append(s.name);
+            System.out.println(adjacent_rooms_output);
 
             String user_choice = scanner.nextLine();
             if (Objects.equals(user_choice, murder_location.name)) System.out.println("Please enter the location followed by the murder");
@@ -121,15 +119,6 @@ public class Main {
 //            if (guess.contains(killer) && guess.contains()) break;
 //            String User_choice_c = User_choice.substring(0, 1).toUpperCase() + User_choice.substring(1);
 
-
-
-            System.out.println("you win");
-
-            /// find a way to call the function adjacent rooms in room
-            // then the plan is to use one function to set everything then the other to print it and its in a permanent loop until the game is completed
-
-
-//        DansCode.main();
             /*
              * TODO:
              * START INVESTIGATION
@@ -150,9 +139,6 @@ public class Main {
              * CHECK AGAINST REQUIREMENTS
              * MAKE FINAL CHANGES
              * TEST EVERYTHING
-             *
-             *
-             *
 
              */
         }
