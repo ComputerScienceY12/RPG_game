@@ -15,6 +15,7 @@ public class Main {
         return new Object[]{};
     }
     public static void main(String[] args) throws Exception {
+        SimpleAudioPlayer.main(1);
 
         File file = new File("intro_art.txt");
         Scanner sc = new Scanner(file);
@@ -137,20 +138,19 @@ public class Main {
             if (player.get_current_room().name == house.get_murder_location().name) System.out.println("right room");
             if (house.has_room(user_choice)) player.move_player(house.get_room(user_choice));
             else if (murder_location_names.contains(user_choice)){
-                System.out.println("You are checking if they were murdered in "); // will add the room name here, im lazy
+                System.out.println("You are checking if they were murdered in " + player.get_current_room().name);
                if (Objects.equals(murder_location.sub_location.value, user_choice)) {
                     System.out.println("You have found the murder location, well done.");
                     System.out.println("You have 3 guesses. You must guess the murderer out of " + potential_murderers_string);
-                    for (int i = 0; i < 6; i++){
+                    for (int i = 0; i < 3; i++){
                         String murder_choice = scanner.nextLine();
-                        if (Objects.equals(murder_choice, killer)){
+                        if (Objects.equals(murder_choice, killer)) {
                             System.out.println("You won, " + killer + " murdered in the" + player.get_current_room() + item_prefixes.get(user_choice) + user_choice);
                             break;
                         }
                     }
                 }else System.out.println("This isn't the murder location");
             }
-
 
 //            String guess = sc.nextLine();
 //            if (guess.contains(killer) && guess.contains()) break;
