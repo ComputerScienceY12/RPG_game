@@ -1,10 +1,7 @@
 package com.williamdaw.RPG_game;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Room {
     String name;
@@ -59,5 +56,10 @@ public class Room {
 
     public ArrayList<PotentialMurderLocation> get_potential_murder_locations() {
         return this.potential_murder_locations;
+    }
+
+    public boolean has_adjacent_room(String room_name) {
+        for (Room room : this.adjacent_rooms) if (Objects.equals(room.name, room_name)) return true;
+        return false;
     }
 }

@@ -14,13 +14,6 @@ public class Main {
         return new Object[]{};
     }
     public static void main(String[] args) throws Exception {
-
-
-        File file = new File("intro_art.txt");
-        Scanner sc = new Scanner(file);
-
-        while (sc.hasNextLine()) System.out.println(sc.nextLine());
-
         Scanner scanner = new Scanner(System.in);
 
         Random rand = new Random();
@@ -132,10 +125,8 @@ public class Main {
             System.out.println(String.join(", ", adjacent_rooms_names));
             System.out.println(String.join(", ", current_room_potential_murder_locations_names));
 
-
             String user_choice = scanner.nextLine();
-//            if (Objects.equals(user_choice, murder_location.name)) System.out.println("Please enter the location followed by the murder");
-            if (house.has_room(user_choice)) player.move_player(house.get_room(user_choice));
+            if (player.get_current_room().has_adjacent_room(user_choice)) player.move_player(house.get_room(user_choice));
             else if (murder_location_names.contains(user_choice)){
                 System.out.println("You are checking if they were murdered in " + player.get_current_room().name);
                if (Objects.equals(murder_location.sub_location.value, user_choice)) {
