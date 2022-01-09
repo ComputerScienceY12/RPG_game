@@ -1,14 +1,12 @@
 package com.williamdaw.RPG_game;
 
-import java.util.*;
-
-import java.io.File;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.util.*;
 
 public class Main {
 
@@ -16,9 +14,14 @@ public class Main {
         return new Object[]{};
     }
     public static void main(String[] args) throws Exception {
-        SimpleAudioPlayer.main();
+//        SimpleAudioPlayer.main();
+
+        Scanner scanner = new Scanner(System.in);
 
         Random rand = new Random();
+
+        House house = new House();
+        Player player = new Player(scanner);
 
         File inputFile = new File("config.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -42,115 +45,78 @@ public class Main {
         // parse rooms & adjacent rooms
         NodeList room_node_list = ((Element) doc.getElementsByTagName("rooms").item(0)).getElementsByTagName("room");
         for (int i = 0; i < room_node_list.getLength(); i++) {
-            Node room_node = room_node_list.item(i);
-            character_names.add(((Element) room_node).getAttribute("name"));
+            Element room_element = (Element) room_node_list.item(i);
+            String room_type = room_element.getAttribute("type");
+            String room_name = room_element.getAttribute("name");
+            int room_floor = Integer.parseInt(room_element.getAttribute("floor"));
+
+            ArrayList<Item> room_items = new ArrayList<>();
+            ArrayList<PotentialMurderLocation> potential_murder_locations = new ArrayList<>();
+            NodeList room_item_node_list = room_element.getElementsByTagName("item");
+            for (int j = 0; j < room_item_node_list.getLength(); j++) {
+                Element item = (Element) room_item_node_list.item(j);
+                String item_name = item.getAttribute("name");
+                if (Integer.parseInt(item.getAttribute("murder_location")) == 1) potential_murder_locations.add(new PotentialMurderLocation(item_name));
+                else room_items.add(new Item(item_name));
+            }
+
+            Room room;
+            if (Objects.equals(room_type, "bedroom")) room = new Bedroom(room_name, room_floor, room_items, potential_murder_locations);
+            else if (Objects.equals(room_type, "bathroom")) room = new Bathroom(room_name, room_floor, room_items, potential_murder_locations);
+            else if (Objects.equals(room_type, "hallway")) room = new Hallway(room_name, room_floor, room_items, potential_murder_locations);
+            else if (Objects.equals(room_type, "other_rooms")) room = new Room(room_name, room_floor, room_items, potential_murder_locations);
+            else throw new Exception("XML file has unsupported room type.");
+            house.add_room(room);
         }
 
 
-
-
-
-
-
-
-
-
-//            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-//                Element eElement = (Element) nNode;
-//                System.out.println("Student roll no : "
-//                        + eElement.getAttribute("rollno"));
-//                System.out.println("First Name : "
-//                        + eElement
-//                        .getElementsByTagName("firstname")
-//                        .item(0)
-//                        .getTextContent());
-//                System.out.println("Last Name : "
-//                        + eElement
-//                        .getElementsByTagName("lastname")
-//                        .item(0)
-//                        .getTextContent());
-//                System.out.println("Nick Name : "
-//                        + eElement
-//                        .getElementsByTagName("nickname")
-//                        .item(0)
-//                        .getTextContent());
-//                System.out.println("Marks : "
-//                        + eElement
-//                        .getElementsByTagName("marks")
-//                        .item(0)
-//                        .getTextContent());
-//            }
+        for (int i = 0; i < room_node_list.getLength(); i++) {
+            Element room_element = (Element) room_node_list.item(i);
+            String room_type = room_element.getAttribute("type");
+            String room_name = room_element.getAttribute("name");
+            String suffix = "";
+            if (Objects.equals(room_type, "bedroom")) suffix = " bedroom";
+            NodeList room_adjacent_room_node_list = room_element.getElementsByTagName("adjacent_room");
+            for (int j = 0; j < room_adjacent_room_node_list.getLength(); j++) {
+                if (!(house.has_room(room_name + suffix))) {
+                    System.out.println(room_name + suffix);
+                }
+                if (!(house.has_room(((Element) room_adjacent_room_node_list.item(j)).getAttribute("name")))) {
+                    System.out.println(room_name + suffix);
+                    System.out.println(((Element) room_adjacent_room_node_list.item(j)).getAttribute("name"));
+                }
+                Room room = house.get_room(room_name + suffix);
+                Room room1 = house.get_room(((Element) room_adjacent_room_node_list.item(j)).getAttribute("name"));
+                room.add_adjacent_room(room1);
+            }
+        }
 
         String killer = character_names.get(rand.nextInt(character_names.size())); // TODO: CANNOT KILL HERE
-
         System.out.println(killer); // TODO: REMOVE ME
-
-        // Create a map of all the rooms and items.
-        Map<String, Item[]> bedrooms = Map.of(
-                "Guest", new Item[]{new Item("Bed"), new Item("Next to the window")},
-                "Master", new Item[]{new Item("Wardrobe"), new Item("Door")},
-                "Child", new Item[]{new Item("Floor"), new Item("Bed")}
-        );
-        Map<String, Item[]> other_rooms = Map.of(
-                "Porch", new Item[]{new Item("on deck Chair"), new Item("on the steps")},
-                "Living Room", new Item[]{new Item("on sofa"), new Item("against the tv")},
-                "Kitchen", new Item[]{new Item("in the sink"), new Item("in the cupboards")}
-        );
-        Map<String, Item[]> bathrooms = Map.of(
-                "Downstairs Bathroom", new Item[]{new Item("in the bath"), new Item("on the sink")},
-                "Upstairs Bathroom", new Item[]{new Item("in the shower"), new Item("next to the door")}
-        );
-
-        Map<String, Item[]> outside = Map.of(
-                "Front Garden", new Item[]{new Item("in the flowerbed"), new Item("on the concrete")},
-                "Back Garden", new Item[]{new Item("on the trampoline"), new Item("up against the fence")}
-        );
-
-        House house = new House();
-//        for (String bedroom : bedrooms.keySet()) house.add_room(new Bedroom(bedroom, 1, bedrooms.get(bedroom)));
-//        for (String gardens : outside.keySet()) house.add_room(new Room(gardens, 0, outside.get(gardens)));
-//        for (String room : other_rooms.keySet()) house.add_room(new Room(room, 0, other_rooms.get(room)));
-//        house.add_room(new Room[]{new Bathroom(null, 0, bathrooms.get("Downstairs Bathroom")), new Bathroom(house.get_room("Master Bedroom"), 1, bathrooms.get("Upstairs Bathroom"))});
-        house.add_room(new Room[]{new Hallway(0), new Hallway(1)});
-
-
 
         house.set_murder_location();
         MurderLocation murder_location = house.get_murder_location();
-        String room_murder_subsection = "";
-        if (outside.containsKey(murder_location.name)) {
-            room_murder_subsection = "outside";
-        }
-        if(bedrooms.containsKey(murder_location.name)) {
-            room_murder_subsection = "bedrooms";
-        }
-        if(other_rooms.containsKey(murder_location.name)) {
-            room_murder_subsection = "other_rooms";
-        }
+
 //        DansCode.main();
-        System.out.println(room_murder_subsection + house.get_murder_location());
         Room current_room = house.get_room("Front garden");
 
-        System.out.println("you murderer option are");
-        for (String character : character_names) {
-            System.out.print(character + " ,");
-        }
-        Scanner sc = new Scanner(System.in);
+        System.out.println("Potential murderers: ");
+        System.out.print(String.join(", ", character_names));
         boolean found = false;
 
-        boolean win = false;
-        System.out.println(" ");
-        Player.getUser_name();
-        // ask martin how to return the murder location
-        while (!(win)) {
+        boolean playing = true;
+
+        while (playing) {
 
             Room[] adjacent_rooms = current_room.get_adjacent_rooms();
             System.out.println(current_room);
-            System.out.println("You are in " + current_room + ", where would you like to go");
+            System.out.println("You are in " + current_room + ", where would you like to go?");
 
-            for (Room s : adjacent_rooms) System.out.println(s.name);
+            StringBuilder x = new StringBuilder();
+            for (Room s : adjacent_rooms) x.append(s.name);
+            System.out.println(x);
 
-            String user_choice = sc.nextLine();
+            String user_choice = scanner.nextLine();
             if (Objects.equals(user_choice, murder_location.name))
                 System.out.println("Please enter the location followed by the murder");
 
@@ -194,9 +160,6 @@ public class Main {
 //        DansCode.main();
             /*
              * TODO:
-             * WHO KILLED? RANDom generator start of main class
-             * WHERE PLAYER STARTS in w while loop within main class
-             * WHO PLAYER IS done with a class
              * START INVESTIGATION
              * ENSURE ALL OPTIONS WORK
              * MAKE A WAY TO WIN
@@ -219,8 +182,7 @@ public class Main {
              *
              *
 
-             * */
-
+             */
         }
     }
 }

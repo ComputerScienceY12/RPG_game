@@ -21,7 +21,6 @@ public class House {
 
     public boolean has_room(String room_name) {
         for (com.williamdaw.RPG_game.Room room : this.rooms) if (Objects.equals(room.get_name(), room_name)) return true;
-        System.out.println("hello");
         return false;
     }
     public Room get_room(String room_name) throws Exception {
