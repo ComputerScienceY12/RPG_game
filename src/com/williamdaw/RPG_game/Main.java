@@ -151,7 +151,6 @@ public class Main {
             /*
              * TODO:
              * ENSURE ALL OPTIONS WORK
-             * MAKE A WAY TO WIN
              * TEST RANDOMNESS
              * TEST EVERYTHING
              * TEST ROBUSTNESS
