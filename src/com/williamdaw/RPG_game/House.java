@@ -7,7 +7,7 @@ import java.util.Objects;
 public class House {
     private MurderLocation murder_location = null;
     private final ArrayList<Room> rooms = new ArrayList<>();
-
+    public Room start_location;
     public void set_murder_location() {
         this.murder_location = new MurderLocation(this);
     }
