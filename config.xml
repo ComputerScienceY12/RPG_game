@@ -99,4 +99,10 @@
         <colour_scheme name="dark" display="Dark" title_text_color="#2A5BBC" main_text_color="#3D71D6" background_color="#3B3B3B" button_background_color="#545454" />
         <colour_scheme name="high_contrast" display="High Contrast" title_text_color="#FFF500" main_text_color="#FFF500" background_color="#000000" button_background_color="#BDBDBD" />
     </game_settings>
+    <user_interface_items>
+        <user_interface_item name="title_text" parent="main_frame" bounds="250,0,500,100" type="label" color="0" />
+        <user_interface_item name="area_text" parent="main_frame" bounds="100,20,200,50" type="label" color="0" />
+        <user_interface_item name="room_text" parent="main_frame" bounds="780,20,200,50" type="label" color="0" />
+        <user_interface_item name="how_to_play_text" parent="main_frame" bounds="375,235,250,30" type="label" color="0" />
+    </user_interface_items>
 </class>
