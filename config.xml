@@ -29,17 +29,17 @@
         <room type="bedroom" name="Guest" floor="1">
             <item name="bed" murder_location="1" />
             <item name="window" murder_location="1" />
-            <adjacent_room name="Upstairs Hallway" />
+            <adjacent_room name="Upstairs hallway" />
         </room>
         <room type="bedroom" name="Master" floor="1">
             <item name="door" murder_location="1" />
             <adjacent_room name="Upstairs bathroom" />
-            <adjacent_room name="Upstairs Hallway" />
+            <adjacent_room name="Upstairs hallway" />
         </room>
         <room type="bedroom" name="Child" floor="1">
             <item name="floor" murder_location="1" />
             <item name="bed" murder_location="1" />
-            <adjacent_room name="Upstairs Hallway" />
+            <adjacent_room name="Upstairs hallway" />
 
         </room>
         <room type="bathroom" name="Downstairs bathroom" floor="0">
@@ -52,28 +52,28 @@
             <item name="door" murder_location="1" />
             <adjacent_room name="Master" />
         </room>
-        <room type="hallway" name="Upstairs Hallway" floor="1">
-            <adjacent_room name="Downstairs Hallway" />
+        <room type="hallway" name="Upstairs hallway" floor="1">
+            <adjacent_room name="Downstairs hallway" />
             <adjacent_room name="Master" />
             <adjacent_room name="Guest" />
             <adjacent_room name="Child" />
         </room>
-        <room type="hallway" name="Downstairs Hallway" floor="0" >
-            <adjacent_room name="Upstairs Hallway" />
-            <adjacent_room name="Porch Bathroom" />
+        <room type="hallway" name="Downstairs hallway" floor="0" >
+            <adjacent_room name="Upstairs hallway" />
+            <adjacent_room name="Porch" />
             <adjacent_room name="Living room" />
             <adjacent_room name="Kitchen" />
         </room>
         <room type="other_rooms" name="Porch" floor="0">
             <item name="steps" murder_location="1" />
             <item name="deckchair" murder_location="1" />
-            <adjacent_room name="Downstairs Hallway" />
+            <adjacent_room name="Downstairs hallway" />
             <adjacent_room name="Front garden" />
         </room>
         <room type="other_rooms" name="Living room" floor="0">
             <item name="sofa" murder_location="1"/>
             <item name="TV" murder_location="1" />
-            <adjacent_room name="Downstairs Hallway" />
+            <adjacent_room name="Downstairs hallway" />
         </room>
         <room type="other_rooms" name="Front garden" floor="0">
             <item name="flower" murder_location="1"/>
@@ -83,13 +83,13 @@
         <room type="other_rooms" name="Back garden" floor="0">
             <item name="fence" murder_location="1"/>
             <item name="trampoline" murder_location="1" />
-            <adjacent_room name="Downstairs Hallway" />
+            <adjacent_room name="Downstairs hallway" />
         </room>
         <room type="other_rooms" name="Kitchen" floor="0">
             <item name="sink" murder_location="1"/>
             <item name="cupboard" murder_location="1" />
-            <adjacent_room name="Downstairs Hallway" />
-            <adjacent_room name="Downstairs Bathroom" />
+            <adjacent_room name="Downstairs hallway" />
+            <adjacent_room name="Downstairs bathroom" />
             <adjacent_room name="Back garden" />
         </room>
     </rooms>
