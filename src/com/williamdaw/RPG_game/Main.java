@@ -6,6 +6,7 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Main {
@@ -14,7 +15,18 @@ public class Main {
         return new Object[]{};
     }
     public static void main(String[] args) throws Exception {
-//        SimpleAudioPlayer.main();
+
+        File file =
+                new File("intro_art.txt");
+        Scanner sc = new Scanner(file);
+
+        while (sc.hasNextLine())
+            System.out.println(sc.nextLine());
+
+
+
+//        SimpleAudioPlayer.main(0);
+
 
         Scanner scanner = new Scanner(System.in);
 
@@ -103,36 +115,44 @@ public class Main {
         System.out.println("Potential murderers: ");
         String murder_options =(String.join(", ", character_names));
         System.out.println(murder_options);
-        System.out.println(item_prefixes);
         boolean playing = true;
         while (playing) {
             System.out.println("You are in " + current_room.name + ", where would you like to search?");
-
+            ArrayList<String> murder_location_names =  new ArrayList<>();
             ArrayList<Room> adjacent_rooms = current_room.get_adjacent_rooms();
             ArrayList<String> adjacent_rooms_names = new ArrayList<>();
             ArrayList<String> current_room_potential_murder_locations_names = new ArrayList<>();
             ArrayList<PotentialMurderLocation> current_room_potential_murder_locations = current_room.get_potential_murder_locations();
+            ArrayList<PotentialMurderLocation> tester = new ArrayList<>();
             for (Room s : adjacent_rooms) adjacent_rooms_names.add(s.name);
+
+
             for (PotentialMurderLocation s : current_room_potential_murder_locations) current_room_potential_murder_locations_names.add(item_prefixes.get(s.value) + s.value);
+            for (PotentialMurderLocation s : current_room_potential_murder_locations) murder_location_names.add( s.value);
+
             System.out.println(String.join(", ", adjacent_rooms_names));
             System.out.println(String.join(", ", current_room_potential_murder_locations_names));
 
 
             String user_choice = scanner.nextLine();
 //            if (Objects.equals(user_choice, murder_location.name)) System.out.println("Please enter the location followed by the murder");
-
+            if( current_room == house.get_murder_location()){
+                System.out.println("right room");
+            }
             if (house.has_room(user_choice)) current_room = house.get_room(user_choice);
-            else if (current_room_potential_murder_locations_names.contains(user_choice)){
+
+            else if (murder_location_names.contains(user_choice)){
                 System.out.println("You are checking if they were murdered here");
-                if (!(house.is_sub_murder_location(user_choice))) System.out.println("This isn't the murder location");
+
+               if (!(Objects.equals(murderLocation.get_potential_murder_location_name(), user_choice)))  System.out.println("This isn't the murder location"); // this is the problem line fix and all solved
                 else {
                     System.out.println("this is the murder location");
                     System.out.println("You have 3 trys to guess the murder out of " + murder_options);
                     for (int i = 0; i < 6; i++){
                         String murder_choice = scanner.nextLine();
-                        if (murder_choice == killer){
+                        if (Objects.equals(murder_choice, killer)){
                             System.out.println("You won it was " + killer +" in the" + current_room + item_prefixes.get(user_choice) + user_choice);
-                            break;
+                            playing = true;
                         }
 
 
@@ -142,6 +162,7 @@ public class Main {
 
                 }
             }
+
 
 //            String guess = sc.nextLine();
 //            if (guess.contains(killer) && guess.contains()) break;
@@ -170,6 +191,12 @@ public class Main {
 
              */
         }
+        System.out.println("With many thanks to:");
+        System.out.println("Martin Najemi - lead coder");
+        System.out.println("William Daw - secondary coder");
+        System.out.println("Daniel Judd - graphic design");
+        System.out.println("Everyone else you took part");
+        SimpleAudioPlayer.main(1);
     }
 }
 
