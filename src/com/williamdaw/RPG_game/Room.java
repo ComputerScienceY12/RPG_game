@@ -53,8 +53,8 @@ public class Room {
         this.adjacent_rooms.add(adjacent_room);
     }
 
-    public Room[] get_adjacent_rooms() {
-        return (Room[]) this.adjacent_rooms.toArray();
+    public ArrayList<Room> get_adjacent_rooms() {
+        return this.adjacent_rooms;
     }
 
     public ArrayList<PotentialMurderLocation> get_potential_murder_locations() {
