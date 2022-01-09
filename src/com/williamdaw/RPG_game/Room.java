@@ -1,6 +1,5 @@
 package com.williamdaw.RPG_game;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Room {
@@ -20,26 +19,11 @@ public class Room {
         this.items.addAll(Arrays.asList(items));
     }
 
-    public Room(String room_name, int floor, Item[] items, PotentialMurderLocation[] potential_murder_locations) {
-        this.name = room_name;
-        this.floor = floor;
-        this.items.addAll(Arrays.asList(items));
-        this.potential_murder_locations.addAll(Arrays.asList(potential_murder_locations));
-    }
-
     public Room(String room_name, int floor, ArrayList<Item> items, ArrayList<PotentialMurderLocation> potential_murder_locations) {
         this.name = room_name;
         this.floor = floor;
         this.items.addAll(items);
         this.potential_murder_locations.addAll(potential_murder_locations);
-    }
-
-    public void add_item(Item item) {
-        this.items.add(item);
-    }
-
-    public void add_items(ArrayList<Item> items) {
-        this.items.addAll(items);
     }
 
     public String get_name() {
