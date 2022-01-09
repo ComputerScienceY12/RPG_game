@@ -1,6 +1,7 @@
 package com.williamdaw.RPG_game;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class MurderLocation extends Room {
@@ -15,5 +16,9 @@ public class MurderLocation extends Room {
         ArrayList<PotentialMurderLocation> sub_locations = this.value.get_potential_murder_locations();
         this.sub_location = sub_locations.get(new Random().nextInt(sub_locations.size()));
         this.floor = this.value.floor;
+    }
+    public boolean check_sub_location(String sub_location_name){
+        if (Objects.equals(this.sub_location.value, sub_location_name)) return true;
+        return false;
     }
 }
