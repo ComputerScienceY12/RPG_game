@@ -12,17 +12,14 @@ public class DansCode {
                 {"#FFF500", "#FFF500", "#000000", "#BDBDBD"} // High Contrast
         }; // TitleTextColour, MainTextColour, BG Colour, Button BG Colour
 
-        public static int roomIndex, areaIndex, index = 0;
-
         public static JFrame mainFrame = new JFrame();
-        //creates the screen
 
         public static JLabel titleText = new JLabel("The Mansion Murder", JLabel.CENTER);
         public static JLabel areaText = new JLabel(Areas[areaIndex], JLabel.LEFT);
         public static JLabel roomText = new JLabel(Rooms[areaIndex][roomIndex], JLabel.RIGHT);
         public static JLabel howToPlayText = new JLabel("Click 'Play Game!'", JLabel.CENTER);
         public static JLabel colourSchemeText = new JLabel("Colour Theme:", JLabel.CENTER);
-        // makes the different avalible lables and there location
+        // makes the different available labels and their location
 
         public static JButton playButton = new JButton("Play Game!");
         public static JButton howToPlayButton = new JButton("How To Play");
@@ -32,7 +29,7 @@ public class DansCode {
         public static JButton darkButton = new JButton("Dark");
         public static JButton contrastButton = new JButton("Contrast");
         public static JButton backButton = new JButton("X");
-        // makes the buttons that are avalible
+        // makes the buttons that are available
         public static void updateGUI() {
 
             Font labelFont = new Font("Verdana", Font.BOLD, 20);
@@ -55,7 +52,7 @@ public class DansCode {
             darkButton.setVisible(false);
             contrastButton.setVisible(false);
             backButton.setVisible(false);
-            // sets up the start up screen
+            // sets up the start-up screen
             mainFrame.setSize(1000, 500);
             mainFrame.setLocation(50, 100);
             mainFrame.setTitle(" ");
