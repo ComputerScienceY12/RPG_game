@@ -139,6 +139,7 @@ public class Main {
                         if (Objects.equals(murder_choice, killer)) {
                             System.out.println("You won, " + killer + " murdered in the " + player.get_current_room() + item_prefixes.get(user_choice) + user_choice);
                             playing = false;
+                            break;
                         }
                     }
                 }else System.out.println("This isn't the murder location");
