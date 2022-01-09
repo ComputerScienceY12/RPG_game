@@ -105,26 +105,23 @@ public class Main {
         boolean found = false;
 
         boolean playing = true;
-
         while (playing) {
-
-            Room[] adjacent_rooms = current_room.get_adjacent_rooms();
-            System.out.println(current_room);
             System.out.println("You are in " + current_room + ", where would you like to go?");
 
             StringBuilder x = new StringBuilder();
-            for (Room s : adjacent_rooms) x.append(s.name);
+            for (Room s : current_room.get_adjacent_rooms()) x.append(s.name);
             System.out.println(x);
 
             String user_choice = scanner.nextLine();
-            if (Objects.equals(user_choice, murder_location.name))
-                System.out.println("Please enter the location followed by the murder");
+            if (Objects.equals(user_choice, murder_location.name)) System.out.println("Please enter the location followed by the murder");
+
+            if (house.has_room(user_choice)) current_room = house.get_room(user_choice);
 
 //            String guess = sc.nextLine();
 //            if (guess.contains(killer) && guess.contains()) break;
 //            String User_choice_c = User_choice.substring(0, 1).toUpperCase() + User_choice.substring(1);
 
-            if (house.has_room(user_choice)) current_room = house.get_room(user_choice);
+
 
             System.out.println("you win");
 
@@ -132,31 +129,6 @@ public class Main {
             // then the plan is to use one function to set everything then the other to print it and its in a permanent loop until the game is completed
 
 
-//        Map<String, Item[]> murder_weapons = Map.of(
-//                "Knife", new Item[]{ new Item("stabbed") },
-//                "bat", new Item[]{ new Item("beaten") },
-//                "Poison", new Item[]{ new Item("poisoned") },
-//                "Handgun", new Item[]{ new Item("shot") }
-//        );
-
-//        Map<String, Item[]> other_rooms_items = Map.of(
-//                "Porch", new Item[]{ new Item("on bed") },
-//                "Living Room", new Item[]{ new Item("in wardrobe") },
-//                "Kitchen", new Item[]{ new Item("on floor") }
-//        );
-//        Map<String, Item[]> bedrooms_items = Map.of(
-//                "Guest", new Item[]{ new Item("on bed") },
-//                "Master", new Item[]{ new Item("key"),new Item("flashlight") },
-//                "Child", new Item[]{ new Item("toy") }
-//        );
-//        Map<String, Item[]> bathrooms_items = Map.of(
-//                "Downstairs Bathroom", new Item[]{ new Item("hairdrier") },
-//                "Upstairs", new Item[]{ new Item("toaster") }
-////                "Child", new Item[]{ new Item("on floor") }
-//        );
-//
-
-//        Player.getUser_name();
 //        DansCode.main();
             /*
              * TODO:
