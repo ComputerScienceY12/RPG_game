@@ -8,9 +8,11 @@ public class Player {
     private Room current_room;
 
     public void ask_name(Scanner scanner) {
-        System.out.println("What is your name?");
-        this.name = scanner.nextLine();
+//        System.out.println("What is your name?");
+//        this.name = scanner.nextLine();
+        this.name = "xyz";
     }
+
     public void move_player(Room room) {
         this.current_room = room;
     }
@@ -19,8 +21,7 @@ public class Player {
         return this.name;
     }
 
-    public Player(Scanner scanner, House house) {
-        move_player(house.start_location);
+    public Player(Scanner scanner) {
         ask_name(scanner);
     }
 
