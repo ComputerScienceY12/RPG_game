@@ -61,20 +61,20 @@ public class DansCode {
             mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             mainFrame.setResizable(false);
 
-            mainFrame.add(titleText);
-            titleText.setBounds(250, 0, 500, 100);
-            titleText.setFont(labelFont);
-            titleText.setForeground(Color.decode(Colour[index][0]));
+//            mainFrame.add(titleText);
+//            titleText.setBounds(250, 0, 500, 100);
+//            titleText.setFont(labelFont);
+//            titleText.setForeground(Color.decode(Colour[index][0]));
+//
+//            mainFrame.add(areaText);
+//            areaText.setBounds(100, 20, 200, 50);
+//            areaText.setFont(labelFont);
+//            areaText.setForeground(Color.decode(Colour[index][0]));
 
-            mainFrame.add(areaText);
-            areaText.setBounds(100, 20, 200, 50);
-            areaText.setFont(labelFont);
-            areaText.setForeground(Color.decode(Colour[index][0]));
-
-            mainFrame.add(roomText);
-            roomText.setBounds(780, 20, 200, 50);
-            roomText.setFont(labelFont);
-            roomText.setForeground(Color.decode(Colour[index][0]));
+//            mainFrame.add(roomText);
+//            roomText.setBounds(780, 20, 200, 50);
+//            roomText.setFont(labelFont);
+//            roomText.setForeground(Color.decode(Colour[index][0]));
 
             mainFrame.add(howToPlayText);
             howToPlayText.setBounds(375, 235, 250, 30);
