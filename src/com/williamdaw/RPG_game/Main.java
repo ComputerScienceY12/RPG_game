@@ -104,7 +104,7 @@ public class Main {
 
         boolean playing = true;
         while (playing) {
-            System.out.println("You are in " + current_room + ", where would you like to go?");
+            System.out.println("You are in " + current_room.name + ", where would you like to go?");
 
             ArrayList<Room> adjacent_rooms = current_room.get_adjacent_rooms();
             ArrayList<String> adjacent_rooms_names = new ArrayList<>();
