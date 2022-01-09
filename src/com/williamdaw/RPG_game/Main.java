@@ -14,8 +14,6 @@ public class Main {
         return new Object[]{};
     }
     public static void main(String[] args) throws Exception {
-
-
         File file = new File("intro_art.txt");
         Scanner sc = new Scanner(file);
 
