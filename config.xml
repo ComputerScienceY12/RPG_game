@@ -53,6 +53,18 @@
             <item name="door" murder_location="1" />
             <adjacent_room name="Master" />
         </room>
+        <room type="hallway" name="Upstairs Hallway">
+            <adjacent_room name="Downstairs Hallway" />
+            <adjacent_room name="Master" />
+            <adjacent_room name="Guest" />
+            <adjacent_room name="Child" />
+        </room>
+        <room type="hallway" name="Downstairs Hallway" >
+            <adjacent_room name="Upstairs Hallway" />
+            <adjacent_room name="Porch Bathroom" />
+            <adjacent_room name="Living room" />
+            <adjacent_room name="Kitchen" />
+        </room>
         <room type="other_rooms" name="Porch">
             <item name="steps" murder_location="1" />
             <item name="deckchair" murder_location="1" />
@@ -80,18 +92,6 @@
             <adjacent_room name="Downstairs Hallway" />
             <adjacent_room name="Downstairs Bathroom" />
             <adjacent_room name="Back garden" />
-        </room>
-        <room type="other_rooms" name="Upstairs Hallway">
-            <adjacent_room name="Downstairs Hallway" />
-            <adjacent_room name="Master" />
-            <adjacent_room name="Guest" />
-            <adjacent_room name="Child" />
-        </room>
-        <room type="other_rooms" name="Downstairs Hallway" >
-            <adjacent_room name="Upstairs Hallway" />
-            <adjacent_room name="Porch Bathroom" />
-            <adjacent_room name="Living room" />
-            <adjacent_room name="Kitchen" />
         </room>
     </rooms>
 </class>
