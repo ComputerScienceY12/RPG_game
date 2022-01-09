@@ -138,11 +138,10 @@ public class Main {
                 System.out.println("right room");
             }
             if (house.has_room(user_choice)) current_room = house.get_room(user_choice);
-
             else if (murder_location_names.contains(user_choice)){
                 System.out.println("You are checking if they were murdered in "); // will add the room name here, im lazy
                if (Objects.equals(murder_location.sub_location.value, user_choice)) {
-                    System.out.println("this is the murder location");
+                    System.out.println("You have found the murder location, well done.");
                     System.out.println("You have 3 guesses. You must guess the murderer out of " + potential_murderers_string);
                     for (int i = 0; i < 6; i++){
                         String murder_choice = scanner.nextLine();
