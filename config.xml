@@ -26,7 +26,7 @@
         <object_prefix object="trampoline" prefix=" on the " />
     </object_prefixes>
     <rooms>
-        <room type="bedroom" name="Guest">
+        <room type="bedroom" name="Guest" floor="1">
             <item name="bed" murder_location="1" />
             <item name="window" murder_location="1" />
             <adjacent_room name="Upstairs Hallway" />
