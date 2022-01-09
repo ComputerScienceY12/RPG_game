@@ -92,7 +92,7 @@
             <adjacent_room name="Back garden" />
         </room>
     </rooms>
-    <house_settings>
-        <house_setting name="start_location" value="Front garden" />
-    </house_settings>
+    <game_settings>
+        <setting name="start_location" value="Front garden" />
+    </game_settings>
 </class>
