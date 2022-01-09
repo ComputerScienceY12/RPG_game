@@ -12,7 +12,7 @@ public class Player {
         this.name = scanner.nextLine();
     }
     public void move_player(Room room) {
-
+        this.current_room = room;
     }
 
     public String get_name() {
@@ -21,7 +21,11 @@ public class Player {
 
     public Player(Scanner scanner, House house) throws Exception {
         ask_name(scanner);
-        if (house.has_room("Front garden")) move_player(house.get_room("Front garden"));
+        move_player(house.start_location);
+    }
+
+    public Room get_current_room() {
+        return this.current_room;
     }
 
 }
