@@ -145,18 +145,8 @@ public class Main {
                 }else System.out.println("This isn't the murder location");
             }
 
-//            String guess = sc.nextLine();
-//            if (guess.contains(killer) && guess.contains()) break;
-//            String User_choice_c = User_choice.substring(0, 1).toUpperCase() + User_choice.substring(1);
-
             /*
              * TODO:
-             * ENSURE ALL OPTIONS WORK
-             * TEST RANDOMNESS
-             * TEST EVERYTHING
-             * TEST ROBUSTNESS
-             * CHECK AGAINST REQUIREMENTS
-             *
              * NEW BRANCH GITHUB
              *
              * ADD HOME SCREEN
