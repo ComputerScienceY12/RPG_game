@@ -1,9 +1,11 @@
 package com.williamdaw.RPG_game;
 
-public class PotentialMurderLocation {
-    String value;
+public class PotentialMurderLocation extends Item {
     public PotentialMurderLocation(String value) {
-        this.value = value;
+        super(value);
+    }
+    public String get_potential_murder_location_name() {
+        return this.value;
     }
 
 }

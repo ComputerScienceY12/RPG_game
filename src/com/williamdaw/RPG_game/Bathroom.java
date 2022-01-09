@@ -1,9 +1,12 @@
 package com.williamdaw.RPG_game;
 
+import java.util.ArrayList;
+
 public class Bathroom extends Room {
-    Room attached_to;
-    public Bathroom(Object attached_to_room, int floor, PotentialMurderLocation[] potential_murder_locations) {
-      super("Floor " + floor + " Bathroom", floor, potential_murder_locations);
-        if (attached_to_room instanceof Room) this.attached_to = (Room) attached_to_room;
+    public Bathroom(String name, int floor, PotentialMurderLocation[] potential_murder_locations) {
+        super(name, floor, potential_murder_locations);
+    }
+    public Bathroom(String name, int floor, ArrayList<Item> items, ArrayList<PotentialMurderLocation> potential_murder_locations) {
+        super(name, floor, items, potential_murder_locations);
     }
 }
