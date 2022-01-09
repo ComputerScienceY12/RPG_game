@@ -57,7 +57,7 @@
             <adjacent_room name="Guest bedroom" />
             <adjacent_room name="Child bedroom" />
         </room>
-        <room type="hallway" name="Downstairs hallway" floor="0" >
+        <room type="hallway" name="Downstairs hallway" floor="0">
             <adjacent_room name="Upstairs hallway" />
             <adjacent_room name="Porch" />
             <adjacent_room name="Living room" />
