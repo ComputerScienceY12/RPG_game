@@ -6,12 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Judd {
-    public static String[][] Colour = {{"#007FAD", "#009DD6", "#FFFFFF", "#C0C0C0"}, {"#2A5BBC", "#3D71D6", "#3B3B3B", "#545454"}, {"#FFF500", "#FFF500", "#000000", "#BDBDBD"}};//Light, Dark, High Contrast //TitleTextColour, MainTextColour, BG Colour, Button BG Colour
-    public static String[][] Rooms = {{"Front Garden", "Back Garden"}, {"Porch", "Living Room", "Kitchen", "Bathroom"}, {"Master Bedroom", "Children's Bedroom", "Guest Bedroom", "Bathroom"}}; //Outside, Downstairs, Upstairs
-    public static String[] Areas = {"Outside", "Downstairs", "Upstairs"};
-
-    public static int roomIndex, areaIndex, index = 0;
-
     public static JFrame mainFrame = new JFrame();
 
     public static JLabel titleText = new JLabel("The Mansion Murder", JLabel.CENTER);
@@ -19,6 +13,7 @@ public class Judd {
     public static JLabel roomText = new JLabel(Rooms[areaIndex][roomIndex], JLabel.RIGHT);
     public static JLabel howToPlayText = new JLabel("Click 'Play Game!'", JLabel.CENTER);
     public static JLabel colourSchemeText = new JLabel("Colour Theme:", JLabel.CENTER);
+    // makes the different available labels and their location
 
     public static JButton playButton = new JButton("Play Game!");
     public static JButton howToPlayButton = new JButton("How To Play");
@@ -28,13 +23,14 @@ public class Judd {
     public static JButton darkButton = new JButton("Dark");
     public static JButton contrastButton = new JButton("Contrast");
     public static JButton backButton = new JButton("X");
-
+    // makes the buttons that are available
     public static void updateGUI() {
 
         Font labelFont = new Font("Verdana", Font.BOLD, 20);
         Font btnFont = new Font("Verdana", Font.PLAIN, 20);
         Font colourFont = new Font("Verdana", Font.BOLD, 12);
         Font exitFont = new Font("Verdana", Font.BOLD, 30);
+        //Creates the font types
 
         mainFrame.setVisible(true);
         titleText.setVisible(true);
@@ -50,11 +46,11 @@ public class Judd {
         darkButton.setVisible(false);
         contrastButton.setVisible(false);
         backButton.setVisible(false);
-
+        // sets up the start-up screen
         mainFrame.setSize(1000, 500);
         mainFrame.setLocation(50, 100);
         mainFrame.setTitle(" ");
-        mainFrame.getContentPane().setBackground(Color.decode(Colour[Judd.index][2]));
+        mainFrame.getContentPane().setBackground(Color.decode(Colour[DansCode.index][2]));
         mainFrame.setLayout(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setResizable(false);
@@ -149,16 +145,18 @@ public class Judd {
         backButton.setForeground(Color.decode(Colour[index][1]));
         backButton.setBackground(Color.decode(Colour[index][3]));
         backButton.setCursor(btnOver);
+        //sets up button colours
 
     }
 
     public static void playGame(){
         areaText.setVisible(true);
         roomText.setVisible(true);
+        // sets up the text for playing the game
 
     }
 
-    public static void main(String args[]) {
+    public static void main() {
         updateGUI();
 
         lightButton.addActionListener(new ActionListener() { //Apply Light theme
@@ -235,3 +233,4 @@ public class Judd {
         });
     }
 }
+
