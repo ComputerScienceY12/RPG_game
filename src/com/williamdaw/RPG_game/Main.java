@@ -99,6 +99,7 @@ public class Main {
             if (Objects.equals(setting_name, "start_location")) house.start_location = house.get_room(setting_value);
         }
 
+        // set player start location
         player.move_player(house.start_location);
 
         // choose a killer
@@ -120,8 +121,8 @@ public class Main {
             ArrayList<PotentialMurderLocation> current_room_potential_murder_locations = player.get_current_room().get_potential_murder_locations();
             for (Room s : adjacent_rooms) adjacent_rooms_names.add(s.name);
 
-            for (PotentialMurderLocation s : current_room_potential_murder_locations) current_room_potential_murder_locations_names.add(item_prefixes.get(s.value) + s.value);
-            for (PotentialMurderLocation s : current_room_potential_murder_locations) murder_location_names.add( s.value);
+            for (PotentialMurderLocation s : current_room_potential_murder_locations) current_room_potential_murder_locations_names.add(item_prefixes.get(s.get_value()) + s.get_value());
+            for (PotentialMurderLocation s : current_room_potential_murder_locations) murder_location_names.add(s.get_value());
 
             System.out.println(String.join(", ", adjacent_rooms_names));
             System.out.println(String.join(", ", current_room_potential_murder_locations_names));
@@ -130,7 +131,7 @@ public class Main {
             if (player.get_current_room().has_adjacent_room(user_choice)) player.move_player(house.get_room(user_choice));
             else if (murder_location_names.contains(user_choice)){
                 System.out.println("You are checking if they were murdered in " + player.get_current_room().name);
-               if (Objects.equals(murder_location.sub_location.value, user_choice)) {
+               if (Objects.equals(murder_location.get_sub_location().get_value(), user_choice)) {
                     System.out.println("You have found the murder location, well done.");
                     System.out.println("You have 3 guesses. You must guess the murderer out of " + potential_murderers_string);
                     for (int i = 0; i < 3; i++){

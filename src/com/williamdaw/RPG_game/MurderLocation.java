@@ -5,8 +5,8 @@ import java.util.Objects;
 import java.util.Random;
 
 public class MurderLocation extends Room {
-    Room value;
-    PotentialMurderLocation sub_location;
+    private Room value;
+    private PotentialMurderLocation sub_location;
 
     public MurderLocation(House house) {
         super("Murder Location");
@@ -17,8 +17,7 @@ public class MurderLocation extends Room {
         this.sub_location = sub_locations.get(new Random().nextInt(sub_locations.size()));
         this.floor = this.value.floor;
     }
-    public boolean check_sub_location(String sub_location_name){
-        if (Objects.equals(this.sub_location.value, sub_location_name)) return true;
-        return false;
+    public PotentialMurderLocation get_sub_location() {
+        return this.sub_location;
     }
 }
