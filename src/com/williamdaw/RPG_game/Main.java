@@ -3,10 +3,10 @@ package com.williamdaw.RPG_game;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Main {
@@ -16,24 +16,17 @@ public class Main {
     }
     public static void main(String[] args) throws Exception {
 
-        File file =
-                new File("intro_art.txt");
+        File file = new File("intro_art.txt");
         Scanner sc = new Scanner(file);
 
-        while (sc.hasNextLine())
-            System.out.println(sc.nextLine());
-
-
-
-//        SimpleAudioPlayer.main(0);
-
+        while (sc.hasNextLine()) System.out.println(sc.nextLine());
 
         Scanner scanner = new Scanner(System.in);
 
         Random rand = new Random();
 
         House house = new House();
-        Player player = new Player(scanner);
+        Player player = new Player(scanner, house);
 
         File inputFile = new File("config.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -103,6 +96,15 @@ public class Main {
             }
         }
 
+        // parse settings
+        NodeList house_settings_node_list = ((Element) doc.getElementsByTagName("house_settings").item(0)).getElementsByTagName("house_setting");
+        for (int i = 0; i < house_settings_node_list.getLength(); i++) {
+            Element room_element = (Element) room_node_list.item(i);
+            String setting_name = room_element.getAttribute("name");
+            String setting_value = room_element.getAttribute("value");
+            if (Objects.equals(setting_name, "start_location")) house.start_location = house.get_room(setting_value);
+        }
+
         // choose a killer
         String killer = character_names.get(rand.nextInt(character_names.size()));
         System.out.println(killer); // TODO: REMOVE ME
@@ -111,18 +113,16 @@ public class Main {
         house.set_murder_location();
         MurderLocation murder_location = house.get_murder_location();
 
-        Room current_room = house.get_room("Front garden");
-
         String potential_murderers_string = String.join(", ", character_names);
         System.out.println("Potential murderers: " + potential_murderers_string);
         boolean playing = true;
         while (playing) {
-            System.out.println("You are in " + current_room.name + ", where would you like to search?");
+            System.out.println("You are in " + player.current_room.name + ", where would you like to search?");
             ArrayList<String> murder_location_names =  new ArrayList<>();
-            ArrayList<Room> adjacent_rooms = current_room.get_adjacent_rooms();
+            ArrayList<Room> adjacent_rooms = player.current_room.get_adjacent_rooms();
             ArrayList<String> adjacent_rooms_names = new ArrayList<>();
             ArrayList<String> current_room_potential_murder_locations_names = new ArrayList<>();
-            ArrayList<PotentialMurderLocation> current_room_potential_murder_locations = current_room.get_potential_murder_locations();
+            ArrayList<PotentialMurderLocation> current_room_potential_murder_locations = player.current_room.get_potential_murder_locations();
             for (Room s : adjacent_rooms) adjacent_rooms_names.add(s.name);
 
             for (PotentialMurderLocation s : current_room_potential_murder_locations) current_room_potential_murder_locations_names.add(item_prefixes.get(s.value) + s.value);
@@ -134,10 +134,8 @@ public class Main {
 
             String user_choice = scanner.nextLine();
 //            if (Objects.equals(user_choice, murder_location.name)) System.out.println("Please enter the location followed by the murder");
-            if (current_room == house.get_murder_location()){
-                System.out.println("right room");
-            }
-            if (house.has_room(user_choice)) current_room = house.get_room(user_choice);
+            if (player.current_room.name == house.get_murder_location().name) System.out.println("right room");
+            if (house.has_room(user_choice)) player.current_room = house.get_room(user_choice);
             else if (murder_location_names.contains(user_choice)){
                 System.out.println("You are checking if they were murdered in "); // will add the room name here, im lazy
                if (Objects.equals(murder_location.sub_location.value, user_choice)) {
@@ -146,7 +144,7 @@ public class Main {
                     for (int i = 0; i < 6; i++){
                         String murder_choice = scanner.nextLine();
                         if (Objects.equals(murder_choice, killer)){
-                            System.out.println("You won, " + killer + " murdered in the" + current_room + item_prefixes.get(user_choice) + user_choice);
+                            System.out.println("You won, " + killer + " murdered in the" + player.current_room + item_prefixes.get(user_choice) + user_choice);
                             break;
                         }
                     }
