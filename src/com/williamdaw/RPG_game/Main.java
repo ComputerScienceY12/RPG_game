@@ -127,7 +127,7 @@ public class Main {
                 if (!(house.is_sub_murder_location(user_choice))) System.out.println("This isn't the murder location");
                 else {
                     System.out.println("this is the murder location");
-                    System.out.println("You have 3 guesses. You must guess the murder out of " + murder_options);
+                    System.out.println("You have 3 guesses. You must guess the murder out of " + potential_murderers_string);
                     for (int i = 0; i < 6; i++){
                         String murder_choice = scanner.nextLine();
                         if (murder_choice == killer){
