@@ -94,6 +94,8 @@
     </rooms>
     <game_settings>
         <setting name="start_location" value="Front garden" />
-        <colour_scheme name="light" display="Light" title_text_color="#007FAD" main_text_color="#009DD6" background_color="#FFFFFF" button_background_color="#C0C0C0">
+        <colour_scheme name="light" display="Light" title_text_color="#007FAD" main_text_color="#009DD6" background_color="#FFFFFF" button_background_color="#C0C0C0"/>
+        <colour_scheme name="dark" display="Dark" title_text_color="#2A5BBC" main_text_color="#3D71D6" background_color="#3B3B3B" button_background_color="#545454"/>
+        <colour_scheme name="high contrast" display="High Contrast" title_text_color="#FFF500" main_text_color="#FFF500" background_color="#000000" button_background_color="#BDBDBD"/>
     </game_settings>
 </class>
