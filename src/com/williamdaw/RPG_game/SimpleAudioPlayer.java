@@ -47,7 +47,7 @@ public class SimpleAudioPlayer
             Scanner sc = new Scanner(System.in);
 
 
-            if (timing == 0) Thread.sleep(500);
+            if (timing == 0) Thread.sleep(5000);
             else if (timing == 1) Thread.sleep(153000);;
 
             sc.close();
