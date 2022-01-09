@@ -75,7 +75,7 @@
             <adjacent_room name="Downstairs hallway" />
         </room>
         <room type="other_rooms" name="Front garden" floor="0">
-            <item name="flower" murder_location="1"/>
+            <item name="flowers" murder_location="1"/>
             <item name="concrete" murder_location="1" />
             <adjacent_room name="Porch" />
         </room>
