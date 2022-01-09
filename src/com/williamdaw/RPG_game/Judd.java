@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Main {
+public class Judd {
     public static String[][] Colour = {{"#007FAD", "#009DD6", "#FFFFFF", "#C0C0C0"}, {"#2A5BBC", "#3D71D6", "#3B3B3B", "#545454"}, {"#FFF500", "#FFF500", "#000000", "#BDBDBD"}};//Light, Dark, High Contrast //TitleTextColour, MainTextColour, BG Colour, Button BG Colour
     public static String[][] Rooms = {{"Front Garden", "Back Garden"}, {"Porch", "Living Room", "Kitchen", "Bathroom"}, {"Master Bedroom", "Children's Bedroom", "Guest Bedroom", "Bathroom"}}; //Outside, Downstairs, Upstairs
     public static String[] Areas = {"Outside", "Downstairs", "Upstairs"};
@@ -54,7 +54,7 @@ public class Main {
         mainFrame.setSize(1000, 500);
         mainFrame.setLocation(50, 100);
         mainFrame.setTitle(" ");
-        mainFrame.getContentPane().setBackground(Color.decode(Colour[Main.index][2]));
+        mainFrame.getContentPane().setBackground(Color.decode(Colour[Judd.index][2]));
         mainFrame.setLayout(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setResizable(false);
