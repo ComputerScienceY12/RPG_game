@@ -6,9 +6,8 @@ import java.util.Objects;
 
 public class House {
     private MurderLocation murder_location = null;
-    private final ArrayList<Room> rooms = new ArrayList<Room>();
-
-
+    private final ArrayList<Room> rooms = new ArrayList<>();
+    public Room start_location;
     public void set_murder_location() {
         this.murder_location = new MurderLocation(this);
     }
@@ -19,10 +18,8 @@ public class House {
     public void add_room(Room[] rooms) {
         Collections.addAll(this.rooms, rooms);
     }
-
     public boolean has_room(String room_name) {
         for (com.williamdaw.RPG_game.Room room : this.rooms) if (Objects.equals(room.get_name(), room_name)) return true;
-        System.out.println("hello");
         return false;
     }
     public Room get_room(String room_name) throws Exception {

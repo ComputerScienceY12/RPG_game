@@ -1,68 +1,178 @@
 package com.williamdaw.RPG_game;
 
-import java.util.Map;
-import java.util.Scanner;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
-//interface rooms {
-//    public void library
-//    // stairs
-//    // roof top
-// font 13
-
-///
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.util.*;
 
 public class Main {
-
-    public static String murder_room;
-    String[][] inventory = new String[5][2];
-    public static String[] user_name = new String[2];
+    public Object[] load_config() {
+        return new Object[]{};
+    }
     public static void main(String[] args) throws Exception {
-//        String[] bedrooms = {"Guest", "Master", "Child"};
-//        String[] other_rooms = {"Porch", "Living Room", "Kitchen", "Boot Room"};
-//        String[] bathrooms = {"Downstairs Bathroom", "Upstairs Bathroom"};
-        String[] people = new String[]{"Daniel","Martin","will","Mrs Fowler","Cam"};
+        Scanner scanner = new Scanner(System.in);
 
-//        Map<String, Weapons[]> weapons = Map.of(
-//                "All", new Weapons[]{ new Weapons("Knife") },
-//                "All", new Weapons[]{ new Weapons("Bat") },
-//                "All", new Weapons[]{ new Weapons("Scissors")},
-//                "All", new Weapons[]{ new Weapons("Rope")},
-//                "Bathroom", new Weapons[]{ new Weapons("Drowing")},
-//                "Bathroom", new Weapons[]{ new Weapons("Toast Bath")},
-//                "All", new Weapons[]{ new Weapons("5.56 cadet training rife")}
+        Random rand = new Random();
 
-//        );
-        Map<String, PotentialMurderLocation[]> bedrooms = Map.of(
-                "Guest", new PotentialMurderLocation[]{ new PotentialMurderLocation("on bed") },
-                "Master", new PotentialMurderLocation[]{ new PotentialMurderLocation("in wardrobe") },
-                "Child", new PotentialMurderLocation[]{ new PotentialMurderLocation("on floor") }
-        );
-        Map<String, PotentialMurderLocation[]> other_rooms = Map.of(
-                "Porch", new PotentialMurderLocation[]{ new PotentialMurderLocation( "on deck Chair")},
-                "Living Room", new PotentialMurderLocation[]{ new PotentialMurderLocation("on sofa") },
-                "Kitchen", new PotentialMurderLocation[]{ new PotentialMurderLocation( "in the sink") }
-        );
-        Map<String, PotentialMurderLocation[]> bathrooms = Map.of(
-                "Downstairs Bathroom", new PotentialMurderLocation[]{ new PotentialMurderLocation( "in the bath") },
-                "Upstairs Bathroom", new PotentialMurderLocation[]{ new PotentialMurderLocation (  "hello")}
-        );
-
-//        Map<String, Integer> test_map = new HashMap<String, Integer>() { { "Here", 1 }, { } };
-//        test_map["here"] == 1
         House house = new House();
-        for (String bedroom : bedrooms.keySet()) house.add_room(new Bedroom(bedroom, 1, bedrooms.get(bedroom)));
-        for (String room : other_rooms.keySet()) house.add_room(new Room(room, 0, other_rooms.get(room)));
-        house.add_room(new Room[] { new Bathroom(null, 0, bathrooms.get("Downstairs Bathroom")), new Bathroom(house.get_room("Master Bedroom"), 1, bathrooms.get("Upstairs Bathroom")) });
-        house.add_room(new Room[] { new Hallway(0, new PotentialMurderLocation[] {}), new Hallway(1, new PotentialMurderLocation[] {}) });
+        Player player = new Player(scanner, house);
+        SimpleAudioPlayer.main(0);
 
-        System.out.println("enter username:");
-        Scanner input = new Scanner(System.in);
-        user_name = input.nextLine().split(" ");
+        File inputFile = new File("config.xml");
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(inputFile);
+        doc.getDocumentElement().normalize();
 
+        // parse characters
+        ArrayList<String> character_names = new ArrayList<>();
+        NodeList character_node_list = ((Element) doc.getElementsByTagName("characters").item(0)).getElementsByTagName("character");
+        for (int i = 0; i < character_node_list.getLength(); i++) character_names.add(((Element) character_node_list.item(i)).getAttribute("name"));
+
+        // parse prefixes
+        Map<String, String> item_prefixes = new HashMap<>();
+        NodeList object_prefix_node_list = ((Element) doc.getElementsByTagName("object_prefixes").item(0)).getElementsByTagName("object_prefix");
+        for (int i = 0; i < object_prefix_node_list.getLength(); i++) {
+            Element object_prefix_node = (Element) object_prefix_node_list.item(i);
+            item_prefixes.put(object_prefix_node.getAttribute("object"), object_prefix_node.getAttribute("prefix"));
+        }
+
+        // parse rooms, potential murder locations and items
+        NodeList room_node_list = ((Element) doc.getElementsByTagName("rooms").item(0)).getElementsByTagName("room");
+        for (int i = 0; i < room_node_list.getLength(); i++) {
+            Element room_element = (Element) room_node_list.item(i);
+            String room_type = room_element.getAttribute("type");
+            String room_name = room_element.getAttribute("name");
+            int room_floor = Integer.parseInt(room_element.getAttribute("floor"));
+
+            ArrayList<Item> room_items = new ArrayList<>();
+            ArrayList<PotentialMurderLocation> potential_murder_locations = new ArrayList<>();
+            NodeList room_item_node_list = room_element.getElementsByTagName("item");
+            for (int j = 0; j < room_item_node_list.getLength(); j++) {
+                Element item = (Element) room_item_node_list.item(j);
+                String item_name = item.getAttribute("name");
+                if (Integer.parseInt(item.getAttribute("murder_location")) == 1) potential_murder_locations.add(new PotentialMurderLocation(item_name));
+                else room_items.add(new Item(item_name));
+            }
+
+            Room room;
+            if (Objects.equals(room_type, "bedroom")) room = new Bedroom(room_name, room_floor, room_items, potential_murder_locations);
+            else if (Objects.equals(room_type, "bathroom")) room = new Bathroom(room_name, room_floor, room_items, potential_murder_locations);
+            else if (Objects.equals(room_type, "hallway")) room = new Hallway(room_name, room_floor, room_items, potential_murder_locations);
+            else if (Objects.equals(room_type, "other_rooms")) room = new Room(room_name, room_floor, room_items, potential_murder_locations);
+            else throw new Exception("XML file has unsupported room type.");
+            house.add_room(room);
+        }
+
+        // parse adjacent rooms
+        for (int i = 0; i < room_node_list.getLength(); i++) {
+            Element room_element = (Element) room_node_list.item(i);
+            String room_type = room_element.getAttribute("type");
+            String room_name = room_element.getAttribute("name");
+            String suffix = "";
+            if (Objects.equals(room_type, "bedroom")) suffix = " bedroom";
+            NodeList room_adjacent_room_node_list = room_element.getElementsByTagName("adjacent_room");
+            for (int j = 0; j < room_adjacent_room_node_list.getLength(); j++) {
+                if (!(house.has_room(room_name + suffix))) {
+                    System.out.println(room_name + suffix);
+                }
+                if (!(house.has_room(((Element) room_adjacent_room_node_list.item(j)).getAttribute("name")))) {
+                    System.out.println(room_name + suffix);
+                    System.out.println(((Element) room_adjacent_room_node_list.item(j)).getAttribute("name"));
+                }
+                Room room = house.get_room(room_name + suffix);
+                Room room1 = house.get_room(((Element) room_adjacent_room_node_list.item(j)).getAttribute("name"));
+                room.add_adjacent_room(room1);
+            }
+        }
+
+        // parse settings
+        NodeList house_settings_node_list = ((Element) doc.getElementsByTagName("house_settings").item(0)).getElementsByTagName("house_setting");
+        for (int i = 0; i < house_settings_node_list.getLength(); i++) {
+            Element room_element = (Element) room_node_list.item(i);
+            String setting_name = room_element.getAttribute("name");
+            String setting_value = room_element.getAttribute("value");
+            if (Objects.equals(setting_name, "start_location")) house.start_location = house.get_room(setting_value);
+        }
+
+        // choose a killer
+        String killer = character_names.get(rand.nextInt(character_names.size()));
+        System.out.println(killer); // TODO: REMOVE ME
+
+        // pick a murder location
         house.set_murder_location();
         MurderLocation murder_location = house.get_murder_location();
 
+        String potential_murderers_string = String.join(", ", character_names);
+        System.out.println("Potential murderers: " + potential_murderers_string);
+        boolean playing = true;
+        while (playing) {
+            System.out.println("You are in " + player.get_current_room().name + ", where would you like to search?");
+            ArrayList<String> murder_location_names =  new ArrayList<>();
+            ArrayList<Room> adjacent_rooms = player.get_current_room().get_adjacent_rooms();
+            ArrayList<String> adjacent_rooms_names = new ArrayList<>();
+            ArrayList<String> current_room_potential_murder_locations_names = new ArrayList<>();
+            ArrayList<PotentialMurderLocation> current_room_potential_murder_locations = player.get_current_room().get_potential_murder_locations();
+            for (Room s : adjacent_rooms) adjacent_rooms_names.add(s.name);
 
+            for (PotentialMurderLocation s : current_room_potential_murder_locations) current_room_potential_murder_locations_names.add(item_prefixes.get(s.value) + s.value);
+            for (PotentialMurderLocation s : current_room_potential_murder_locations) murder_location_names.add( s.value);
 
+            System.out.println(String.join(", ", adjacent_rooms_names));
+            System.out.println(String.join(", ", current_room_potential_murder_locations_names));
+
+            String user_choice = scanner.nextLine();
+            if (player.get_current_room().has_adjacent_room(user_choice)) player.move_player(house.get_room(user_choice));
+            else if (murder_location_names.contains(user_choice)){
+                System.out.println("You are checking if they were murdered in " + player.get_current_room().name);
+               if (Objects.equals(murder_location.sub_location.value, user_choice)) {
+                    System.out.println("You have found the murder location, well done.");
+                    System.out.println("You have 3 guesses. You must guess the murderer out of " + potential_murderers_string);
+                    for (int i = 0; i < 3; i++){
+                        String murder_choice = scanner.nextLine();
+                        if (Objects.equals(murder_choice, killer)) {
+                            System.out.println("You won, " + killer + " murdered in the " + player.get_current_room() + item_prefixes.get(user_choice) + user_choice);
+                            playing = false;
+                        }
+                    }
+                }else System.out.println("This isn't the murder location");
+            }
+
+//            String guess = sc.nextLine();
+//            if (guess.contains(killer) && guess.contains()) break;
+//            String User_choice_c = User_choice.substring(0, 1).toUpperCase() + User_choice.substring(1);
+
+            /*
+             * TODO:
+             * ENSURE ALL OPTIONS WORK
+             * MAKE A WAY TO WIN
+             * TEST RANDOMNESS
+             * TEST EVERYTHING
+             * TEST ROBUSTNESS
+             * CHECK AGAINST REQUIREMENTS
+             *
+             * NEW BRANCH GITHUB
+             *
+             * ADD HOME SCREEN
+             * ENSURE ALL WORKS
+             * ADD GAME INTERFACE
+             * ENSURE ALL WORKS
+             * CHECK AGAINST REQUIREMENTS
+             * MAKE FINAL CHANGES
+             * TEST EVERYTHING
+             */
+        }
+        System.out.println("With many thanks to:");
+        System.out.println("Martin Najemi - Did everything");
+        System.out.println("William Daw - Did loads");
+        System.out.println("Daniel Judd - Did absolutely fuck all");
+        System.out.println("Everyone else, you did less than juddy");
+        SimpleAudioPlayer.main(1);
     }
 }
+
+
