@@ -15,7 +15,7 @@ public class Main {
         return new Object[]{};
     }
     public static void main(String[] args) throws Exception {
-        SimpleAudioPlayer.main(1);
+
 
         File file = new File("intro_art.txt");
         Scanner sc = new Scanner(file);
@@ -28,6 +28,7 @@ public class Main {
 
         House house = new House();
         Player player = new Player(scanner, house);
+        SimpleAudioPlayer.main(0);
 
         File inputFile = new File("config.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
