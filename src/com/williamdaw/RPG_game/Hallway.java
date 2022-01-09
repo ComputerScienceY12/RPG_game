@@ -1,7 +1,6 @@
 package com.williamdaw.RPG_game;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Hallway extends Room {
     public Hallway(String name, int floor, ArrayList<Item> item, ArrayList<PotentialMurderLocation> potential_murder_locations) {
