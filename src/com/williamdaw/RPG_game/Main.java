@@ -145,7 +145,7 @@ public class Main {
                     for (int i = 0; i < 3; i++){
                         String murder_choice = scanner.nextLine();
                         if (Objects.equals(murder_choice, killer)) {
-                            System.out.println("You won, " + killer + " murdered in the" + player.get_current_room() + item_prefixes.get(user_choice) + user_choice);
+                            System.out.println("You won, " + killer + " murdered in the " + player.get_current_room() + item_prefixes.get(user_choice) + user_choice);
                             break;
                         }
                     }
