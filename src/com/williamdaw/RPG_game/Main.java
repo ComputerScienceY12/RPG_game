@@ -1,4 +1,4 @@
-package com.daniel_judd.gui_rpg;
+package com.williamdaw.RPG_game;
 
 import javax.swing.*;
 import java.awt.*;
