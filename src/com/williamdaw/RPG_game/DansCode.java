@@ -13,7 +13,6 @@ public class DansCode {
         }; // TitleTextColour, MainTextColour, BG Colour, Button BG Colour
 
         public static JFrame mainFrame = new JFrame();
-        //creates the screen
 
         public static JLabel titleText = new JLabel("The Mansion Murder", JLabel.CENTER);
         public static JLabel areaText = new JLabel(Areas[areaIndex], JLabel.LEFT);
