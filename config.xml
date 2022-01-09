@@ -40,7 +40,6 @@
             <item name="floor" murder_location="1" />
             <item name="bed" murder_location="1" />
             <adjacent_room name="Upstairs hallway" />
-
         </room>
         <room type="bathroom" name="Downstairs bathroom" floor="0">
             <item name="bath" murder_location="1"/>
