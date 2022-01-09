@@ -42,7 +42,7 @@ public class Main {
             item_prefixes.put(object_prefix_node.getAttribute("object"), object_prefix_node.getAttribute("prefix"));
         }
 
-        // parse rooms & adjacent rooms
+        // parse rooms, potential murder locations and items
         NodeList room_node_list = ((Element) doc.getElementsByTagName("rooms").item(0)).getElementsByTagName("room");
         for (int i = 0; i < room_node_list.getLength(); i++) {
             Element room_element = (Element) room_node_list.item(i);
@@ -69,7 +69,7 @@ public class Main {
             house.add_room(room);
         }
 
-
+        // parse adjacent rooms
         for (int i = 0; i < room_node_list.getLength(); i++) {
             Element room_element = (Element) room_node_list.item(i);
             String room_type = room_element.getAttribute("type");
@@ -91,19 +91,19 @@ public class Main {
             }
         }
 
+        // choose a killer
         String killer = character_names.get(rand.nextInt(character_names.size()));
         System.out.println(killer); // TODO: REMOVE ME
 
+        // pick a murder location
         house.set_murder_location();
         MurderLocation murder_location = house.get_murder_location();
         PotentialMurderLocation murderLocation = murder_location.sub_location;
 
         Room current_room = house.get_room("Front garden");
 
-        System.out.println("Potential murderers: ");
-        String murder_options =(String.join(", ", character_names));
-        System.out.println(murder_options);
-        System.out.println(item_prefixes);
+        String potential_murderers_string = String.join(", ", character_names);
+        System.out.println("Potential murderers: " + potential_murderers_string);
         boolean playing = true;
         while (playing) {
             System.out.println("You are in " + current_room.name + ", where would you like to search?");
@@ -127,7 +127,7 @@ public class Main {
                 if (!(house.is_sub_murder_location(user_choice))) System.out.println("This isn't the murder location");
                 else {
                     System.out.println("this is the murder location");
-                    System.out.println("You have 3 trys to guess the murder out of " + murder_options);
+                    System.out.println("You have 3 guesses. You must guess the murder out of " + murder_options);
                     for (int i = 0; i < 6; i++){
                         String murder_choice = scanner.nextLine();
                         if (murder_choice == killer){
