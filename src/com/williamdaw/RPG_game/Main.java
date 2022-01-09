@@ -99,6 +99,7 @@ public class Main {
             if (Objects.equals(setting_name, "start_location")) house.start_location = house.get_room(setting_value);
         }
 
+        // set player start location
         player.move_player(house.start_location);
 
         // choose a killer
