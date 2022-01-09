@@ -19,6 +19,54 @@ public class Main {
         return new Object[]{};
     }
     public static void main(String[] args) throws Exception {
+        JFrame jframe = new JFrame();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         Scanner scanner = new Scanner(System.in);
 
         Random rand = new Random();
