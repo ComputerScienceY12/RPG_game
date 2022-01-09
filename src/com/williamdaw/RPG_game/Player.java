@@ -19,9 +19,9 @@ public class Player {
         return this.name;
     }
 
-    public Player(Scanner scanner, House house) throws Exception {
-        ask_name(scanner);
+    public Player(Scanner scanner, House house) {
         move_player(house.start_location);
+        ask_name(scanner);
     }
 
     public Room get_current_room() {
