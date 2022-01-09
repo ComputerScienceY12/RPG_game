@@ -12,6 +12,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class SimpleAudioPlayer
 {
+    private static String theme;
+
 
     // to store current position
     Long currentFrame;
@@ -30,7 +32,7 @@ public class SimpleAudioPlayer
     {
         // create AudioInputStream object
         audioInputStream =
-                AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
+                AudioSystem.getAudioInputStream(new File(theme));
 
         // create clip reference
         clip = AudioSystem.getClip();
@@ -41,30 +43,26 @@ public class SimpleAudioPlayer
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    public static void main()
+    public static void main(int timing)
     {
         try
         {
-            filePath = "C:\\Users\\willi\\IdeaProjects\\RPG_game\\theme.wav";
+            if (timing == 0) theme = "intro_theme.wav";
+            else if (timing == 1) theme = "end_theme.wav";
+//            File inputFile = new File("end_theme.wav");
+//            filePath = "C:\\Users\\willi\\IdeaProjects\\RPG_game\\theme.wav";
             SimpleAudioPlayer audioPlayer =
                     new SimpleAudioPlayer();
 
             audioPlayer.play();
             Scanner sc = new Scanner(System.in);
 
-            while (true)
-            {
-//                System.out.println("1. pause");
-//                System.out.println("2. resume");
-//                System.out.println("3. restart");
-//                System.out.println("4. stop");
-//                System.out.println("5. Jump to specific time");
-                int c = sc.nextInt();
-                audioPlayer.gotoChoice(c);
-                if (c == 4)
-                    break;
-            }
+
+            if (timing == 0) Thread.sleep(500);
+            else if (timing == 1) Thread.sleep(153000);;
+
             sc.close();
+            audioPlayer.pause();
         }
 
         catch (Exception ex)
@@ -73,38 +71,39 @@ public class SimpleAudioPlayer
             ex.printStackTrace();
 
         }
+
     }
 
     // Work as the user enters his choice
 
-    private void gotoChoice(int c)
-            throws IOException, LineUnavailableException, UnsupportedAudioFileException
-    {
-        switch (c)
-        {
-            case 1:
-                pause();
-                break;
-            case 2:
-                resumeAudio();
-                break;
-            case 3:
-                restart();
-                break;
-            case 4:
-                stop();
-                break;
-            case 5:
-                System.out.println("Enter time (" + 0 +
-                        ", " + clip.getMicrosecondLength() + ")");
-                Scanner sc = new Scanner(System.in);
-                long c1 = sc.nextLong();
-                jump(c1);
-                break;
+//    private void gotoChoice(int c)
+//            throws IOException, LineUnavailableException, UnsupportedAudioFileException
+//    {
+//        switch (c)
+//        {
+//            case 1:
+//                pause();
+//                break;
+//            case 2:
+//                resumeAudio();
+//                break;
+//            case 3:
+//                restart();
+//                break;
+//            case 4:
+//                stop();
+//                break;
+//            case 5:
+//                System.out.println("Enter time (" + 0 +
+//                        ", " + clip.getMicrosecondLength() + ")");
+//                Scanner sc = new Scanner(System.in);
+//                long c1 = sc.nextLong();
+//                jump(c1);
+//                break;
+//
+//        }
 
-        }
 
-    }
 
     // Method to play the audio
     public void play()
@@ -118,15 +117,8 @@ public class SimpleAudioPlayer
     // Method to pause the audio
     public void pause()
     {
-        if (status.equals("paused"))
-        {
-            System.out.println("audio is already paused");
-            return;
-        }
-        this.currentFrame =
-                this.clip.getMicrosecondPosition();
+
         clip.stop();
-        status = "paused";
     }
 
     // Method to resume the audio
