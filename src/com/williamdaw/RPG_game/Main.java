@@ -134,7 +134,7 @@ public class Main {
                if (Objects.equals(murder_location.get_sub_location().get_value(), user_choice)) {
                     System.out.println("You have found the murder location, well done.");
                     System.out.println("You have 3 guesses. You must guess the murderer out of " + potential_murderers_string);
-                    for (int i = 0; i < 3; i++){
+                    for (int i = 0; i < 2; i++){
                         String murder_choice = scanner.nextLine();
                         if (Objects.equals(murder_choice, killer)) {
                             System.out.println("You won, " + killer + " murdered in the " + player.get_current_room() + item_prefixes.get(user_choice) + user_choice);
