@@ -39,7 +39,7 @@
         <room type="bedroom" name="Child" floor="1">
             <item name="floor" murder_location="1" />
             <item name="bed" murder_location="1" />
-            <adjacent_room name="Upstairs Hallway" />
+            <adjacent_room name="Upstairs hallway" />
 
         </room>
         <room type="bathroom" name="Downstairs bathroom" floor="0">
@@ -52,8 +52,8 @@
             <item name="door" murder_location="1" />
             <adjacent_room name="Master" />
         </room>
-        <room type="hallway" name="Upstairs Hallway" floor="1">
-            <adjacent_room name="Downstairs Hallway" />
+        <room type="hallway" name="Upstairs hallway" floor="1">
+            <adjacent_room name="Downstairs hallway" />
             <adjacent_room name="Master" />
             <adjacent_room name="Guest" />
             <adjacent_room name="Child" />
