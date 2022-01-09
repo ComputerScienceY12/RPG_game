@@ -106,12 +106,13 @@ public class Main {
         while (playing) {
             System.out.println("You are in " + current_room + ", where would you like to go?");
 
-            StringBuilder adjacent_rooms_output = new StringBuilder();
-            for (Room s : current_room.get_adjacent_rooms()) adjacent_rooms_output.append(s.name);
-            System.out.println(adjacent_rooms_output);
+            ArrayList<Room> adjacent_rooms = current_room.get_adjacent_rooms();
+            ArrayList<String> adjacent_rooms_names = new ArrayList<>();
+            for (Room s : adjacent_rooms) adjacent_rooms_names.add(s.name);
+            System.out.println(String.join(", ", adjacent_rooms_names));
 
             String user_choice = scanner.nextLine();
-            if (Objects.equals(user_choice, murder_location.name)) System.out.println("Please enter the location followed by the murder");
+//            if (Objects.equals(user_choice, murder_location.name)) System.out.println("Please enter the location followed by the murder");
 
             if (house.has_room(user_choice)) current_room = house.get_room(user_choice);
 
