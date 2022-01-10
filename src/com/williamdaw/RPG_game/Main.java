@@ -19,9 +19,16 @@ public class Main {
         return new Object[]{};
     }
     public static void main(String[] args) throws Exception {
-        JFrame jframe = new JFrame();
+        JFrame frame = new JFrame();
 
 
+        frame.setSize(1000, 500);
+        frame.setLocation(50, 100);
+        frame.setTitle(" ");
+        frame.setLayout(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setVisible(true);
 
 
 
@@ -143,13 +150,83 @@ public class Main {
             }
         }
 
-        // parse settings
+        // parse game settings
         NodeList house_settings_node_list = ((Element) doc.getElementsByTagName("game_settings").item(0)).getElementsByTagName("setting");
         for (int i = 0; i < house_settings_node_list.getLength(); i++) {
-            Element room_element = (Element) house_settings_node_list.item(i);
-            String setting_name = room_element.getAttribute("name");
-            String setting_value = room_element.getAttribute("value");
+            Element setting_element = (Element) house_settings_node_list.item(i);
+            String setting_name = setting_element.getAttribute("name");
+            String setting_value = setting_element.getAttribute("value");
             if (Objects.equals(setting_name, "start_location")) house.start_location = house.get_room(setting_value);
+        }
+
+        String current_color_scheme = "dark";
+
+        // parse color schemes
+        Map<String, Map<String, String>> color_schemes = new HashMap<>();
+        NodeList color_schemes_node_list = ((Element) doc.getElementsByTagName("game_settings").item(0)).getElementsByTagName("color_scheme");
+        for (int i = 0; i < color_schemes_node_list.getLength(); i++) {
+            Element color_scheme_element = (Element) color_schemes_node_list.item(i);
+            Map<String, String> map = new HashMap<>();
+            map.put("display", color_scheme_element.getAttribute("display"));
+            map.put("title_text_color", color_scheme_element.getAttribute("title_text_color"));
+            map.put("main_text_color", color_scheme_element.getAttribute("main_text_color"));
+            map.put("background_color", color_scheme_element.getAttribute("background_color"));
+            map.put("button_background_color", color_scheme_element.getAttribute("button_background_color"));
+            color_schemes.put(color_scheme_element.getAttribute("name"), map);
+        }
+
+        frame.getContentPane().setBackground(Color.decode(color_schemes.get(current_color_scheme).get("background_color")));
+
+        Font labelFont = new Font("Verdana", Font.BOLD, 20);
+        Font btnFont = new Font("Verdana", Font.PLAIN, 20);
+        Font colourFont = new Font("Verdana", Font.BOLD, 12);
+        Font exitFont = new Font("Verdana", Font.BOLD, 30);
+        // parse user interface
+        Map<String, Object> user_interface_items = new HashMap<>();
+        NodeList user_interface_items_node_list = ((Element) doc.getElementsByTagName("user_interface_items").item(0)).getElementsByTagName("user_interface_item");
+        for (int i = 0; i < user_interface_items_node_list.getLength(); i++) {
+            Element user_interface_item = (Element) color_schemes_node_list.item(i);
+            String user_interface_item_type = user_interface_item.getAttribute("type");
+            String[] bounds_string = user_interface_item.getAttribute("display").split(",");
+            Integer[] bounds = new Integer[bounds_string.length];
+            for (int j = 0; j < bounds.length; j++) bounds[j] = Integer.parseInt(bounds_string[i]);
+
+            if (Objects.equals(user_interface_item_type, "label")) {
+                JLabel element;
+                if (Objects.equals(user_interface_item.getAttribute("align"), "CENTER")) {
+                    element = new JLabel(user_interface_item.getAttribute("display"), JLabel.CENTER);
+                }else if (Objects.equals(user_interface_item.getAttribute("align"), "LEFT")) {
+                    element = new JLabel(user_interface_item.getAttribute("display"), JLabel.LEFT);
+                }else if (Objects.equals(user_interface_item.getAttribute("align"), "RIGHT")) {
+                    element = new JLabel(user_interface_item.getAttribute("display"), JLabel.RIGHT);
+                }else {
+                    element = new JLabel(user_interface_item.getAttribute("display"));
+                }
+
+                element.setBounds(bounds[0], bounds[1], bounds[2], bounds[3]);
+                element.setForeground(Color.decode(color_schemes.get(current_color_scheme).get(user_interface_item.getAttribute("color"))));
+                element.setFont(labelFont);
+
+                if (Integer.parseInt(user_interface_item.getAttribute("default_visible")) == 1) element.setVisible(true); else element.setVisible(false);
+
+                if (Objects.equals(user_interface_item.getAttribute("parent"), "main_frame")) frame.add(element);
+
+                user_interface_items.put(user_interface_item.getAttribute("name"), element);
+            }else {
+                JButton element = new JButton(user_interface_item.getAttribute("value"));
+                element.setLayout(null);
+                element.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                element.setBounds(bounds[0], bounds[1], bounds[2], bounds[3]);
+                element.setForeground(Color.decode(color_schemes.get(current_color_scheme).get(user_interface_item.getAttribute("color"))));
+                element.setForeground(Color.decode(color_schemes.get(current_color_scheme).get(user_interface_item.getAttribute("background_color"))));
+                element.setFont(btnFont);
+
+                if (Integer.parseInt(user_interface_item.getAttribute("default_visible")) == 1) element.setVisible(true); else element.setVisible(false);
+
+                if (Objects.equals(user_interface_item.getAttribute("parent"), "main_frame")) frame.add(element);
+
+                user_interface_items.put(user_interface_item.getAttribute("name"), element);
+            }
         }
 
         // set player start location
