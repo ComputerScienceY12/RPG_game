@@ -103,6 +103,15 @@
         <user_interface_item name="title_text" parent="main_frame" bounds="250,0,500,100" type="label" color="0" />
         <user_interface_item name="area_text" parent="main_frame" bounds="100,20,200,50" type="label" color="0" />
         <user_interface_item name="room_text" parent="main_frame" bounds="780,20,200,50" type="label" color="0" />
-        <user_interface_item name="how_to_play_text" parent="main_frame" bounds="375,235,250,30" type="label" color="0" />
+        <user_interface_item name="how_to_play_text" parent="main_frame" bounds="375,235,250,30" type="label" color="1" />
+        <user_interface_item name="color_scheme_text" parent="main_frame" bounds="375,235,250,30" type="label" color="1" />
+        <user_interface_item name="play_button" parent="main_frame" bounds="300,230,400,40" type="button" color="1" background_color="3" />
+        <user_interface_item name="how_to_play_button" parent="main_frame" bounds="300,280,400,40" type="button" color="1" background_color="3" />
+        <user_interface_item name="settings_button" parent="main_frame" bounds="300,330,400,40" type="button" color="1" background_color="3" />
+        <user_interface_item name="exit_button" parent="main_frame" bounds="300,380,400,40" type="button" color="1" background_color="3" />
+        <user_interface_item name="light_button" parent="main_frame" bounds="340,300,100,40" type="button" color="1" background_color="3" />
+        <user_interface_item name="dark_button" parent="main_frame" bounds="450,300,100,40" type="button" color="1" background_color="3" />
+        <user_interface_item name="contrast_button" parent="main_frame" bounds="560,300,100,40" type="button" color="1" background_color="3" />
+        <user_interface_item name="back_button" parent="main_frame" bounds="20,20,60,50" type="button" color="1" background_color="3" />
     </user_interface_items>
 </class>
