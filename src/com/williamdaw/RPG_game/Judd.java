@@ -70,81 +70,81 @@ public class Judd {
 //            roomText.setFont(labelFont);
 //            roomText.setForeground(Color.decode(Colour[index][0]));
 
-        mainFrame.add(howToPlayText);
-        howToPlayText.setBounds(375, 235, 250, 30);
-        howToPlayText.setFont(labelFont);
-        howToPlayText.setForeground(Color.decode(Colour[index][1]));
+//        mainFrame.add(howToPlayText);
+//        howToPlayText.setBounds(375, 235, 250, 30);
+//        howToPlayText.setFont(labelFont);
+//        howToPlayText.setForeground(Color.decode(Colour[index][1]));
 
-        mainFrame.add(colourSchemeText);
-        colourSchemeText.setBounds(375, 235, 250, 30);
-        colourSchemeText.setFont(labelFont);
-        colourSchemeText.setForeground(Color.decode(Colour[index][1]));
+//        mainFrame.add(colourSchemeText);
+//        colourSchemeText.setBounds(375, 235, 250, 30);
+//        colourSchemeText.setFont(labelFont);
+//        colourSchemeText.setForeground(Color.decode(Colour[index][1]));
 
         Cursor btnOver = new Cursor(Cursor.HAND_CURSOR);
 
-        mainFrame.add(playButton);
-        playButton.setBounds(300, 230, 400, 40);
-        playButton.setFont(btnFont);
-        playButton.setLayout(null);
-        playButton.setForeground(Color.decode(Colour[index][1]));
-        playButton.setBackground(Color.decode(Colour[index][3]));
-        playButton.setCursor(btnOver);
+//        mainFrame.add(playButton);
+//        playButton.setBounds(300, 230, 400, 40);
+//        playButton.setFont(btnFont);
+//        playButton.setLayout(null);
+//        playButton.setForeground(Color.decode(Colour[index][1]));
+//        playButton.setBackground(Color.decode(Colour[index][3]));
+//        playButton.setCursor(btnOver);
 
-        mainFrame.add(howToPlayButton);
-        howToPlayButton.setBounds(300, 280, 400, 40);
-        howToPlayButton.setFont(btnFont);
-        howToPlayButton.setLayout(null);
-        howToPlayButton.setForeground(Color.decode(Colour[index][1]));
-        howToPlayButton.setBackground(Color.decode(Colour[index][3]));
-        howToPlayButton.setCursor(btnOver);
+//        mainFrame.add(howToPlayButton);
+//        howToPlayButton.setBounds(300, 280, 400, 40);
+//        howToPlayButton.setFont(btnFont);
+//        howToPlayButton.setLayout(null);
+//        howToPlayButton.setForeground(Color.decode(Colour[index][1]));
+//        howToPlayButton.setBackground(Color.decode(Colour[index][3]));
+//        howToPlayButton.setCursor(btnOver);
 
-        mainFrame.add(settingsButton);
-        settingsButton.setBounds(300, 330, 400, 40);
-        settingsButton.setFont(btnFont);
-        settingsButton.setLayout(null);
-        settingsButton.setForeground(Color.decode(Colour[index][1]));
-        settingsButton.setBackground(Color.decode(Colour[index][3]));
-        settingsButton.setCursor(btnOver);
+//        mainFrame.add(settingsButton);
+//        settingsButton.setBounds(300, 330, 400, 40);
+//        settingsButton.setFont(btnFont);
+//        settingsButton.setLayout(null);
+//        settingsButton.setForeground(Color.decode(Colour[index][1]));
+//        settingsButton.setBackground(Color.decode(Colour[index][3]));
+//        settingsButton.setCursor(btnOver);
 
-        mainFrame.add(exitButton);
-        exitButton.setBounds(300, 380, 400, 40);
-        exitButton.setFont(btnFont);
-        exitButton.setLayout(null);
-        exitButton.setForeground(Color.decode(Colour[index][1]));
-        exitButton.setBackground(Color.decode(Colour[index][3]));
-        exitButton.setCursor(btnOver);
+//        mainFrame.add(exitButton);
+//        exitButton.setBounds(300, 380, 400, 40);
+//        exitButton.setFont(btnFont);
+//        exitButton.setLayout(null);
+//        exitButton.setForeground(Color.decode(Colour[index][1]));
+//        exitButton.setBackground(Color.decode(Colour[index][3]));
+//        exitButton.setCursor(btnOver);
 
-        mainFrame.add(lightButton);
-        lightButton.setBounds(340, 300, 100, 40);
-        lightButton.setFont(colourFont);
-        lightButton.setLayout(null);
-        lightButton.setForeground(Color.decode(Colour[index][1]));
-        lightButton.setBackground(Color.decode(Colour[index][3]));
-        lightButton.setCursor(btnOver);
+//        mainFrame.add(lightButton);
+//        lightButton.setBounds(340, 300, 100, 40);
+//        lightButton.setFont(colourFont);
+//        lightButton.setLayout(null);
+//        lightButton.setForeground(Color.decode(Colour[index][1]));
+//        lightButton.setBackground(Color.decode(Colour[index][3]));
+//        lightButton.setCursor(btnOver);
 
-        mainFrame.add(darkButton);
-        darkButton.setBounds(450, 300, 100, 40);
-        darkButton.setFont(colourFont);
-        darkButton.setLayout(null);
-        darkButton.setForeground(Color.decode(Colour[index][1]));
-        darkButton.setBackground(Color.decode(Colour[index][3]));
-        darkButton.setCursor(btnOver);
+//        mainFrame.add(darkButton);
+//        darkButton.setBounds(450, 300, 100, 40);
+//        darkButton.setFont(colourFont);
+//        darkButton.setLayout(null);
+//        darkButton.setForeground(Color.decode(Colour[index][1]));
+//        darkButton.setBackground(Color.decode(Colour[index][3]));
+//        darkButton.setCursor(btnOver);
 
-        mainFrame.add(contrastButton);
-        contrastButton.setBounds(560, 300, 100, 40);
-        contrastButton.setFont(colourFont);
-        contrastButton.setLayout(null);
-        contrastButton.setForeground(Color.decode(Colour[index][1]));
-        contrastButton.setBackground(Color.decode(Colour[index][3]));
-        contrastButton.setCursor(btnOver);
+//        mainFrame.add(contrastButton);
+//        contrastButton.setBounds(560, 300, 100, 40);
+//        contrastButton.setFont(colourFont);
+//        contrastButton.setLayout(null);
+//        contrastButton.setForeground(Color.decode(Colour[index][1]));
+//        contrastButton.setBackground(Color.decode(Colour[index][3]));
+//        contrastButton.setCursor(btnOver);
 
-        mainFrame.add(backButton);
-        backButton.setBounds(20, 20, 60, 50);
-        backButton.setFont(exitFont);
-        backButton.setLayout(null);
-        backButton.setForeground(Color.decode(Colour[index][1]));
-        backButton.setBackground(Color.decode(Colour[index][3]));
-        backButton.setCursor(btnOver);
+//        mainFrame.add(backButton);
+//        backButton.setBounds(20, 20, 60, 50);
+//        backButton.setFont(exitFont);
+//        backButton.setLayout(null);
+//        backButton.setForeground(Color.decode(Colour[index][1]));
+//        backButton.setBackground(Color.decode(Colour[index][3]));
+//        backButton.setCursor(btnOver);
         //sets up button colours
 
     }
