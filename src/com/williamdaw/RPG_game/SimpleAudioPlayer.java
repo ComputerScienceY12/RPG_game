@@ -10,24 +10,16 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class SimpleAudioPlayer
-{
+public class SimpleAudioPlayer {
     private static String theme;
-
     Long currentFrame;
     Clip clip;
-
     String status;
-
     AudioInputStream audioInputStream;
 
-    public SimpleAudioPlayer()
-            throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException
-    {
+    public SimpleAudioPlayer() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         // create AudioInputStream object
-        audioInputStream =
-                AudioSystem.getAudioInputStream(new File(theme));
+        audioInputStream = AudioSystem.getAudioInputStream(new File(theme));
 
         clip = AudioSystem.getClip();
 
@@ -38,34 +30,24 @@ public class SimpleAudioPlayer
 
     public static void main(int timing) {
         try {
-            if (timing == 0) theme = "intro_theme.wav";
-            else if (timing == 1) theme = "end_theme.wav";
-            SimpleAudioPlayer audioPlayer =
-                    new SimpleAudioPlayer();
+            if (timing == 0) theme = "intro_theme.wav"; else if (timing == 1) theme = "end_theme.wav";
+            SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
 
             audioPlayer.play();
             Scanner sc = new Scanner(System.in);
 
-
-            if (timing == 0) Thread.sleep(5000);
-            else if (timing == 1) Thread.sleep(153000);;
+            if (timing == 0) Thread.sleep(5000); else if (timing == 1) Thread.sleep(153000);
 
             sc.close();
             audioPlayer.stop();
-        }
-
-        catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println("Error with playing sound.");
             ex.printStackTrace();
-
         }
-
     }
-
 
     public void play() {
         clip.start();
-
         status = "play";
     }
 
@@ -74,7 +56,4 @@ public class SimpleAudioPlayer
         clip.stop();
         clip.close();
     }
-
-
-
 }
