@@ -100,7 +100,7 @@
         <color_scheme name="high_contrast" display="High Contrast" title_text_color="#FFF500" main_text_color="#FFF500" background_color="#000000" button_background_color="#BDBDBD" />
     </game_settings>
     <user_interface_items>
-        <user_interface_item name="title_text" parent="main_frame" bounds="250,0,500,100" type="label" color="title_text_color" value="" align="CENTER" default_visible="1" />
+        <user_interface_item name="title_text" parent="main_frame" bounds="250,0,500,100" type="label" color="title_text_color" value="The Murder Mansion" align="CENTER" default_visible="1" />
         <user_interface_item name="area_text" parent="main_frame" bounds="100,20,200,50" type="label" color="title_text_color" align="LEFT" default_visible="0" />
         <user_interface_item name="room_text" parent="main_frame" bounds="780,20,200,50" type="label" color="title_text_color" align="RIGHT" default_visible="0" />
         <user_interface_item name="how_to_play_text" parent="main_frame" bounds="375,235,250,30" type="label" color="main_text_color" value="Click 'Play Game!'" align="CENTER" default_visible="0" />
@@ -109,9 +109,9 @@
         <user_interface_item name="how_to_play_button" parent="main_frame" bounds="300,280,400,40" type="button" color="main_text_color" background_color="button_background_color" value="How To Play" default_visible="1" />
         <user_interface_item name="settings_button" parent="main_frame" bounds="300,330,400,40" type="button" color="main_text_color" background_color="button_background_color" value="Settings" default_visible="1" />
         <user_interface_item name="exit_button" parent="main_frame" bounds="300,380,400,40" type="button" color="main_text_color" background_color="button_background_color" value="Exit" default_visible="1" />
-        <user_interface_item name="light_button" parent="main_frame" bounds="340,300,100,40" type="button" color="main_text_color" background_color="button_background_color" value="Light" default_visible="0" />
-        <user_interface_item name="dark_button" parent="main_frame" bounds="450,300,100,40" type="button" color="main_text_color" background_color="button_background_color" value="Dark" default_visible="0" />
-        <user_interface_item name="contrast_button" parent="main_frame" bounds="560,300,100,40" type="button" color="main_text_color" background_color="button_background_color" value="Contrast" default_visible="0" />
+        <user_interface_item name="light_button" parent="main_frame" bounds="320,300,120,40" type="button" color="main_text_color" background_color="button_background_color" value="Light" default_visible="0" />
+        <user_interface_item name="dark_button" parent="main_frame" bounds="450,300,120,40" type="button" color="main_text_color" background_color="button_background_color" value="Dark" default_visible="0" />
+        <user_interface_item name="contrast_button" parent="main_frame" bounds="580,300,120,40" type="button" color="main_text_color" background_color="button_background_color" value="Contrast" default_visible="0" />
         <user_interface_item name="back_button" parent="main_frame" bounds="20,20,60,50" type="button" color="main_text_color" background_color="button_background_color" value="X" default_visible="0" />
     </user_interface_items>
 </class>
