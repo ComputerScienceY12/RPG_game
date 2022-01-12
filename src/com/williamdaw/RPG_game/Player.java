@@ -8,8 +8,9 @@ public class Player {
     private Room current_room;
 
     public void ask_name(Scanner scanner) {
-        System.out.println("What is your name?");
-        this.name = scanner.nextLine();
+//        System.out.println("What is your name?");
+//        this.name = scanner.nextLine();
+        this.name = "xyz";
     }
 
     public void move_player(Room room) {
