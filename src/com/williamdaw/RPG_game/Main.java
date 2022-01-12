@@ -6,6 +6,7 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.*;
 
@@ -17,9 +18,21 @@ public class Main {
     public Object[] load_config() {
         return new Object[]{};
     }
+    public static void change_theme(String theme_name, Map<String, Object> user_interface_items, Map<String, Map<String, String>> color_schemes, NodeList user_interface_items_node_list) {
+        for (int i = 0; i < user_interface_items_node_list.getLength(); i++) {
+            Element user_interface_item = (Element) user_interface_items_node_list.item(i);
+            String user_interface_item_type = user_interface_item.getAttribute("type");
+            String user_interface_item_name = user_interface_item.getAttribute("name");
+
+            if (Objects.equals(user_interface_item_type, "label")) ((JLabel) user_interface_items.get(user_interface_item_name)).setForeground(Color.decode(color_schemes.get(theme_name).get(user_interface_item.getAttribute("color")))); else {
+                ((JButton) user_interface_items.get(user_interface_item_name)).setForeground(Color.decode(color_schemes.get(theme_name).get(user_interface_item.getAttribute("color"))));
+                ((JButton) user_interface_items.get(user_interface_item_name)).setBackground(Color.decode(color_schemes.get(theme_name).get(user_interface_item.getAttribute("background_color"))));
+            }
+        }
+        // frame.getContentPane().setBackground(Color.decode(color_schemes.get(current_color_scheme).get("background_color"))); // TODO: SET FRAME BACKGROUND
+    }
     public static void main(String[] args) throws Exception {
         JFrame frame = new JFrame();
-
 
         frame.setSize(1000, 500);
         frame.setLocation(50, 100);
@@ -28,50 +41,6 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setVisible(true);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         Scanner scanner = new Scanner(System.in);
 
@@ -136,13 +105,6 @@ public class Main {
             if (Objects.equals(room_type, "bedroom")) suffix = " bedroom";
             NodeList room_adjacent_room_node_list = room_element.getElementsByTagName("adjacent_room");
             for (int j = 0; j < room_adjacent_room_node_list.getLength(); j++) {
-                if (!(house.has_room(room_name + suffix))) {
-                    System.out.println(room_name + suffix);
-                }
-                if (!(house.has_room(((Element) room_adjacent_room_node_list.item(j)).getAttribute("name")))) {
-                    System.out.println(room_name + suffix);
-                    System.out.println(((Element) room_adjacent_room_node_list.item(j)).getAttribute("name"));
-                }
                 Room room = house.get_room(room_name + suffix);
                 Room room1 = house.get_room(((Element) room_adjacent_room_node_list.item(j)).getAttribute("name"));
                 room.add_adjacent_room(room1);
@@ -158,8 +120,6 @@ public class Main {
             if (Objects.equals(setting_name, "start_location")) house.start_location = house.get_room(setting_value);
         }
 
-        String current_color_scheme = "dark";
-
         // parse color schemes
         Map<String, Map<String, String>> color_schemes = new HashMap<>();
         NodeList color_schemes_node_list = ((Element) doc.getElementsByTagName("game_settings").item(0)).getElementsByTagName("color_scheme");
@@ -174,21 +134,25 @@ public class Main {
             color_schemes.put(color_scheme_element.getAttribute("name"), map);
         }
 
+        String current_color_scheme = "dark";
+
         frame.getContentPane().setBackground(Color.decode(color_schemes.get(current_color_scheme).get("background_color")));
 
-        Font labelFont = new Font("Verdana", Font.BOLD, 20);
-        Font btnFont = new Font("Verdana", Font.PLAIN, 20);
-        Font colourFont = new Font("Verdana", Font.BOLD, 12);
-        Font exitFont = new Font("Verdana", Font.BOLD, 30);
+        Font labelFont = new Font("Verdana", Font.BOLD, 20); // TODO: ADD FONTS TO XML
+        Font btnFont = new Font("Verdana", Font.PLAIN, 20); // TODO: ADD FONTS TO XML
+        Font colourFont = new Font("Verdana", Font.BOLD, 12); // TODO: ADD FONTS TO XML
+        Font exitFont = new Font("Verdana", Font.BOLD, 30); // TODO: ADD FONTS TO XML
+
         // parse user interface
         Map<String, Object> user_interface_items = new HashMap<>();
         NodeList user_interface_items_node_list = ((Element) doc.getElementsByTagName("user_interface_items").item(0)).getElementsByTagName("user_interface_item");
         for (int i = 0; i < user_interface_items_node_list.getLength(); i++) {
-            Element user_interface_item = (Element) color_schemes_node_list.item(i);
+            Element user_interface_item = (Element) user_interface_items_node_list.item(i);
             String user_interface_item_type = user_interface_item.getAttribute("type");
-            String[] bounds_string = user_interface_item.getAttribute("display").split(",");
+            String[] bounds_string = user_interface_item.getAttribute("bounds").split(",");
             Integer[] bounds = new Integer[bounds_string.length];
-            for (int j = 0; j < bounds.length; j++) bounds[j] = Integer.parseInt(bounds_string[i]);
+            for (int j = 0; j < bounds_string.length; j++)
+                bounds[j] = Integer.parseInt(bounds_string[j]);
 
             if (Objects.equals(user_interface_item_type, "label")) {
                 JLabel element;
@@ -206,9 +170,9 @@ public class Main {
                 element.setForeground(Color.decode(color_schemes.get(current_color_scheme).get(user_interface_item.getAttribute("color"))));
                 element.setFont(labelFont);
 
-                if (Integer.parseInt(user_interface_item.getAttribute("default_visible")) == 1) element.setVisible(true); else element.setVisible(false);
-
                 if (Objects.equals(user_interface_item.getAttribute("parent"), "main_frame")) frame.add(element);
+
+                if (Integer.parseInt(user_interface_item.getAttribute("default_visible")) == 1) element.setVisible(true); else element.setVisible(false);
 
                 user_interface_items.put(user_interface_item.getAttribute("name"), element);
             }else {
@@ -217,10 +181,10 @@ public class Main {
                 element.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 element.setBounds(bounds[0], bounds[1], bounds[2], bounds[3]);
                 element.setForeground(Color.decode(color_schemes.get(current_color_scheme).get(user_interface_item.getAttribute("color"))));
-                element.setForeground(Color.decode(color_schemes.get(current_color_scheme).get(user_interface_item.getAttribute("background_color"))));
+                element.setBackground(Color.decode(color_schemes.get(current_color_scheme).get(user_interface_item.getAttribute("background_color"))));
                 element.setFont(btnFont);
 
-                if (Integer.parseInt(user_interface_item.getAttribute("default_visible")) == 1) element.setVisible(true); else element.setVisible(false);
+                element.setVisible(Integer.parseInt(user_interface_item.getAttribute("default_visible")) == 1);
 
                 if (Objects.equals(user_interface_item.getAttribute("parent"), "main_frame")) frame.add(element);
 
@@ -228,69 +192,73 @@ public class Main {
             }
         }
 
+
+        String[] hide_ = new String[]{ "back_button", "light_button", "dark_button", "contrast_button", "how_to_play_text", "area_text", "room_text", "play_button", "how_to_play_button", "settings_button", "exit_button", "title_text" };
+        String[] show_ = new String[]{ "play_button", "how_to_play_button", "settings_button", "exit_button", "title_text" };
+        for (String i : hide_) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(false); else ((JButton) user_interface_items.get(i)).setVisible(false);
+        for (String i : show_) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(true); else ((JButton) user_interface_items.get(i)).setVisible(true);
+
         // set player start location
         player.move_player(house.start_location);
 
         // choose a killer
-        String killer = character_names.get(rand.nextInt(character_names.size()));
+        String murderer = character_names.get(rand.nextInt(character_names.size()));
 
         // pick a murder location
         house.set_murder_location();
         MurderLocation murder_location = house.get_murder_location();
 
-        String potential_murderers_string = String.join(", ", character_names);
-        System.out.println("Potential murderers: " + potential_murderers_string);
-        boolean playing = true;
-        while (playing) {
-            System.out.println("You are in " + player.get_current_room().name + ", where would you like to search?");
-            ArrayList<String> murder_location_names =  new ArrayList<>();
-            ArrayList<Room> adjacent_rooms = player.get_current_room().get_adjacent_rooms();
-            ArrayList<String> adjacent_rooms_names = new ArrayList<>();
-            ArrayList<String> current_room_potential_murder_locations_names = new ArrayList<>();
-            ArrayList<PotentialMurderLocation> current_room_potential_murder_locations = player.get_current_room().get_potential_murder_locations();
-            for (Room s : adjacent_rooms) adjacent_rooms_names.add(s.name);
+        // Set events for theme changing buttons
+        ((JButton) user_interface_items.get("light_button")).addActionListener(e -> change_theme("light", user_interface_items, color_schemes, user_interface_items_node_list));
+        ((JButton) user_interface_items.get("dark_button")).addActionListener(e -> change_theme("dark", user_interface_items, color_schemes, user_interface_items_node_list));
+        ((JButton) user_interface_items.get("contrast_button")).addActionListener(e -> change_theme("high_contrast", user_interface_items, color_schemes, user_interface_items_node_list));
 
-            for (PotentialMurderLocation s : current_room_potential_murder_locations) current_room_potential_murder_locations_names.add(item_prefixes.get(s.get_value()) + s.get_value());
-            for (PotentialMurderLocation s : current_room_potential_murder_locations) murder_location_names.add(s.get_value());
+        // Set game title
+        ((JLabel) user_interface_items.get("title_text")).setText("The Murder Mansion");
 
-            System.out.println(String.join(", ", adjacent_rooms_names));
-            System.out.println(String.join(", ", current_room_potential_murder_locations_names));
+        ((JButton) user_interface_items.get("play_button")).addActionListener(e -> { // PLAY GAME
+            String[] hide = new String[]{ "play_button", "how_to_play_button", "settings_button", "exit_button" };
+            String[] show = new String[]{ "title_text", "back_button" };
+            for (String i : hide) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(false); else ((JButton) user_interface_items.get(i)).setVisible(false);
+            for (String i : show) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(true); else ((JButton) user_interface_items.get(i)).setVisible(true);
+//            playGame();
+        });
 
-            String user_choice = scanner.nextLine();
-            if (player.get_current_room().has_adjacent_room(user_choice)) player.move_player(house.get_room(user_choice));
-            else if (murder_location_names.contains(user_choice)){
-                System.out.println("You are checking if they were murdered in " + player.get_current_room().name);
-               if (Objects.equals(murder_location.get_sub_location().get_value(), user_choice)) {
-                    System.out.println("You have found the murder location, well done.");
-                    System.out.println("You have 3 guesses. You must guess the murderer out of " + potential_murderers_string);
-                    for (int i = 0; i < 2; i++){
-                        String murder_choice = scanner.nextLine();
-                        if (Objects.equals(murder_choice, killer)) {
-                            System.out.println("You won, " + killer + " murdered in the " + player.get_current_room().get_name() + item_prefixes.get(user_choice) + user_choice);
-                            playing = false;
-                            break;
-                        }
-                    }
-                }else System.out.println("This isn't the murder location");
-            }
+        ((JButton) user_interface_items.get("how_to_play_button")).addActionListener(e -> { // HOW TO PLAY
+            ((JLabel) user_interface_items.get("title_text")).setText("How To Play");
+            String[] hide = new String[]{ "play_button", "how_to_play_button", "settings_button", "exit_button" };
+            String[] show = new String[]{ "how_to_play_text", "back_button" };
+            for (String i : hide) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(false); else ((JButton) user_interface_items.get(i)).setVisible(false);
+            for (String i : show) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(true); else ((JButton) user_interface_items.get(i)).setVisible(true);
+        });
 
-            /*
-             * TODO:
-             * ADD HOME SCREEN
-             * ENSURE ALL WORKS
-             * ADD GAME INTERFACE
-             * ENSURE ALL WORKS
-             * CHECK AGAINST REQUIREMENTS
-             * MAKE FINAL CHANGES
-             * TEST EVERYTHING
-             */
-        }
-        System.out.println("With many thanks to:");
-        System.out.println("Martin Najemi - Did everything");
-        System.out.println("William Daw - Did loads");
-        System.out.println("Daniel Judd - Did absolutely fuck all");
-        System.out.println("Everyone else, you did less than juddy");
-        SimpleAudioPlayer.main(1);
+        ((JButton) user_interface_items.get("settings_button")).addActionListener(e -> { // SETTINGS
+            ((JLabel) user_interface_items.get("title_text")).setText("Settings");
+            String[] hide = new String[]{ "play_button", "how_to_play_button", "settings_button", "exit_button" };
+            String[] show = new String[]{ "light_button", "dark_button", "contrast_button", "back_button" };
+            for (String i : hide) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(false); else ((JButton) user_interface_items.get(i)).setVisible(false);
+            for (String i : show) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(true); else ((JButton) user_interface_items.get(i)).setVisible(true);
+        });
+
+        ((JButton) user_interface_items.get("exit_button")).addActionListener(e -> frame.dispose()); // EXIT GAME
+
+        ((JButton) user_interface_items.get("back_button")).addActionListener(e -> { // Return to Menu
+            ((JLabel) user_interface_items.get("title_text")).setText("The Murder Mansion");
+            String[] hide = new String[]{ "back_button", "light_button", "dark_button", "contrast_button", "how_to_play_text", "area_text", "room_text" };
+            String[] show = new String[]{ "play_button", "how_to_play_button", "settings_button", "exit_button", "title_text" };
+            for (String i : hide) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(false); else ((JButton) user_interface_items.get(i)).setVisible(false);
+            for (String i : show) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(true); else ((JButton) user_interface_items.get(i)).setVisible(true);
+        });
+
+        /*
+         * TODO:
+         * ENSURE ALL WORKS
+         * ADD GAME INTERFACE
+         * ENSURE ALL WORKS
+         * CHECK AGAINST REQUIREMENTS
+         * MAKE FINAL CHANGES
+         * TEST EVERYTHING
+         */
     }
 }
 
