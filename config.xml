@@ -1,0 +1,98 @@
+<?xml version = "1.0"?>
+<class>
+    <characters>
+        <character name="Will" />
+        <character name="Mrs Fowler" />
+        <character name="Martin" />
+        <character name="Mitch" />
+        <character name="Cam" />
+        <character name="Dan" />
+    </characters>
+    <object_prefixes>
+        <object_prefix object="bed" prefix=" on the " />
+        <object_prefix object="window" prefix=" next to the " />
+        <object_prefix object="wardrobe" prefix=" in the " />
+        <object_prefix object="TV" prefix=" next to the " />
+        <object_prefix object="sofa" prefix=" on the " />
+        <object_prefix object="sink" prefix=" in the " />
+        <object_prefix object="cupboard" prefix=" on the " />
+        <object_prefix object="deckchair" prefix=" on the " />
+        <object_prefix object="shower" prefix=" in the " />
+        <object_prefix object="bath" prefix=" in the " />
+        <object_prefix object="flowers" prefix=" in the " />
+        <object_prefix object="concrete" prefix=" on the " />
+        <object_prefix object="fence" prefix=" against the fence " />
+        <object_prefix object="trampoline" prefix=" on the " />
+        <object_prefix object="floor" prefix=" on the " />
+        <object_prefix object="door" prefix=" behind the " />
+    </object_prefixes>
+    <rooms>
+        <room type="bedroom" name="Guest" floor="1">
+            <item name="bed" murder_location="1" />
+            <item name="window" murder_location="1" />
+            <adjacent_room name="Upstairs hallway" />
+        </room>
+        <room type="bedroom" name="Master" floor="1">
+            <item name="door" murder_location="1" />
+            <adjacent_room name="Upstairs bathroom" />
+            <adjacent_room name="Upstairs hallway" />
+        </room>
+        <room type="bedroom" name="Child" floor="1">
+            <item name="floor" murder_location="1" />
+            <item name="bed" murder_location="1" />
+            <adjacent_room name="Upstairs hallway" />
+        </room>
+        <room type="bathroom" name="Downstairs bathroom" floor="0">
+            <item name="bath" murder_location="1"/>
+            <item name="sink" murder_location="1" />
+            <adjacent_room name="Kitchen" />
+        </room>
+        <room type="bathroom" name="Upstairs bathroom" floor="1">
+            <item name="shower" murder_location="1"/>
+            <item name="door" murder_location="1" />
+            <adjacent_room name="Master bedroom" />
+        </room>
+        <room type="hallway" name="Upstairs hallway" floor="1">
+            <adjacent_room name="Downstairs hallway" />
+            <adjacent_room name="Master bedroom" />
+            <adjacent_room name="Guest bedroom" />
+            <adjacent_room name="Child bedroom" />
+        </room>
+        <room type="hallway" name="Downstairs hallway" floor="0">
+            <adjacent_room name="Upstairs hallway" />
+            <adjacent_room name="Porch" />
+            <adjacent_room name="Living room" />
+            <adjacent_room name="Kitchen" />
+        </room>
+        <room type="other_rooms" name="Porch" floor="0">
+            <item name="deckchair" murder_location="1" />
+            <adjacent_room name="Downstairs hallway" />
+            <adjacent_room name="Front garden" />
+        </room>
+        <room type="other_rooms" name="Living room" floor="0">
+            <item name="sofa" murder_location="1"/>
+            <item name="TV" murder_location="1" />
+            <adjacent_room name="Downstairs hallway" />
+        </room>
+        <room type="other_rooms" name="Front garden" floor="0">
+            <item name="flowers" murder_location="1"/>
+            <item name="concrete" murder_location="1" />
+            <adjacent_room name="Porch" />
+        </room>
+        <room type="other_rooms" name="Back garden" floor="0">
+            <item name="fence" murder_location="1"/>
+            <item name="trampoline" murder_location="1" />
+            <adjacent_room name="Downstairs hallway" />
+        </room>
+        <room type="other_rooms" name="Kitchen" floor="0">
+            <item name="sink" murder_location="1"/>
+            <item name="cupboard" murder_location="1" />
+            <adjacent_room name="Downstairs hallway" />
+            <adjacent_room name="Downstairs bathroom" />
+            <adjacent_room name="Back garden" />
+        </room>
+    </rooms>
+    <house_settings>
+        <house_setting name="start_location" value="Front garden" />
+    </house_settings>
+</class>
