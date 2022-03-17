@@ -158,11 +158,6 @@ public class Main {
              * TEST EVERYTHING
              */
         }
-        System.out.println("With many thanks to:");
-        System.out.println("Martin Najemi - Did everything");
-        System.out.println("William Daw - Did loads");
-        System.out.println("Daniel Judd - Did absolutely fuck all");
-        System.out.println("Everyone else, you did less than juddy");
         SimpleAudioPlayer.main(1);
     }
 }
