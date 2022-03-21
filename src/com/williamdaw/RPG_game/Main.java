@@ -4,33 +4,31 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.io.File;
 import java.util.*;
 
-import javax.swing.*;
-import java.awt.*;
-
 
 public class Main {
-    public Object[] load_config() {
-        return new Object[]{};
-    }
     public static void change_theme(String theme_name, Map<String, Object> user_interface_items, Map<String, Map<String, String>> color_schemes, NodeList user_interface_items_node_list) {
         for (int i = 0; i < user_interface_items_node_list.getLength(); i++) {
             Element user_interface_item = (Element) user_interface_items_node_list.item(i);
             String user_interface_item_type = user_interface_item.getAttribute("type");
             String user_interface_item_name = user_interface_item.getAttribute("name");
 
-            if (Objects.equals(user_interface_item_type, "label")) ((JLabel) user_interface_items.get(user_interface_item_name)).setForeground(Color.decode(color_schemes.get(theme_name).get(user_interface_item.getAttribute("color")))); else {
+            if (Objects.equals(user_interface_item_type, "label"))
+                ((JLabel) user_interface_items.get(user_interface_item_name)).setForeground(Color.decode(color_schemes.get(theme_name).get(user_interface_item.getAttribute("color"))));
+            else {
                 ((JButton) user_interface_items.get(user_interface_item_name)).setForeground(Color.decode(color_schemes.get(theme_name).get(user_interface_item.getAttribute("color"))));
                 ((JButton) user_interface_items.get(user_interface_item_name)).setBackground(Color.decode(color_schemes.get(theme_name).get(user_interface_item.getAttribute("background_color"))));
             }
         }
         // frame.getContentPane().setBackground(Color.decode(color_schemes.get(current_color_scheme).get("background_color"))); // TODO: SET FRAME BACKGROUND
     }
+
     public static void main(String[] args) throws Exception {
         JFrame frame = new JFrame();
 
@@ -59,7 +57,8 @@ public class Main {
         // parse characters
         ArrayList<String> character_names = new ArrayList<>();
         NodeList character_node_list = ((Element) doc.getElementsByTagName("characters").item(0)).getElementsByTagName("character");
-        for (int i = 0; i < character_node_list.getLength(); i++) character_names.add(((Element) character_node_list.item(i)).getAttribute("name"));
+        for (int i = 0; i < character_node_list.getLength(); i++)
+            character_names.add(((Element) character_node_list.item(i)).getAttribute("name"));
 
         // parse prefixes
         Map<String, String> item_prefixes = new HashMap<>();
@@ -83,15 +82,20 @@ public class Main {
             for (int j = 0; j < room_item_node_list.getLength(); j++) {
                 Element item = (Element) room_item_node_list.item(j);
                 String item_name = item.getAttribute("name");
-                if (Integer.parseInt(item.getAttribute("murder_location")) == 1) potential_murder_locations.add(new PotentialMurderLocation(item_name));
+                if (Integer.parseInt(item.getAttribute("murder_location")) == 1)
+                    potential_murder_locations.add(new PotentialMurderLocation(item_name));
                 else room_items.add(new Item(item_name));
             }
 
             Room room;
-            if (Objects.equals(room_type, "bedroom")) room = new Bedroom(room_name, room_floor, room_items, potential_murder_locations);
-            else if (Objects.equals(room_type, "bathroom")) room = new Bathroom(room_name, room_floor, room_items, potential_murder_locations);
-            else if (Objects.equals(room_type, "hallway")) room = new Hallway(room_name, room_floor, room_items, potential_murder_locations);
-            else if (Objects.equals(room_type, "other_rooms")) room = new Room(room_name, room_floor, room_items, potential_murder_locations);
+            if (Objects.equals(room_type, "bedroom"))
+                room = new Bedroom(room_name, room_floor, room_items, potential_murder_locations);
+            else if (Objects.equals(room_type, "bathroom"))
+                room = new Bathroom(room_name, room_floor, room_items, potential_murder_locations);
+            else if (Objects.equals(room_type, "hallway"))
+                room = new Hallway(room_name, room_floor, room_items, potential_murder_locations);
+            else if (Objects.equals(room_type, "other_rooms"))
+                room = new Room(room_name, room_floor, room_items, potential_murder_locations);
             else throw new Exception("XML file has unsupported room type.");
             house.add_room(room);
         }
@@ -158,11 +162,11 @@ public class Main {
                 JLabel element;
                 if (Objects.equals(user_interface_item.getAttribute("align"), "CENTER")) {
                     element = new JLabel(user_interface_item.getAttribute("display"), JLabel.CENTER);
-                }else if (Objects.equals(user_interface_item.getAttribute("align"), "LEFT")) {
+                } else if (Objects.equals(user_interface_item.getAttribute("align"), "LEFT")) {
                     element = new JLabel(user_interface_item.getAttribute("display"), JLabel.LEFT);
-                }else if (Objects.equals(user_interface_item.getAttribute("align"), "RIGHT")) {
+                } else if (Objects.equals(user_interface_item.getAttribute("align"), "RIGHT")) {
                     element = new JLabel(user_interface_item.getAttribute("display"), JLabel.RIGHT);
-                }else {
+                } else {
                     element = new JLabel(user_interface_item.getAttribute("display"));
                 }
 
@@ -172,10 +176,10 @@ public class Main {
 
                 if (Objects.equals(user_interface_item.getAttribute("parent"), "main_frame")) frame.add(element);
 
-                if (Integer.parseInt(user_interface_item.getAttribute("default_visible")) == 1) element.setVisible(true); else element.setVisible(false);
+                element.setVisible(Integer.parseInt(user_interface_item.getAttribute("default_visible")) == 1);
 
                 user_interface_items.put(user_interface_item.getAttribute("name"), element);
-            }else {
+            } else {
                 JButton element = new JButton(user_interface_item.getAttribute("value"));
                 element.setLayout(null);
                 element.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -193,10 +197,16 @@ public class Main {
         }
 
 
-        String[] hide_ = new String[]{ "back_button", "light_button", "dark_button", "contrast_button", "how_to_play_text", "area_text", "room_text", "play_button", "how_to_play_button", "settings_button", "exit_button", "title_text" };
-        String[] show_ = new String[]{ "play_button", "how_to_play_button", "settings_button", "exit_button", "title_text" };
-        for (String i : hide_) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(false); else ((JButton) user_interface_items.get(i)).setVisible(false);
-        for (String i : show_) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(true); else ((JButton) user_interface_items.get(i)).setVisible(true);
+        String[] hide_ = new String[]{"back_button", "light_button", "dark_button", "contrast_button", "how_to_play_text", "area_text", "room_text", "play_button", "how_to_play_button", "settings_button", "exit_button", "title_text"};
+        String[] show_ = new String[]{"play_button", "how_to_play_button", "settings_button", "exit_button", "title_text"};
+        for (String i : hide_)
+            if (user_interface_items.get(i).getClass() == JLabel.class)
+                ((JLabel) user_interface_items.get(i)).setVisible(false);
+            else ((JButton) user_interface_items.get(i)).setVisible(false);
+        for (String i : show_)
+            if (user_interface_items.get(i).getClass() == JLabel.class)
+                ((JLabel) user_interface_items.get(i)).setVisible(true);
+            else ((JButton) user_interface_items.get(i)).setVisible(true);
 
         // set player start location
         player.move_player(house.start_location);
@@ -217,48 +227,111 @@ public class Main {
         ((JLabel) user_interface_items.get("title_text")).setText("The Murder Mansion");
 
         ((JButton) user_interface_items.get("play_button")).addActionListener(e -> { // PLAY GAME
-            String[] hide = new String[]{ "play_button", "how_to_play_button", "settings_button", "exit_button" };
-            String[] show = new String[]{ "title_text", "back_button" };
-            for (String i : hide) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(false); else ((JButton) user_interface_items.get(i)).setVisible(false);
-            for (String i : show) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(true); else ((JButton) user_interface_items.get(i)).setVisible(true);
+            String[] hide = new String[]{"play_button", "how_to_play_button", "settings_button", "exit_button"};
+            String[] show = new String[]{"title_text", "back_button"};
+            for (String i : hide)
+                if (user_interface_items.get(i).getClass() == JLabel.class)
+                    ((JLabel) user_interface_items.get(i)).setVisible(false);
+                else ((JButton) user_interface_items.get(i)).setVisible(false);
+            for (String i : show)
+                if (user_interface_items.get(i).getClass() == JLabel.class)
+                    ((JLabel) user_interface_items.get(i)).setVisible(true);
+                else ((JButton) user_interface_items.get(i)).setVisible(true);
 //            playGame();
         });
 
         ((JButton) user_interface_items.get("how_to_play_button")).addActionListener(e -> { // HOW TO PLAY
             ((JLabel) user_interface_items.get("title_text")).setText("How To Play");
-            String[] hide = new String[]{ "play_button", "how_to_play_button", "settings_button", "exit_button" };
-            String[] show = new String[]{ "how_to_play_text", "back_button" };
-            for (String i : hide) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(false); else ((JButton) user_interface_items.get(i)).setVisible(false);
-            for (String i : show) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(true); else ((JButton) user_interface_items.get(i)).setVisible(true);
+            String[] hide = new String[]{"play_button", "how_to_play_button", "settings_button", "exit_button"};
+            String[] show = new String[]{"how_to_play_text", "back_button"};
+            for (String i : hide)
+                if (user_interface_items.get(i).getClass() == JLabel.class)
+                    ((JLabel) user_interface_items.get(i)).setVisible(false);
+                else ((JButton) user_interface_items.get(i)).setVisible(false);
+            for (String i : show)
+                if (user_interface_items.get(i).getClass() == JLabel.class)
+                    ((JLabel) user_interface_items.get(i)).setVisible(true);
+                else ((JButton) user_interface_items.get(i)).setVisible(true);
         });
 
         ((JButton) user_interface_items.get("settings_button")).addActionListener(e -> { // SETTINGS
             ((JLabel) user_interface_items.get("title_text")).setText("Settings");
-            String[] hide = new String[]{ "play_button", "how_to_play_button", "settings_button", "exit_button" };
-            String[] show = new String[]{ "light_button", "dark_button", "contrast_button", "back_button" };
-            for (String i : hide) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(false); else ((JButton) user_interface_items.get(i)).setVisible(false);
-            for (String i : show) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(true); else ((JButton) user_interface_items.get(i)).setVisible(true);
+            String[] hide = new String[]{"play_button", "how_to_play_button", "settings_button", "exit_button"};
+            String[] show = new String[]{"light_button", "dark_button", "contrast_button", "back_button"};
+            for (String i : hide)
+                if (user_interface_items.get(i).getClass() == JLabel.class)
+                    ((JLabel) user_interface_items.get(i)).setVisible(false);
+                else ((JButton) user_interface_items.get(i)).setVisible(false);
+            for (String i : show)
+                if (user_interface_items.get(i).getClass() == JLabel.class)
+                    ((JLabel) user_interface_items.get(i)).setVisible(true);
+                else ((JButton) user_interface_items.get(i)).setVisible(true);
         });
 
         ((JButton) user_interface_items.get("exit_button")).addActionListener(e -> frame.dispose()); // EXIT GAME
 
         ((JButton) user_interface_items.get("back_button")).addActionListener(e -> { // Return to Menu
             ((JLabel) user_interface_items.get("title_text")).setText("The Murder Mansion");
-            String[] hide = new String[]{ "back_button", "light_button", "dark_button", "contrast_button", "how_to_play_text", "area_text", "room_text" };
-            String[] show = new String[]{ "play_button", "how_to_play_button", "settings_button", "exit_button", "title_text" };
-            for (String i : hide) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(false); else ((JButton) user_interface_items.get(i)).setVisible(false);
-            for (String i : show) if (user_interface_items.get(i).getClass() == JLabel.class) ((JLabel) user_interface_items.get(i)).setVisible(true); else ((JButton) user_interface_items.get(i)).setVisible(true);
+            String[] hide = new String[]{"back_button", "light_button", "dark_button", "contrast_button", "how_to_play_text", "area_text", "room_text"};
+            String[] show = new String[]{"play_button", "how_to_play_button", "settings_button", "exit_button", "title_text"};
+            for (String i : hide)
+                if (user_interface_items.get(i).getClass() == JLabel.class)
+                    ((JLabel) user_interface_items.get(i)).setVisible(false);
+                else ((JButton) user_interface_items.get(i)).setVisible(false);
+            for (String i : show)
+                if (user_interface_items.get(i).getClass() == JLabel.class)
+                    ((JLabel) user_interface_items.get(i)).setVisible(true);
+                else ((JButton) user_interface_items.get(i)).setVisible(true);
         });
+
+
+
+        System.out.println("You are in " + player.get_current_room().name + ", where would you like to search?");
+        ArrayList<String> murder_location_names = new ArrayList<>();
+        ArrayList<Room> adjacent_rooms = player.get_current_room().get_adjacent_rooms();
+        ArrayList<String> adjacent_rooms_names = new ArrayList<>();
+        ArrayList<String> current_room_potential_murder_locations_names = new ArrayList<>();
+        ArrayList<PotentialMurderLocation> current_room_potential_murder_locations = player.get_current_room().get_potential_murder_locations();
+        for (Room s : adjacent_rooms) adjacent_rooms_names.add(s.name);
+
+        for (PotentialMurderLocation s : current_room_potential_murder_locations)
+            current_room_potential_murder_locations_names.add(item_prefixes.get(s.get_value()) + s.get_value());
+        for (PotentialMurderLocation s : current_room_potential_murder_locations)
+            murder_location_names.add(s.get_value());
+
+        System.out.println(String.join(", ", adjacent_rooms_names));
+        System.out.println(String.join(", ", current_room_potential_murder_locations_names));
+
+        String user_choice = scanner.nextLine();
+        if (player.get_current_room().has_adjacent_room(user_choice))
+            player.move_player(house.get_room(user_choice));
+        else if (murder_location_names.contains(user_choice)) {
+            System.out.println("You are checking if they were murdered in " + player.get_current_room().name);
+            if (Objects.equals(murder_location.get_sub_location().get_value(), user_choice)) {
+                System.out.println("You have found the murder location, well done.");
+                System.out.println("You have 3 guesses. You must guess the murderer out of " + potential_murderers_string);
+                for (int i = 0; i < 2; i++) {
+                    String murder_choice = scanner.nextLine();
+                    if (Objects.equals(murder_choice, killer)) {
+                        System.out.println("You won, " + killer + " murdered in the " + player.get_current_room().get_name() + item_prefixes.get(user_choice) + user_choice);
+                        playing = false;
+                        break;
+                    }
+                }
+            } else System.out.println("This isn't the murder location");
+        }
 
         /*
          * TODO:
-         * ENSURE ALL WORKS
-         * ADD GAME INTERFACE
          * ENSURE ALL WORKS
          * CHECK AGAINST REQUIREMENTS
          * MAKE FINAL CHANGES
          * TEST EVERYTHING
          */
+    }
+
+    public Object[] load_config() {
+        return new Object[]{};
     }
 }
 

@@ -1,7 +1,6 @@
 package com.williamdaw.RPG_game;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Judd {
     public static JFrame mainFrame = new JFrame();
@@ -20,7 +19,7 @@ public class Judd {
         mainFrame.setResizable(false);
     }
 
-    public static void playGame(){
+    public static void playGame() {
 //        areaText.setVisible(true); // commented due to compilation errors
 //        roomText.setVisible(true); // commented due to compilation errors
     }
